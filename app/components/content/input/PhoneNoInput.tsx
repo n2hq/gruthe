@@ -252,10 +252,11 @@ function separatePhoneNumber(phoneText: string) {
     const parts = phoneText?.split('-');
 
     // Check if we have exactly one dash
-    if (parts?.length === 2) {
+    if (parts?.length === 3) {
         return {
-            dialCode: parts[0],  // "+1"
-            number: parts[1],    // "17027325111"
+            countryCode: parts[0],
+            dialCode: parts[1],  // "+1"
+            number: parts[2],    // "17027325111"
             fullNumber: phoneText
         };
     }
@@ -318,23 +319,24 @@ const PhoneNoInput = ({
             // Only process if there's a phone number
             if (phone) {
                 const result = separatePhoneNumber(phone);
+                const countryCode = result.countryCode
                 const dialCode = result.dialCode;
                 const localNumber = result.number;
 
-                console.log("Found:", { phone, dialCode, localNumber });
+                //console.log("Found:", { phone, dialCode, localNumber });
 
                 // Find the country from the dial code
-                if (dialCode) {
+                if (countryCode) {
                     // Find exact match first, then partial match
-                    const countryFromDialCode = COUNTRY_DATA.find(country =>
-                        country.code === dialCode
+                    const countryFromCountryCode = COUNTRY_DATA.find(country =>
+                        country.code === countryCode
                     ) || COUNTRY_DATA.find(country =>
-                        dialCode.startsWith(country.code)
+                        countryCode.startsWith(country.code)
                     );
 
-                    if (countryFromDialCode) {
-                        console.log("Setting country:", countryFromDialCode.name);
-                        setSelectedCountry(countryFromDialCode);
+                    if (countryFromCountryCode) {
+                        console.log("Setting country:", countryFromCountryCode.name);
+                        setSelectedCountry(countryFromCountryCode);
                     }
                 }
 
@@ -437,8 +439,8 @@ const PhoneNoInput = ({
 
     // Handle country selection
     const handleCountrySelect = (country: typeof COUNTRY_DATA[0]) => {
-        console.log(country)
-        console.log(country.dialCode)
+        //console.log(country)
+        //console.log(country.dialCode)
 
         setSelectedCountry(country);
         setShowDropdown(false);
@@ -455,7 +457,7 @@ const PhoneNoInput = ({
             setDisplayValue(formattedLocal);
 
             // Combine country code + local number for storage
-            const fullNumber = country.code + "-" + digitsOnly;
+            const fullNumber = country.code + "-" + country.dialCode + "-" + digitsOnly;
             console.log(fullNumber)
 
             // Create synthetic event for form handler
@@ -489,8 +491,8 @@ const PhoneNoInput = ({
         setDisplayValue(formattedLocal);
 
         // Combine country code + local number for storage
-        const fullNumber = selectedCountry.code + "-" + digitsOnly;
-
+        //const fullNumber = selectedCountry.code + "-" + digitsOnly;
+        const fullNumber = selectedCountry.code + "-" + selectedCountry.dialCode + "-" + digitsOnly;
         // Create synthetic event for form handler
         setValue(controlName, fullNumber, {
             shouldDirty: true,
@@ -526,7 +528,8 @@ const PhoneNoInput = ({
         setDisplayValue(formatted);
 
         // Update form with full number
-        const fullNumber = countryFromPaste.code + "-" + cleanLocal;
+        //const fullNumber = countryFromPaste.code + "-" + cleanLocal;
+        const fullNumber = countryFromPaste.code + "-" + countryFromPaste.dialCode + "-" + cleanLocal
 
         setValue(controlName, fullNumber, {
             shouldDirty: true,

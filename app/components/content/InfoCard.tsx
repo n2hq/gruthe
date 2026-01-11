@@ -3,49 +3,23 @@ import React, { useEffect, useState } from 'react'
 import { BsHeart } from 'react-icons/bs'
 import { BiSolidStar, BiStar } from 'react-icons/bi'
 import { ListingType } from '~/lib/types'
-import { config, convertDashToSpace, formatNumber, getInitials, removeAllParagraphs, removePlusSign, truncateText } from '~/lib/lib'
+import { config, convertDashToSpace, formatInternationalPhone, formatNumber, getInitials, removeAllParagraphs, removePlusSign, splitPhoneString, truncateText } from '~/lib/lib'
 
 import formatPhoneNumber from '~/lib/phoneFormatter'
 import RatingBoxInfoCard from './RatingBoxInfoCard'
 import { Link } from '@remix-run/react'
 import AlternateImage from '~/components/content/AlternateImage'
 
+
+
+
 /**
  * Formats an international phone number (E.164) in a universal readable format
  * Example:
  * +937048048395 → +93 704 804 8395
  */
-export function formatInternationalPhone(phone: string): string {
-    if (!phone) return '';
 
-    // Ensure it starts with +
-    if (!phone.startsWith('+')) return phone;
 
-    // Remove everything except digits
-    const digits = phone.replace(/\D/g, '');
-
-    // Extract country code (1–3 digits)
-    const countryCode = digits.slice(0, digits.length > 11 ? 3 : digits.length > 10 ? 2 : 1);
-    const nationalNumber = digits.slice(countryCode.length);
-
-    // Group national number into readable chunks
-    const groups: string[] = [];
-    let i = 0;
-
-    while (i < nationalNumber.length) {
-        const remaining = nationalNumber.length - i;
-
-        if (remaining > 4) {
-            groups.push(nationalNumber.slice(i, i + 3));
-            i += 3;
-        } else {
-            groups.push(nationalNumber.slice(i));
-            break;
-        }
-    }
-
-    return `+${countryCode} ${groups.join(' ')}`;
-}
 
 
 const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: boolean }) => {
@@ -102,7 +76,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                             <p className={`text-base leading-[1.2em] capitalize`}>{convertDashToSpace(item.category)}</p>
                             <div>
                                 {/* <BsHeart className={`text-2xl cursor-pointer`} /> */}
-                                <div className={`text-[12px] md:text-lg min-w-[100px] text-right`}>{formatInternationalPhone(item?.phone) || `n/a`}</div>
+                                <div className={`text-[12px] md:text-lg min-w-[100px] text-right`}>{formatInternationalPhone(splitPhoneString(item?.phone)) || `n/a`}</div>
                             </div>
                         </div>
 

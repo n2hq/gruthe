@@ -71,7 +71,7 @@ const About = ({ listing }: AboutProps) => {
 
             {/** about description */}
 
-            <div className={`text-[15px] text-gray-700 mt-6 font-light`}>
+            <div className={`text-lg text-gray-700 mt-6`}>
                 {listing.short_description}
             </div>
 

@@ -2221,3 +2221,57 @@ export const filterCountry = (countries: CountryType[] | undefined, searchTerm: 
     )
     return filtered
 }
+
+
+export function splitPhoneString(phone: string): string {
+    let phoneArray: Array<string>
+    let phoneNo: string = phone
+
+    if (phone !== null && phone !== undefined && phone !== '') {
+        phoneArray = phone.split("-")
+
+        if (phoneArray.length === 3) {
+            const countryCode = phoneArray[0]
+            const dialCode = phoneArray[1]
+            const localNumber = phoneArray[2]
+
+            phoneNo = dialCode + "-" + localNumber
+        }
+    }
+
+
+    return phoneNo
+}
+
+
+export function formatInternationalPhone(phone: string): string {
+    if (!phone) return '';
+
+    // Ensure it starts with +
+    if (!phone.startsWith('+')) return phone;
+
+    // Remove everything except digits
+    const digits = phone.replace(/\D/g, '');
+
+    // Extract country code (1–3 digits)
+    const countryCode = digits.slice(0, digits.length > 11 ? 3 : digits.length > 10 ? 2 : 1);
+    const nationalNumber = digits.slice(countryCode.length);
+
+    // Group national number into readable chunks
+    const groups: string[] = [];
+    let i = 0;
+
+    while (i < nationalNumber.length) {
+        const remaining = nationalNumber.length - i;
+
+        if (remaining > 4) {
+            groups.push(nationalNumber.slice(i, i + 3));
+            i += 3;
+        } else {
+            groups.push(nationalNumber.slice(i));
+            break;
+        }
+    }
+
+    return `+${countryCode} ${groups.join(' ')}`;
+}

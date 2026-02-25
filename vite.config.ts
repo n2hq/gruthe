@@ -34,7 +34,9 @@ export default defineConfig({
       "bycet.com",
       "test.bycet.com",
       "test.ashthor.com",
-      "ashthor.com"
+      "ashthor.com",
+      "test.gruthe.com",
+      "gruthe.com"
     ], // <-- your domain here
     hmr: {
       port: Number(process.env.VITE_HMR_PORT), // or any other available port

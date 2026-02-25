@@ -3,14 +3,16 @@ import React from 'react'
 
 const HeaderLogo = () => {
     return (
-        <div className={`text-4xl font-bold font-sans tracking-tight text-[rgb(131,39,39)]`}>
-            <Link to={`/`} className=''>
-                <span className={`italic`}>
-                    b
+        <div className={`text-3xl font-black font-poppins tracking-tight text-[rgb(131,39,39)]`}>
+            <Link to={`/`} className={`flex -gap-2`}>
+                <span>
+                    Gru
                 </span>
-                <span>y</span>
                 <span className={`text-blue-600`}>
-                    cet
+                    the
+                </span>
+                <span className={`italic relative -left-[2px]`}>
+                    !
                 </span>
             </Link>
         </div>

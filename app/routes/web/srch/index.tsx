@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction } from '@remix-run/node'
-import { convertDashToSpace, getCountries, getSearch, logError } from '~/lib/lib'
-import { useLoaderData, useNavigation, useSearchParams } from '@remix-run/react'
+import { convertDashToSpace, getCountries, getLatestBusinesses, getSearch, getTopLatestBusinesses, logError } from '~/lib/lib'
+import { Link, useLoaderData, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
 
@@ -13,6 +13,11 @@ import SearchAd from '~/components/content/ads/SearchAd'
 import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
 import Pagination from '~/components/content/Pagination'
+
+import { BsStar } from 'react-icons/bs'
+import { BiChevronLeft, BiChevronRight, BiSolidStar } from 'react-icons/bi'
+import { CgChevronRight } from 'react-icons/cg'
+import { PreSearch } from './PreSearch'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -26,10 +31,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let page: number = 1
     let data: any = ""
     let countries = null
+    let latest: ListingType[] = []
 
     try {
         page = parseInt(url?.searchParams.get("page") || "1")
         data = await getSearch(query, city, state, country, category, page)
+        latest = await getTopLatestBusinesses()
         countries = await getCountries()
     } catch (error: any) {
         logError(error)
@@ -45,7 +52,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         state: state,
         city: city,
         country: country,
-        category: category
+        category: category,
+        latest: latest
     }
     return res;
 }
@@ -115,6 +123,7 @@ const index = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigation = useNavigation()
 
+    const latestBusinesses = res.latest
 
     const data = res.data.items || []
     const pagination = res.data.pagination
@@ -156,6 +165,9 @@ const index = () => {
                     </div> :
                     <div className={`h-[40px]`}></div>
             }
+            <div className={``}>
+                <PreSearch items={latestBusinesses} />
+            </div>
             <div className={`px-[15px]`}>
                 <div className={`max-w-[1200px] mx-auto w-full`}>
 
@@ -222,63 +234,37 @@ const index = () => {
                         <div className={`flex gap-2 mt-2 flex-wrap`}>
                             {
                                 category !== '' &&
-                                <div className={`w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`}>
-                                    Hotels
+                                <div className={`w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal capitalize`}>
+                                    {query}
                                 </div>
                             }
                             {
                                 country !== '' &&
                                 <div className={`w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`}>
-                                    United Arab Emirates</div>
+                                    {country}</div>
                             }
                             {
                                 state !== '' &&
                                 <div className={`w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`}>
-                                    Dubai</div>
+                                    {state}</div>
                             }
                             {
                                 city !== '' &&
                                 <div className={`w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`}>
-                                    City: Dubai</div>
+                                    City: {city}</div>
                             }
                         </div>
                     </div>
 
 
                     <div className={``}>
+
+
                         <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12`}>
 
                             <div className={` lg:col-span-8`}>
 
-                                {
-                                    data.map((item: ListingType, index: number) => {
-
-                                        const showAd = (index % 4) === 3;
-
-
-                                        return (
-                                            <div key={index}>
-                                                {
-                                                    (showAd) ?
-                                                        <>
-
-                                                            <InfoCard key={index} item={item}
-                                                                isFirst={index === 0}
-                                                            />
-                                                            <SearchAd />
-                                                        </> :
-
-                                                        <>
-                                                            <InfoCard key={index} item={item}
-                                                                isFirst={index === 0}
-                                                            />
-
-                                                        </>
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
+                                <SearchResult results={data} />
 
                                 <div className={`mb-3 mt-6`}>
                                     <Pagination
@@ -286,6 +272,7 @@ const index = () => {
                                     />
                                 </div>
                             </div>
+
                             <div className={`hidden lg:block col-span-4`}>
                                 <div className={`sticky top-[80px] w-full`}>
                                     <Featured />
@@ -302,3 +289,48 @@ const index = () => {
 }
 
 export default index
+
+
+export interface SearchResultProps {
+    results: ListingType[]
+}
+
+export const SearchResult = ({ results }: SearchResultProps) => {
+    return (
+        <div>
+            {
+                results?.map((item: ListingType, index: number) => {
+
+                    const showAd = (index % 4) === 3;
+
+
+                    return (
+                        <div key={index}>
+                            {
+                                (showAd) ?
+                                    <>
+
+                                        <InfoCard key={index} item={item}
+                                            isFirst={index === 0}
+                                        />
+                                        <SearchAd />
+                                    </> :
+
+                                    <>
+                                        <InfoCard key={index} item={item}
+                                            isFirst={index === 0}
+                                        />
+
+                                    </>
+                            }
+                        </div>
+                    )
+                })
+            }
+        </div>
+    )
+}
+
+
+
+

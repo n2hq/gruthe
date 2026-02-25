@@ -10,6 +10,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/landing", "routes/landing/index.tsx");
         route("/web/srch", "routes/web/browse/index.tsx");
         route("/web/search", "routes/web/srch/index.tsx")
+        route("/web/latest", "routes/web/srch/latest.tsx")
         route("/web/cat/:category/city/:city", "routes/web/categorycity/index.tsx");
 
         route("/web/category/:category/city/:city", "routes/web/categorycity/catcity/index.tsx");
@@ -165,6 +166,10 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         route("api/listing/cat_city_sitexml", "routes/api/listing/category_city_sitexml.tsx")
         route("api/listing/cat_sitexml", "routes/api/listing/category_sitexml.tsx")
+
+        route("/api/listing/top_latest_businesses", "routes/api/listing/top_latest_businesses.tsx")
+
+        route("/api/listing/latest_businesses", "routes/api/listing/latest_businesses.tsx")
 
         route("api/rating", "routes/api/rating/index.tsx");
         route("api/rating/:user_guid/:business_guid", "routes/api/rating/rating.tsx");

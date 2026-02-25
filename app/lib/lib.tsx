@@ -255,6 +255,56 @@ export const getLatestBusinesses = async (limit: number) => {
     }
 }
 
+
+export const getTopLatestBusinesses = async () => {
+
+    const endpoint = `/api/listing/top_latest_businesses`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+export const getLatestBusinesses2 = async (page: string) => {
+
+    let endpoint = `/api/listing/latest_businesses`
+    endpoint += '?page=' + page
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
 export const getRating = async (userGuid: string | null, businessGuid: string | null) => {
 
     const endpoint = `/api/rating/${userGuid}/${businessGuid}`

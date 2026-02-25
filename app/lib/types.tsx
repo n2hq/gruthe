@@ -156,6 +156,7 @@ export type ListingType = {
     currency: any
     profile_image_url_ext: any
     bg_image_url_ext: any
+    starting: any
 }
 
 export type ContactType = {

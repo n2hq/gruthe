@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-APP_NAME="bycet_test"
+APP_NAME="gruthe_test"
 #APP_NAME="ashthor_test"
 
 echo "🌿  Renaming branch to main..."

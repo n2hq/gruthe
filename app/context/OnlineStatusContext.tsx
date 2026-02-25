@@ -34,24 +34,8 @@ export const OnlineStatusProvider = ({ children }: { children: React.ReactNode }
 
             {/* Automatically show offline banner */}
             {!isOnline && (
-                <div
-                    style={{
-                        position: "fixed",
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        background: "#A52A2A",
-                        color: "#fff",
-                        padding: "20px",
-                        textAlign: "center",
-                        fontWeight: "normal",
-                        zIndex: 1000,
-                        letterSpacing: "0px",
-
-
-                    }}
-                >
-                    ⚠️ Check internet connection.
+                <div className={`fixed bottom-4 w-fit px-6 py-2 right-2 bg-black text-white rounded-3xl`}>
+                    Check internet connection
                 </div>
             )}
         </OnlineStatusContext.Provider>

@@ -25,8 +25,8 @@ git pull origin main --allow-unrelated-histories --no-rebase || echo "No existin
 echo "Deleting build folder..."
 rm -rf build/ 2>/dev/null || true
 
-echo "🛠  Building PROD..."
-npm run build:prod
+#echo "🛠  Building PROD..."
+#npm run build:prod
 #npm run build:prod
 
 echo "📦  Staging changes..."

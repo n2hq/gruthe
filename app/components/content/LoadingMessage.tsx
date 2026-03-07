@@ -40,7 +40,7 @@ const LoadingMessage = ({ loading }: LoadingProp) => {
                     <div style={{ marginBottom: '0px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '0.5em' }}>
                         <div className='spinner'></div>
 
-                        <b style={{ fontFamily: 'arial', fontSize: '13px', fontWeight: 'bold', textTransform: 'lowercase' }}>{config.SITENAME}</b>
+                        <b style={{ fontFamily: 'arial', fontSize: '13px', fontWeight: 'bold', textTransform: 'capitalize' }}>{config.SITENAME}</b>
                     </div>
 
 

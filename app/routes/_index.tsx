@@ -11,7 +11,7 @@ import Hotels from './homepage/assets/hotels/Hotels'
 import YourGuide from './homepage/assets/yourguide/YourGuide'
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { generateRandom10DigitNumber, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, logError } from '~/lib/lib'
+import { config, generateRandom10DigitNumber, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, logError } from '~/lib/lib'
 import { useLoaderData } from '@remix-run/react'
 import { ListingType } from '~/lib/types'
 import { late } from 'zod'
@@ -66,7 +66,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 
     return [
-      { title: "Bycet - Online Business Directory, Explore Listings Around The World" },
+      { title: `${config.SITENAME} - Online Business Directory, Explore Listings Around The World` },
       { name: "description", content: "Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries." },
       { name: "keywords", content: "Business Directory Service, Location Services" },
       { property: "fb:app_id", content: "1325393508603168" },

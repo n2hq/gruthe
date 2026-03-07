@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-APP_NAME="bycet"
+APP_NAME="gruthe"
 
 echo "🌿  Renaming branch to main..."
 git branch -M main

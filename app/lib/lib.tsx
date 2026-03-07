@@ -160,7 +160,7 @@ export const getFeaturedListing: any = async () => {
 
     const endpoint = `/api/listing/featured_listing`
     const url = config.BASE_URL + endpoint
-
+    console.log(url)
 
 
 

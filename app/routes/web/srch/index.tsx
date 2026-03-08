@@ -118,7 +118,7 @@ const dat = [
 
 const index = () => {
     const res: any = useLoaderData()
-    console.log("NODE_ENV =", process.env.NODE_ENV);
+
     const [loading, setLoading] = useState(true)
     const [searchParams, setSearchParams] = useSearchParams();
     const navigation = useNavigation()

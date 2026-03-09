@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { BsHeart } from 'react-icons/bs'
 import { BiSolidStar, BiStar } from 'react-icons/bi'
 import { ListingType } from '~/lib/types'
-import { config, convertDashToSpace, formatInternationalPhone, formatNumber, getInitials, removeAllParagraphs, removePlusSign, splitPhoneString, truncateText } from '~/lib/lib'
+import { config, convertDashToSpace, formatInternationalPhone, formatNumber, getInitials, headers, removeAllParagraphs, removePlusSign, splitPhoneString, truncateText } from '~/lib/lib'
 
 import formatPhoneNumber from '~/lib/phoneFormatter'
 import RatingBoxInfoCard from './RatingBoxInfoCard'
@@ -33,6 +33,27 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
         }
     }, [item])
 
+    const prefetchImage = async (img: string) => {
+        const endpoint = img
+
+
+
+        try {
+            const response = await fetch(endpoint, {
+                method: "GET",
+                headers: headers,
+            })
+
+            if (!response.ok) {
+                return false
+            }
+
+            return true
+        } catch (error: any) {
+            return false
+        }
+    }
+
     useEffect(() => {
 
         if (data !== null) {
@@ -51,6 +72,10 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
             setImg(img)
             let imgPath: string = config?.IMG_BASE_URL + img
+            const prefetch = prefetchImage(imgPath)
+            if (!prefetch) {
+                setImgPath(`https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/eb/f5/fd/caption.jpg?w=1200&h=1200&s=1`)
+            }
             setImgPath(imgPath)
         }
     }, [data])

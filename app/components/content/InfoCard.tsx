@@ -74,6 +74,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
             let imgPath: string = config?.IMG_BASE_URL + img
             const prefetch = prefetchImage(imgPath)
             if (!prefetch) {
+                console.log('here')
                 setImgPath(`https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/eb/f5/fd/caption.jpg?w=1200&h=1200&s=1`)
             }
             else {

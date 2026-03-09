@@ -78,6 +78,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                 setImgPath(`https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/eb/f5/fd/caption.jpg?w=1200&h=1200&s=1`)
             }
             else {
+                console.log('there')
                 setImgPath(imgPath)
             }
         }

@@ -45,7 +45,7 @@ export const PreSearch = ({ items }: PreSearchProps) => {
             <div className={` mb-12 relative max-w-[1200px] mx-auto w-full`}>
 
 
-                <div className={`flex max-w-[1200px] mx-auto w-full gap-4 overflow-x-hidden rounded-3xl`}
+                <div className={`flex max-w-[1200px] mx-auto w-full gap-4 overflow-x-hidden rounded-t-3xl`}
                     ref={scrollRef}
                 >
                     {

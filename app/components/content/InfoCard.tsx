@@ -33,26 +33,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
         }
     }, [item])
 
-    const prefetchImage = async (img: string) => {
-        const endpoint = img
 
-
-
-        try {
-            const response = await fetch(endpoint, {
-                method: "GET",
-                headers: headers,
-            })
-
-            if (!response.ok) {
-                return false
-            }
-
-            return true
-        } catch (error: any) {
-            return false
-        }
-    }
 
     useEffect(() => {
 
@@ -72,15 +53,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
             setImg(img)
             let imgPath: string = config?.IMG_BASE_URL + img
-            const prefetch = prefetchImage(imgPath)
-            if (!prefetch) {
-
-                setImgPath(`https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/eb/f5/fd/caption.jpg?w=1200&h=1200&s=1`)
-            }
-            else {
-
-                setImgPath(imgPath)
-            }
+            setImgPath(imgPath)
         }
     }, [data])
     return (

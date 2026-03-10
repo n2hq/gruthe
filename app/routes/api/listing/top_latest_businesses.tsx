@@ -21,6 +21,7 @@ export const loader: LoaderFunction = async ({ params }) => {
                     ON d.gid = bg.business_guid
                 LEFT JOIN tbl_business_profile_image bpi
                     ON d.gid = bpi.business_guid
+                WHERE active_status=true
                 ORDER BY d.date_created
                 DESC
                 LIMIT 20;

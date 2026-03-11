@@ -96,7 +96,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             products: products,
             reportTime: reportTime,
             randomNumber: randomNumber,
-            fullPath: fullPath,
+            fullUrl: fullUrl,
             businessRating: businessRating,
             businessReviews: businessReviews,
             related: related,

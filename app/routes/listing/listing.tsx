@@ -113,11 +113,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const res: any = useLoaderData()
-    const fullUrl: string = data.fullUrl;
+
     let randomNumber = data?.randomNumber
     let profileImageData = data.profileImageData
     let title = `${data.listing.title} - ${config.SITENAME}` || `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
 
+    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
 
     const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
 

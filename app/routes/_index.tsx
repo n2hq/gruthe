@@ -32,8 +32,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let ratingData
     let randomNumber
 
-    const url = new URL(request.url);
-    const fullUrl = url.href;
 
     try {
       hotels = await getHomeListingByCategory('hotel', 6)
@@ -50,8 +48,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return {
       hotels: hotels,
       latestBusinesses: latestBusinesses,
-      randomNumber: randomNumber,
-      fullUrl: fullUrl
+      randomNumber: randomNumber
     }
   } catch (err: any) {
     logError(err)
@@ -62,7 +59,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 type OperationType = 'login' | 'signup' | 'update' | 'processing';
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-
   let randomNo = data?.randomNumber
 
   const res: any = useLoaderData()
@@ -75,7 +71,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
   const description = `Discover and connect with businesses worldwide. ${config.SITENAME}.com helps you explore listings, find services, and grow your network across industries and countries.`
 
-  let img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+  let img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
 
 

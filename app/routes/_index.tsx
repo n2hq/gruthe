@@ -11,7 +11,7 @@ import Hotels from './homepage/assets/hotels/Hotels'
 import YourGuide from './homepage/assets/yourguide/YourGuide'
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { config, generateRandom10DigitNumber, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, logError } from '~/lib/lib'
+import { config, generateRandom10DigitNumber, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, getMeta, logError } from '~/lib/lib'
 import { useLoaderData } from '@remix-run/react'
 import { ListingType } from '~/lib/types'
 import { late } from 'zod'
@@ -32,6 +32,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let ratingData
     let randomNumber
 
+    const url = new URL(request.url);
+    const fullUrl = url.href;
 
     try {
       hotels = await getHomeListingByCategory('hotel', 6)
@@ -48,7 +50,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return {
       hotels: hotels,
       latestBusinesses: latestBusinesses,
-      randomNumber: randomNumber
+      randomNumber: randomNumber,
+      fullUrl: fullUrl
     }
   } catch (err: any) {
     logError(err)
@@ -61,37 +64,29 @@ type OperationType = 'login' | 'signup' | 'update' | 'processing';
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
   let randomNo = data?.randomNumber
+
+  const res: any = useLoaderData()
+
+  let randomNumber = randomNo
+
+  let title = `${config.SITENAME} Business Directory, Explore Listings Around The World`
+
+  const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+
+  const description = `Discover and connect with businesses worldwide. ${config.SITENAME}.com helps you explore listings, find services, and grow your network across industries and countries.`
+
+  let img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+
+
+
+  const metaImage = img
+
+
   try {
-
-
-
-    return [
-      { title: `${config.SITENAME} - Online Business Directory, Explore Listings Around The World` },
-      { name: "description", content: "Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries." },
-      { name: "keywords", content: "Business Directory Service, Location Services" },
-      { property: "fb:app_id", content: "1325393508603168" },
-      { property: "og:url", content: "https://bycet.com" },
-      { property: "og:type", content: "website" },
-      { property: "og:title", content: "Bycet - Online Business Directory, Explore Listings Around The World" },
-      { property: "og:description", content: "Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries." },
-      { property: "og:image", content: `https://bycet.com/images/bycet.png?v=${randomNo}` },
-      { property: "og:image:secure_url", content: `https://bycet.com/images/bycet.png?v=${randomNo}` },
-      { property: "og:image:type", content: "image/png" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Bycet" },
-      { name: "twitter:site", content: "@bycetinc" },
-      { name: "twitter:creator", content: "@bycetinc" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Bycet - Online Business Directory, Explore Listings Around The World" },
-      { name: "twitter:description", content: "Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries." },
-      { name: "twitter:image", content: `https://bycet.com/images/bycet.png?v=${randomNo}` },
-      { name: "twitter:image:alt", content: "Bycet Business Directory Logo" }
-    ];
+    return getMeta(randomNumber, fullUrl, title, description, metaImage)
   } catch (e: any) {
     logError(e)
   }
-
   return []
 };
 

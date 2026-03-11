@@ -24,8 +24,8 @@ import Products from './lassets/Products'
 import SocialMedia from './lassets/SocialMedia'
 import Services from './lassets/Services'
 import ClaimBusiness from './lassets/ClaimBusiness'
-import { LoaderFunction } from '@remix-run/node'
-import { config, generateRandom10DigitNumber, getBusinessGallery, getBusinessProfileBgData, getBusinessProfileImageData, getBusinessRating, getBusinessReviews, getBusinessVideoGallery, getListingByCategory, getNearbyBusinesses, getPage, getProductGallery, getRatingsReviews, getRelatedByCategory, getServiceList, getServicesByBusinessGuid, logError, spinUpPlaceholder } from '~/lib/lib'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { config, generateRandom10DigitNumber, getBusinessGallery, getBusinessProfileBgData, getBusinessProfileImageData, getBusinessRating, getBusinessReviews, getBusinessVideoGallery, getListingByCategory, getMeta, getNearbyBusinesses, getPage, getProductGallery, getRatingsReviews, getRelatedByCategory, getServiceList, getServicesByBusinessGuid, logError, spinUpPlaceholder } from '~/lib/lib'
 import { AddVideoType, BusinessReviewType, ListingType, ProductType, ProfileImageType, RatingsDataType, ServiceType } from '~/lib/types'
 import { ReportTime } from '~/lib/ReportTime'
 import { useLoaderData } from '@remix-run/react'
@@ -61,6 +61,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     const url = new URL(request.url);
     const pathname = url.pathname;
+    let fullUrl = url.href
 
     try {
 
@@ -76,7 +77,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         products = await getProductGallery(listing?.gid, listing?.owner)
         reportTime = await ReportTime(listing)
         randomNumber = generateRandom10DigitNumber()
-        fullPath = config.BASE_URL + pathname
+
 
         related = await getRelatedByCategory(listing?.category, 10)
         nearby = await getNearbyBusinesses(listing?.city_id || '32', 10) //use dubai = 32
@@ -110,7 +111,39 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return null
 }
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+    const res: any = useLoaderData()
+    const fullUrl: string = data.fullUrl;
+    let randomNumber = data?.randomNumber
+    let profileImageData = data.profileImageData
+    let title = `${data.listing.title} - ${config.SITENAME}` || `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
 
+
+    const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
+
+    let img
+    let profileImage = profileImageData.image_url
+
+    console.log(profileImage)
+
+    if (profileImage === '' || profileImage === undefined || profileImage === null) {
+        img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+
+    } else {
+        img = config.IMG_BASE_URL + profileImage
+    }
+
+
+    const metaImage = img
+
+
+    try {
+        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+    } catch (e: any) {
+        logError(e)
+    }
+    return []
+};
 
 const listing = () => {
     const reviewContext: ReviewType | null = useWriteReviewAltContext()

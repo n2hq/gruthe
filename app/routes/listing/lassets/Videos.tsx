@@ -92,20 +92,24 @@ const Videos = ({ videoGallery, listing }: VideosProps) => {
         const remapVideos = async (videoGallery: AddVideoType[] | undefined) => {
 
             let remappedVideo: any = []
-            videoGallery?.map((video: AddVideoType, index: number) => {
-                const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-                const match = video.video_url.match(regex);
-                let videoId = match ? match[1] : null;
-                let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`
-                let videoObject: OutVideoType = {
-                    videoId: videoId,
-                    videoUrl: video.video_url,
-                    videoTitle: video.video_title,
-                    videoThumbnail: thumbnail,
-                    videoGuid: video.video_guid
-                }
-                remappedVideo.push(videoObject)
-            })
+
+            if (Array.isArray(videoGallery)) {
+                videoGallery?.map((video: AddVideoType, index: number) => {
+                    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+                    const match = video?.video_url?.match(regex);
+                    let videoId = match ? match[1] : null;
+                    let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`
+                    let videoObject: OutVideoType = {
+                        videoId: videoId,
+                        videoUrl: video.video_url,
+                        videoTitle: video.video_title,
+                        videoThumbnail: thumbnail,
+                        videoGuid: video.video_guid
+                    }
+                    remappedVideo?.push(videoObject)
+                })
+            }
+
 
             setOutVideo(remappedVideo)
         }

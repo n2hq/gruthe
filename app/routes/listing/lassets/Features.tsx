@@ -115,7 +115,7 @@ const Features = ({ listing }: FeaturesProps) => {
                         features?.length > 0 &&
                         features?.map((feature: FacilityType, index: number) => {
                             return (
-                                <div onClick={() => handleDescription(feature?.facility_description, `${feature?.facility_name} information`)}>
+                                <div key={index} onClick={() => handleDescription(feature?.facility_description, `${feature?.facility_name} information`)}>
                                     <div className={`hover:underline cursor-pointer text-lg`}>
                                         {feature?.facility_name}
                                     </div>

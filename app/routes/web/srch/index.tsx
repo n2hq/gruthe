@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
-import { LoaderFunction } from '@remix-run/node'
-import { convertDashToSpace, getCountries, getLatestBusinesses, getSearch, getTopLatestBusinesses, logError } from '~/lib/lib'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { config, convertDashToSpace, generateRandom10DigitNumber, getCountries, getLatestBusinesses, getMeta, getSearch, getTopLatestBusinesses, logError } from '~/lib/lib'
 import { Link, useLoaderData, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -28,19 +28,25 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const country = url?.searchParams.get("country") || "";
     const category = url?.searchParams.get("category") || "";
 
+
+    const fullUrl = url.href;
+
     let page: number = 1
     let data: any = ""
     let countries = null
     let latest: ListingType[] = []
-
+    let randomNumber
     try {
         page = parseInt(url?.searchParams.get("page") || "1")
         data = await getSearch(query, city, state, country, category, page)
         latest = await getTopLatestBusinesses()
         countries = await getCountries()
+        randomNumber = generateRandom10DigitNumber()
     } catch (error: any) {
         logError(error)
     }
+
+
 
     //console.log(data?.items)
     console.log('boo')
@@ -53,10 +59,30 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         city: city,
         country: country,
         category: category,
-        latest: latest
+        latest: latest,
+        fullUrl: fullUrl,
+        randomNumber: randomNumber
     }
     return res;
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+    const res: any = useLoaderData()
+    const fullUrl: string = data.fullUrl;
+    let randomNumber = data?.randomNumber
+    const title = `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
+    const description = `Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
+
+    const metaImage = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+
+
+    try {
+        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+    } catch (e: any) {
+        logError(e)
+    }
+    return []
+};
 
 export type CardType = {
     img: string

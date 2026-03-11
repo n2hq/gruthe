@@ -2325,3 +2325,36 @@ export function formatInternationalPhone(phone: string): string {
 
     return `+${countryCode} ${groups.join(' ')}`;
 }
+
+
+export const getMeta = (randomNumber: string, fullUrl: string, title: string, description: string, metaImage: string) => {
+
+    try {
+        return [
+            { title: `${title}` },
+            { name: "description", content: `${description}` },
+            { property: "fb:app_id", content: "1325393508603168" },
+            { property: "og:url", content: `${fullUrl}` },
+            { property: "og:type", content: "website" },
+            { property: "og:title", content: `${title}` },
+            { property: "og:description", content: `${description}` },
+            { property: "og:image", content: `${metaImage}` },
+            { property: "og:image:secure_url", content: `${metaImage}` },
+            { property: "og:image:type", content: "image/png" },
+            { property: "og:image:width", content: "1200" },
+            { property: "og:image:height", content: "630" },
+            { property: "og:image:alt", content: "Gruthe" },
+            { name: "twitter:site", content: "@Gruthe_" },
+            { name: "twitter:creator", content: "@Gruthe_" },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:title", content: `${title}` },
+            { name: "twitter:description", content: `${description}` },
+            { name: "twitter:image", content: `${metaImage}` },
+            { name: "twitter:image:alt", content: `${config.SITENAME} Business Directory Logo` }
+        ];
+    } catch (e: any) {
+        logError(e)
+    }
+
+    return []
+};

@@ -1823,6 +1823,33 @@ export const getBusinessCategory = async (): Promise<any | undefined> => {
     }
 }
 
+
+export const getBusinessCity = async (): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/city_sitexml`
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
 export const sanitizeWord = (url: string) => {
 
     return url

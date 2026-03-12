@@ -19,6 +19,11 @@ export const loader: LoaderFunction = async () => {
     </sitemap>
 
     <sitemap>
+      <loc>${baseUrl}/sitemap-cities.xml</loc>
+      <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    </sitemap>
+
+    <sitemap>
       <loc>${baseUrl}/sitemap-categories-cities.xml</loc>
       <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     </sitemap>

@@ -20,6 +20,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/sitemap.xml", "routes/sitemap.xml.tsx");
         route("/sitemap-main.xml", "routes/sitemap-main.xml.tsx");
         route("/sitemap-categories.xml", "routes/sitemap-categories.xml.tsx");
+        route("/sitemap-cities.xml", "routes/sitemap-cities.xml.tsx");
         route("/sitemap-categories-cities.xml", "routes/sitemap-categories-cities.xml.tsx");
 
 
@@ -166,6 +167,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         route("api/listing/cat_city_sitexml", "routes/api/listing/category_city_sitexml.tsx")
         route("api/listing/cat_sitexml", "routes/api/listing/category_sitexml.tsx")
+
+        route("api/listing/city_sitexml", "routes/api/listing/city_sitexml.tsx")
 
         route("/api/listing/top_latest_businesses", "routes/api/listing/top_latest_businesses.tsx")
 

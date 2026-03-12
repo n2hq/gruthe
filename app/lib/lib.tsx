@@ -1824,9 +1824,11 @@ export const getBusinessCategory = async (): Promise<any | undefined> => {
 }
 
 export const sanitizeWord = (url: string) => {
+
     return url
         .trim() // Remove leading/trailing spaces
         .replace(/\s+/g, '-') // Replace multiple spaces with single dash
+        .replace(/,/, '')
         .toLowerCase(); // Convert to lowercase (optional)
 }
 

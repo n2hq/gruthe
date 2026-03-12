@@ -1853,21 +1853,49 @@ export const getBusinessCity = async (): Promise<any | undefined> => {
 export const sanitizeWord = (url: string) => {
 
     return url
-        .trim() // Remove leading/trailing spaces
-        .replace(/\s+/g, '-') // Replace multiple spaces with single dash
-        .replace(/,/, '')
-        .toLowerCase(); // Convert to lowercase (optional)
+        ?.trim() // Remove leading/trailing spaces
+        ?.replace(/\s+/g, '-') // Replace multiple spaces with single dash
+        ?.replace(/,/, '')
+        ?.toLowerCase(); // Convert to lowercase (optional)
 }
 
 
 export const convertDashToSpace = (str: string) => {
-    return str.replace(/-/g, ' ');
+    return str?.replace(/-/g, ' ');
 };
 
 
 export const getBusinessByCategory = async (category: string | null, page: number): Promise<any | undefined> => {
 
     const endpoint = `/api/listing/category/${category}?page=${page}`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+
+export const getBusinessByCity = async (city: string | null, page: number): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/city/${city}?page=${page}`
     const url = config.BASE_URL + endpoint
 
 

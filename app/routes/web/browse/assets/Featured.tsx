@@ -64,7 +64,7 @@ const Featured = () => {
 
     return (
         <div className={`border-[1px] px-4 pt-4 pb-4
-        rounded-xl border-gray-200`}>
+        rounded-xl border-gray-200 mb-6`}>
             <div className={`font-bold text-lg`}>Featured</div>
             <div className={`divide-y divide-gray-200`}>
                 {

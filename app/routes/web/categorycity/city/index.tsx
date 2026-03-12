@@ -13,6 +13,7 @@ import SearchAd from '~/components/content/ads/SearchAd'
 import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
 import BusinessLinks from './assets/BusinessLinks'
+import Categories from './assets/Categories'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -226,8 +227,10 @@ const index = () => {
                             <div className={`hidden lg:block col-span-4`}>
                                 <div className={`sticky top-[80px] w-full`}>
 
-                                    <BusinessLinks />
                                     <Featured />
+                                    <BusinessLinks />
+                                    <Categories />
+
                                 </div>
                             </div>
                         </div>

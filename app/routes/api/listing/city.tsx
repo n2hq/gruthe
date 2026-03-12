@@ -4,9 +4,16 @@ import { query } from "../DB"
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const ITEMS_PER_PAGE = 20;
+    let cityparam: string
+
+    if (params.city) {
+        cityparam = params.city
+    } else {
+        cityparam = ''
+    }
 
     try {
-        const city = params.city
+        const city = convertDashToSpace(cityparam)
 
         const url = new URL(request.url);
         const searchParams = {

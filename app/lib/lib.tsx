@@ -1864,6 +1864,11 @@ export const convertDashToSpace = (str: string) => {
     return str?.replace(/-/g, ' ');
 };
 
+export const capitalizePhrase = (str: string) => {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 
 export const getBusinessByCategory = async (category: string | null, page: number): Promise<any | undefined> => {
 

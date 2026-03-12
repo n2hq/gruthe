@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
-import { LoaderFunction } from '@remix-run/node'
-import { config, convertDashToSpace, getBusinessByCategory, getBusinessByCity, getCountries, getSearch, logError } from '~/lib/lib'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { capitalizePhrase, config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getBusinessByCity, getCountries, getMeta, getSearch, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -12,31 +12,35 @@ import Featured from '../../browse/assets/Featured'
 import SearchAd from '~/components/content/ads/SearchAd'
 import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
+import BusinessLinks from './assets/BusinessLinks'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
 
-    const category = params.city
+    const city = params.city
 
-    console.log(category)
+    console.log(city)
 
     const url = new URL(request.url);
     const page = Math.max(1, parseInt(url?.searchParams.get("page") || "1"));
 
     let businesses: any = null;
-
+    let randomNumber
 
     try {
         // Call your paginated backend function
-        businesses = await getBusinessByCity(category!, page);
+        businesses = await getBusinessByCity(city!, page);
+        randomNumber = generateRandom10DigitNumber()
+
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }
 
     return {
-        category: category,
+        city: city,
         businesses: businesses || { data: [], pagination: null },
-        currentPage: page
+        currentPage: page,
+        randomNumber: randomNumber
     };
 }
 
@@ -98,9 +102,34 @@ const dat = [
     }
 ]
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+    const res: any = useLoaderData()
+
+    let randomNumber = data?.randomNumber
+
+    let title = `Best Businesses in ${capitalizePhrase(data?.city)} | Gruthe Business Directory`
+
+    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+
+    const description = `Find the best businesses in ${data?.city}. Browse verified businesses, contact details, reviews, working hours and ratings on Gruthe.`
+
+    let img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+
+
+    const metaImage = img
+
+
+    try {
+        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+    } catch (e: any) {
+        logError(e)
+    }
+    return []
+};
+
 const index = () => {
     const baseUrl = config.BASE_URL
-    const { category, businesses } = useLoaderData<typeof loader>();
+    const { city, businesses } = useLoaderData<typeof loader>();
     const fallbackImg = `/images/fallbackBusinessImg.png`
 
     const location = useLocation();
@@ -134,11 +163,12 @@ const index = () => {
 
                     <div className={`mb-6 text-xl font-light`}>
                         <div>
-                            <b className={`text-2xl`}>Searching for</b> <span className={`text-2xl font-semibold underline capitalize`}>{convertDashToSpace(category)}</span>
+                            <b className={`text-2xl`}>Best Businesses in </b> <span className={`text-2xl font-semibold underline capitalize`}>{convertDashToSpace(city)}</span>
                         </div>
                         <div className={`flex gap-2 mt-2 flex-wrap`}>
                             <p className="mt-2 text-gray-600 font-normal text-lg">
-                                Explore verified <b className={`font-bold`}>{category}</b> services. View contact info, working hours, and reviews.
+                                Find the best businesses in <b>{capitalizePhrase(city)}</b>. Browse verified businesses, contact details, reviews, working hours and ratings on Gruthe.
+
                             </p>
 
 
@@ -195,6 +225,8 @@ const index = () => {
                             </div>
                             <div className={`hidden lg:block col-span-4`}>
                                 <div className={`sticky top-[80px] w-full`}>
+
+                                    <BusinessLinks />
                                     <Featured />
                                 </div>
                             </div>

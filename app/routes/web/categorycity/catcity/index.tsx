@@ -11,6 +11,8 @@ import Featured from '../../browse/assets/Featured'
 import SearchAd from '~/components/content/ads/SearchAd'
 import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
+import BusinessLinks from '../city/assets/BusinessLinks'
+import Categories from '../city/assets/Categories'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -198,6 +200,8 @@ const index = () => {
                             <div className={`hidden lg:block col-span-4`}>
                                 <div className={`sticky top-[80px] w-full`}>
                                     <Featured />
+                                    <BusinessLinks />
+                                    <Categories />
                                 </div>
                             </div>
                         </div>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
-import { LoaderFunction } from '@remix-run/node'
-import { config, convertDashToSpace, getBusinessByCategory, getCountries, getSearch, logError } from '~/lib/lib'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getCountries, getMeta, getSearch, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -24,11 +24,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const page = Math.max(1, parseInt(url?.searchParams.get("page") || "1"));
 
     let businesses: any = null;
-
+    let randomNumber: number = 0
+    let fullUrl = url.href
 
     try {
         // Call your paginated backend function
         businesses = await getBusinessByCategory(category!, page);
+        randomNumber = generateRandom10DigitNumber()
+
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }
@@ -36,9 +39,36 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return {
         category: category,
         businesses: businesses || { data: [], pagination: null },
-        currentPage: page
+        currentPage: page,
+        randomNumber: randomNumber,
+        fullUrl: fullUrl
     };
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+    const res: any = useLoaderData()
+
+    let randomNumber = data?.randomNumber
+    let title = `${data.category} - ${config.SITENAME}` || `Category - ${config.SITENAME} Business Directory, Explore ${data.category} around the world`
+
+    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+
+    const description = `Discover ${data.category} businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
+
+    let img
+
+    img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+
+    const metaImage = img
+
+
+    try {
+        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+    } catch (e: any) {
+        logError(e)
+    }
+    return []
+};
 
 export type CardType = {
     img: string

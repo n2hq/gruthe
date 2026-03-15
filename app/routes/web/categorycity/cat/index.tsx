@@ -53,7 +53,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
 
-    const description = `Discover ${data.category} businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
+    const description = `Discover ${data.category} worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 
     let img
 

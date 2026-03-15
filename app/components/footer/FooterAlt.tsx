@@ -93,15 +93,15 @@ const doBusinessLinks = [
 const garsseteSocialLinks = [
     {
         icon: <FaFacebook />,
-        link: 'http://facebook.com/ashthors'
+        link: 'http://facebook.com/gruthe'
     },
     {
         icon: <FaXTwitter />,
-        link: 'http://x.com/ashthors'
+        link: 'http://x.com/gruthe_'
     },
     {
         icon: <FaInstagram />,
-        link: 'http://instagram.com/ashthors'
+        link: 'http://instagram.com/gr.uthe'
     },
 ]
 

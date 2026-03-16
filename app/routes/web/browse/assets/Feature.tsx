@@ -19,7 +19,9 @@ const Feature = ({ feature }: any) => {
             <div className={`font-normal  
                 tracking-normal mt-[2px] leading-[1.3em]
                 text-black`}>
-                {feature.short_description.substring(0, 80)}
+                {
+                    feature.short_description.length > 80 ?
+                        `${feature.short_description.substring(0, 80)}...` : feature.short_description}
             </div>
             <div className={`text-[12px] font-normal 
                 tracking-tight mt-[5px] leading-[1.4em]

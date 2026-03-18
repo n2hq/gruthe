@@ -76,118 +76,135 @@ const PreSrch = ({ items }: PreSrchProps) => {
         }
     };
 
+
+    const styleSht = `
+            .hide-bottom-scrollbar {
+                overflow-y: auto;
+                scrollbar-width: none;
+            }
+
+            .hide-bottom-scrollbar::-webkit-scrollbar {
+                width: 0px;
+                height: 0px;
+            }`
+
     return (
-        <div className={`px-[15px]`}>
-            <div className={`max-w-[1200px] mx-auto w-full`}>
+        <div>
 
-                {/** section title and sub title */}
-                <div className={`flex place-content-between place-items-end  mb-3 `}>
-                    <div className={`flex flex-col place-content-center  w-[70%] h-full place-items-start`}>
-                        <div className={`text-[17px] font-sans font-bold`}>
-                            Featured Businesses
-                        </div>
+            <div className={`px-[15px]`}>
 
-                        <div className={`text-[12px] font-sans`}>
-                            Whatever your business, we've got you.
-                        </div>
-                    </div>
-                    <div>
-                        <Link to={`/web/latest`}>
-                            <div className={`flex place-items-center gap-2`}>
-                                <span>
-                                    More
-                                </span>
-                                <BsChevronDoubleRight />
+                <div className={`max-w-[1200px] mx-auto w-full`}>
+
+                    {/** section title and sub title */}
+                    <div className={`flex place-content-between place-items-end  mb-3 `}>
+                        <div className={`flex flex-col place-content-center  w-[70%] h-full place-items-start`}>
+                            <div className={`text-[17px] font-sans font-bold`}>
+                                Featured Businesses
                             </div>
-                        </Link>
-                    </div>
-                </div>
 
-
-                {/** scroller */}
-                <div className={`relative`}>
-                    <div
-                        ref={scrollRef}
-                        className={`flex max-w-[1200px] mx-auto w-full gap-4 overflow-x-auto bottom-scrollbar-hidden rounded-t-3xl`}
-                    >
-                        <div className={`flex gap-4`}>
-                            {
-                                items?.map((item: ListingType, index: number) => {
-                                    const IMG_BASE_URL = config.IMG_BASE_URL
-                                    const imgEndPoint = (item?.profile_image_url_ext) ? (IMG_BASE_URL + item.profile_image_url_ext) : ''
-
-                                    let ITEM_URL = '/'
-                                    ITEM_URL += (item?.username) ? item?.username : item?.gid
-                                    return (
-                                        <div
-                                            key={index}
-                                            className={`w-[160px] md:min-w-[160px]`}
-                                        >
-                                            <Link to={ITEM_URL}>
-                                                <div className={`border-none rounded-3xl  h-[150px]  overflow-hidden relative`}>
-                                                    {
-                                                        item?.profile_image_url_ext ?
-                                                            <img
-                                                                src={imgEndPoint}
-                                                                alt=""
-                                                                className={`object-cover h-full w-full`}
-                                                            /> :
-                                                            <AlternateImage title={item.title} />
-                                                    }
-
-                                                    <div className={`absolute bottom-0 text-white h-[40%] w-full flex items-end content-start`}>
-
-                                                    </div>
-                                                </div>
-
-                                                <div className={`mt-3 relative `}>
-
-                                                    <div className={` text-[13px] font-[500] mt-[3px] line-clamp-2 leading-[16px]`}>
-                                                        {item?.title}
-                                                    </div>
-
-                                                </div>
-
-                                                <div className={`text-sm text-gray-500 flex place-items-center gap-2`}>
-                                                    <span>
-                                                        Starting {item?.currency}{formatNumber(item?.minimum_amount)}
-                                                    </span>
-                                                    {
-                                                        item?.avg_rating &&
-                                                        <span className={`flex place-items-center`}>
-                                                            <BiSolidStar />
-                                                            <span>
-                                                                {item?.avg_rating}
-                                                            </span>
-                                                        </span>
-                                                    }
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    )
-                                })
-                            }
+                            <div className={`text-[12px] font-sans`}>
+                                Whatever your business, we've got you.
+                            </div>
+                        </div>
+                        <div>
+                            <Link to={`/web/latest`}>
+                                <div className={`flex place-items-center gap-2`}>
+                                    <span>
+                                        More
+                                    </span>
+                                    <BsChevronDoubleRight />
+                                </div>
+                            </Link>
                         </div>
                     </div>
 
-                    {/** navlinks */}
-                    {/** left arrow */}
-                    <div className={`absolute text-white top-1/2 -translate-y-1/2 left-2 w-[50px] min-w-[50px] h-[50px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[0]`}
-                        onClick={() => { scrollLeft() }}
-                    >
-                        <FaChevronLeft />
+
+                    {/** scroller */}
+                    <style dangerouslySetInnerHTML={{ __html: styleSht }} />
+                    <div className={`relative`}>
+                        <div
+                            ref={scrollRef}
+                            className={`flex max-w-[1200px] mx-auto w-full gap-4 overflow-x-auto hide-bottom-scrollbar rounded-t-3xl`}
+                        >
+                            <div className={`flex gap-4`}>
+                                {
+                                    items?.map((item: ListingType, index: number) => {
+                                        const IMG_BASE_URL = config.IMG_BASE_URL
+                                        const imgEndPoint = (item?.profile_image_url_ext) ? (IMG_BASE_URL + item.profile_image_url_ext) : ''
+
+                                        let ITEM_URL = '/'
+                                        ITEM_URL += (item?.username) ? item?.username : item?.gid
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={`w-[160px] md:min-w-[160px]`}
+                                            >
+                                                <Link to={ITEM_URL}>
+                                                    <div className={`border-none rounded-3xl  h-[150px]  overflow-hidden relative`}>
+                                                        {
+                                                            item?.profile_image_url_ext ?
+                                                                <img
+                                                                    src={imgEndPoint}
+                                                                    alt=""
+                                                                    className={`object-cover h-full w-full`}
+                                                                /> :
+                                                                <AlternateImage title={item.title} />
+                                                        }
+
+                                                        <div className={`absolute bottom-0 text-white h-[40%] w-full flex items-end content-start`}>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div className={`mt-3 relative `}>
+
+                                                        <div className={` text-[13px] font-[500] mt-[3px] line-clamp-2 leading-[16px]`}>
+                                                            {item?.title}
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className={`text-sm text-gray-500 flex place-items-center gap-2`}>
+                                                        <span>
+                                                            Starting {item?.currency}{formatNumber(item?.minimum_amount)}
+                                                        </span>
+                                                        {
+                                                            item?.avg_rating &&
+                                                            <span className={`flex place-items-center`}>
+                                                                <BiSolidStar />
+                                                                <span>
+                                                                    {item?.avg_rating}
+                                                                </span>
+                                                            </span>
+                                                        }
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+
+                        {/** navlinks */}
+                        {/** left arrow */}
+                        <div className={`absolute text-white top-1/2 -translate-y-1/2 left-2 w-[50px] min-w-[50px] h-[50px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[0]`}
+                            onClick={() => { scrollLeft() }}
+                        >
+                            <FaChevronLeft />
+                        </div>
+
+
+                        {/** right arrow */}
+                        <div className={`absolute text-white top-1/2 -translate-y-1/2 right-2 w-[50px] min-w-[50px] h-[50px] bg-black/70 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[0]`}
+                            onClick={() => { scrollRight() }}
+                        >
+                            <FaChevronRight />
+                        </div>
                     </div>
 
 
-                    {/** right arrow */}
-                    <div className={`absolute text-white top-1/2 -translate-y-1/2 right-2 w-[50px] min-w-[50px] h-[50px] bg-black/70 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[0]`}
-                        onClick={() => { scrollRight() }}
-                    >
-                        <FaChevronRight />
-                    </div>
                 </div>
-
-
             </div>
         </div>
     )

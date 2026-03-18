@@ -10,7 +10,7 @@ export default function ChangeEmailFailAlt() {
         // Trigger animation after component mounts
         setIsVisible(true);
     }, []);
-    console.log(config.SITENAME)
+
 
     return (
         <div className="min-h-screen w-screen min-w-screen bg-black/50  flex items-center justify-center p-4">

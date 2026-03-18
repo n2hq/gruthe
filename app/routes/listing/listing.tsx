@@ -242,7 +242,7 @@ const listing = () => {
 
 
 
-                            <div className={`grid grid-cols-1 lg:grid-cols-12 lg:gap-x-24 mt-0 md:mt-12`}>
+                            <div className={`grid grid-cols-1 lg:grid-cols-12 lg:gap-x-24 mt-0 md:mt-12 bg-blue-400`}>
                                 <div className={` md:col-span-7`}>
 
 
@@ -253,6 +253,9 @@ const listing = () => {
                                             ratings={ratingsData}
                                             reviewContext={reviewContext}
                                             businessRating={businessRating}
+                                            shareContext={shareContext}
+                                            profileImg={profileImg}
+                                            profileImageData={profileImageData}
                                         />
 
                                     </WriteReviewAltProvider>

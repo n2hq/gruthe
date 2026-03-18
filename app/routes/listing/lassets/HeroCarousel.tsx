@@ -131,7 +131,7 @@ const HeroCarousel = ({ images, listing }: HeroCarouselProps) => {
                                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                             >
 
-                                <div className={`absolute  left-0 right-0 bottom-0 h-[30%]  w-full bg-gradient-to-b from-transparent to-gray-800`} />
+                                <div className={`absolute  left-0 right-0 bottom-0 h-[30%]  w-full bg-gradient-to-b from-transparent to-gray-900`} />
                                 <div className={`absolute bottom-5 w-full text-center text-white`}>
                                     <div>{index + 1} / {slides.length}</div>
                                     <div className={`max-w-[80%] mx-auto w-full line-clamp-1 text-center text-sm font-light mt-2`}>

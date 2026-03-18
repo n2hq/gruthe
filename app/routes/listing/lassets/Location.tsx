@@ -62,7 +62,7 @@ const Location = ({ listing }: LocationProps) => {
                         <div className={`col-span-6 rounded-xl overflow-hidden border border-gray-300`}>
                             <div className={`relative h-full w-full`}>
                                 <img
-                                    src={`https://m.media-amazon.com/images/I/81WGuaolxhL._AC_SL1500_.jpg`}
+                                    src={`/images/map.jpg`}
                                     alt=""
                                     className={` object-center object-cover w-full h-full`}
                                 />

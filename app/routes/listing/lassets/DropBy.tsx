@@ -4,7 +4,9 @@ import { BiPhone } from 'react-icons/bi';
 import { CgWebsite } from 'react-icons/cg';
 import { LuMapPinPlus } from "react-icons/lu";
 import { MdEmail } from 'react-icons/md';
+import { ReviewType, WriteReviewAltProvider } from '~/context/WriteReviewAltContext';
 import { ListingType } from '~/lib/types';
+import Reviews from './Reviews';
 
 const contacts2 = [
     {
@@ -34,10 +36,11 @@ export type ContactType = {
 export interface DropByProps {
     listing: ListingType
     reportTime: any
-    operatingHoursStatus: any
+    operatingHoursStatus: any,
+    reviewContext: ReviewType | null
 }
 
-const DropBy = ({ listing, reportTime, operatingHoursStatus }: DropByProps) => {
+const DropBy = ({ listing, reportTime, operatingHoursStatus, reviewContext }: DropByProps) => {
     const [address, setAddress] = useState('')
     const [contacts, setContacts] = useState<ContactType[]>()
 
@@ -100,12 +103,22 @@ const DropBy = ({ listing, reportTime, operatingHoursStatus }: DropByProps) => {
         <div>
 
             {/** say hello header */}
-            <div>
-                <div className={`text-[22px] md:text-[25px] font-bold`}>
-                    Welcome to<i>!</i>
+            <div className={`flex place-content-between`}>
+                <div>
+                    <div className={`text-[22px] md:text-[25px] font-bold`}>
+                        Welcome to<i>!</i>
+                    </div>
+                    <div className={` font-light text-[15px] -mt-1 underline`}>
+                        {listing?.title}
+                    </div>
                 </div>
-                <div className={` font-light text-[15px] -mt-1 underline`}>
-                    {listing?.title}
+
+                <div className=''>
+                    <div className={`border p-2 rounded-lg md:hidden bg-gray-200`}>
+                        <WriteReviewAltProvider>
+                            <Reviews listing={listing} reviewContext={reviewContext} />
+                        </WriteReviewAltProvider>
+                    </div>
                 </div>
             </div>
 

@@ -30,7 +30,7 @@ const MobileHeroWithTitle = ({ title, images, listing }: MobileHeroProps) => {
     return (
         <div className={`block md:hidden`}>
             <div className={`bg-gray-700 h-[450px] w-full z-[0]`}>
-                <div className={`absolute inset-0 flex items-center -top-20 justify-center text-gray-400 font-extralight text-sm`}>
+                <div className={`absolute  flex items-center -top-20 justify-center text-gray-400 font-extralight text-sm`}>
                     {listing?.title}
                 </div>
                 <HeroCarousel images={heroImages} listing={listing} />

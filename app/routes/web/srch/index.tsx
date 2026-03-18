@@ -18,6 +18,7 @@ import { BsStar } from 'react-icons/bs'
 import { BiChevronLeft, BiChevronRight, BiSolidStar } from 'react-icons/bi'
 import { CgChevronRight } from 'react-icons/cg'
 import { PreSearch } from './PreSearch'
+import PreSrch from './PreSrch'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -192,7 +193,8 @@ const index = () => {
                     <div className={`h-[40px]`}></div>
             }
             <div className={``}>
-                <PreSearch items={latestBusinesses} />
+                <PreSrch items={latestBusinesses} />
+
             </div>
             <div className={`px-[15px]`}>
                 <div className={`max-w-[1200px] mx-auto w-full`}>

@@ -73,7 +73,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                         }
                     </div>
 
-                    <div className={`flex flex-col flex-grow pl-5 relative`}>
+                    <div className={`flex flex-col flex-grow pl-3 relative`}>
                         <div className={`flex justify-between relative`}>
                             <p className={`text-base leading-[1.2em] capitalize`}>{convertDashToSpace(item.category)}</p>
                             <div>
@@ -96,36 +96,52 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
                         </div>
 
-                        <div className={`flex justify-between items-end pt-5`}>
-                            <div>
-                                <div className={`text-sm mb-2 flex flex-col -space-y-0.5 relative`}>
-                                    <p className=' line-clamp-1'>{item?.address_one}</p>
-                                    <p className=' line-clamp-1'>{item.address_two && `${item.address_two}, `} {item.city_name && `${item.city_name}, `} {item?.country_name}</p>
-                                </div>
-                                <div className={`flex place-items-center relative`}>
-                                    <RatingBoxInfoCard rating={Number(item?.avg_rating) || 0} />
+                        <div className={`flex justify-between items-end pt-5 h-[100px]`}>
+                            <div className={`w-[70%] h-full`}>
+                                <div className={`text-[12px] -space-y-.5`}>
+                                    <p className={`line-clamp-1`}>{item?.address_one}</p>
+                                    <p>
+                                        {
+                                            item?.address_two &&
+                                            <span>
+                                                {item.address_two}
+                                            </span>
+                                        }
 
-                                    <span className={` ml-1 relative left-0 top-[0px] text-[14px]`}>
-                                        {item?.avg_rating || 0}
-                                    </span>
-                                    <span className={`ml-1 relative left-0 top-[0px] text-orange-700 text-[13px]`}>
-                                        ({item?.count_of_rating || 0}) Reviews
-                                    </span>
-                                </div>
-                            </div>
+                                        {
+                                            item?.city_name &&
+                                            <span>
+                                                {`${item?.city_name}, `}
+                                            </span>
+                                        }
 
-                            <div>
-                                <div>
-                                    <p className={`text-right -mb-1`}>Starting</p>
-
-                                    <p className={`text-lg lg:text-xl font-semibold pb-1 text-right`}>
-                                        {item.currency}{formatNumber(Number(item.minimum_amount || 0))}
+                                        {item?.country_name}
                                     </p>
                                 </div>
-                                <p className={` text-right font-light hover:underline`}>
-                                    Website
-                                </p>
+                                <div className={`mt-2 flex gap-1`}>
+                                    <RatingBoxInfoCard rating={Number(item?.avg_rating) || 0} />
+                                    <span>
+                                        {item?.avg_rating || 0}
+                                    </span>
+                                    <span>
+                                        ({item?.count_of_rating || 0})
+                                    </span>
+                                </div>
                             </div>
+
+                            <div className={`w-[30%]  h-full flex flex-col place-items-end`}>
+                                <p>
+                                    Starting
+                                </p>
+                                <p className={`font-bold text-[19px]`}>
+                                    {item.currency} {formatNumber(Number(item.minimum_amount) || 0)}
+                                </p>
+
+                                <div className={`hover:underline`}>
+                                    Website
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

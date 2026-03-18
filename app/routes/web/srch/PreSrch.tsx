@@ -96,7 +96,7 @@ const PreSrch = ({ items }: PreSrchProps) => {
                 <div className={`max-w-[1200px] mx-auto w-full`}>
 
                     {/** section title and sub title */}
-                    <div className={`flex place-content-between place-items-end  mb-3 `}>
+                    <div className={`flex place-content-between place-items-center  mb-3 `}>
                         <div className={`flex flex-col place-content-center  w-[70%] h-full place-items-start`}>
                             <div className={`text-[17px] font-sans font-bold`}>
                                 Featured Businesses

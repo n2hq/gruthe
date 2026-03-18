@@ -108,7 +108,7 @@ const PreSrch = ({ items }: PreSrchProps) => {
                 <div className={`relative`}>
                     <div
                         ref={scrollRef}
-                        className={`flex max-w-[1200px] mx-auto w-full gap-4 overflow-x-hidden rounded-t-3xl`}
+                        className={`flex max-w-[1200px] mx-auto w-full gap-4 overflow-x-auto bottom-scrollbar-hidden rounded-t-3xl`}
                     >
                         <div className={`flex gap-4`}>
                             {

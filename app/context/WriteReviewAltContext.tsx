@@ -19,8 +19,10 @@ export type ReviewType = {
 export const useWriteReviewAltContext = () => {
     const ctx: ReviewType = useContext(WriteReviewAltContext)
     if (ctx) {
+
         return ctx
     }
+
     return null
 }
 

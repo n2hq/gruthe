@@ -30,13 +30,13 @@ const RatingSummary = ({ ratings, listing, reviewContext, businessRating, shareC
     }, [ratings])
 
     return (
-        <div className='mb-8 border  border-solid   rounded-3xl shadow-lg shadow-gray-100 bg-orange-50'>
+        <div className='mb-8 border  border-solid   rounded-3xl shadow-lg shadow-gray-100'>
             {/* <div className={`p-3 bg-gray-100`}>
                 <div className={`text-[13px] tracking-normal font-normal text-gray-500 text-center pb-3 md:pb-5 max-w-[70%] md:max-w-full mx-auto w-full md:text-start md:text-lg leading-[1.3em]`}>
                     Please always verify businesses before conducting transactions. Do not send funds to unknown individuals.
                 </div>
             </div> */}
-            <div className={`grid grid-cols-4 border-none md:border md:border-solid rounded-3xl py-5 divide-x `}>
+            <div className={`grid grid-cols-3 border-none md:border md:border-solid rounded-3xl py-5 divide-x `}>
                 <div className={`text-lg flex flex-col  place-items-center place-content-center`}>
                     <div className={`mx-[50%] text-center leading-[1.2em] text-[14px] md:text-[15px] font-semibold`}>
                         <div className={`md:hidden`}>
@@ -56,18 +56,7 @@ const RatingSummary = ({ ratings, listing, reviewContext, businessRating, shareC
                     </div>
                 </div>
 
-                <div className={`flex place-items-center place-content-center`}>
-                    <div className={` w-[60%]`}>
-                        <ShareDialogProvider>
-                            <Share
-                                shareContext={shareContext}
-                                listing={listing}
-                                profileImg={profileImg}
-                                profileImageData={profileImageData}
-                            />
-                        </ShareDialogProvider>
-                    </div>
-                </div>
+
                 <div className={`flex flex-col place-items-center gap-y-0`}>
                     <div className={`text-xl font-semibold md:text-2xl`}>
                         {businessRating?.count_of_rating || 0}

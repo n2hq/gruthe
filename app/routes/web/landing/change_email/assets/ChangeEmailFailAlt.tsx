@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import { useState, useEffect } from "react";
 import { MdOutlineCancel } from "react-icons/md";
+import { config } from "~/lib/lib";
 
 export default function ChangeEmailFailAlt() {
     const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ export default function ChangeEmailFailAlt() {
                     {/* failed Icon */}
                     <div className="flex justify-center mb-6 mt-0 py-5 bg-gray-50 border-b">
                         <div className={`text-2xl font-[600] tracking-tighter font-poppins text-gray-700`}>
-                            Garssete
+                            {config.SITENAME}
                         </div>
                     </div>
 

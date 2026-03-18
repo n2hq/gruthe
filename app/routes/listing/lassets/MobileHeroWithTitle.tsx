@@ -29,7 +29,7 @@ const MobileHeroWithTitle = ({ title, images, listing }: MobileHeroProps) => {
 
     return (
         <div className={`block md:hidden bg-black`}>
-            <div className={`bg-gray-700 h-[600px] w-full z-[0]`}>
+            <div className={`bg-gray-700 h-[500px] w-full z-[0]`}>
                 <div className={`absolute  flex items-center -top-20 justify-center text-gray-400 font-extralight text-sm`}>
                     {listing?.title}
                 </div>

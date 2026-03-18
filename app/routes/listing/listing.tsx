@@ -260,8 +260,11 @@ const listing = () => {
 
                                     </WriteReviewAltProvider>
 
-                                    <DropBy listing={listing} reportTime={reportTime}
+                                    <DropBy
+                                        listing={listing}
+                                        reportTime={reportTime}
                                         operatingHoursStatus={operatingHoursStatus}
+                                        reviewContext={reviewContext}
                                     />
 
                                     <ReadMoreAboutProvider>

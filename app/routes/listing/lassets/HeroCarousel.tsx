@@ -118,8 +118,8 @@ const HeroCarousel = ({ images, listing }: HeroCarouselProps) => {
 
 
     return (
-        <div className={`relative`}>
-            <div className={` w-full h-[430px] md:h-[500px] flex overflow-hidden  `}>
+        <div className={`relative h-full`}>
+            <div className={` w-full h-full md:h-[500px] flex overflow-hidden  `}>
                 {
                     slides?.map((slide: any, index: any) => {
 

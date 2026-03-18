@@ -78,7 +78,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                             <p className={`text-base leading-[1.2em] capitalize`}>{convertDashToSpace(item.category)}</p>
                             <div>
                                 {/* <BsHeart className={`text-2xl cursor-pointer`} /> */}
-                                <div className={`text-[12px] md:text-lg min-w-[100px] text-right`}>{formatInternationalPhone(splitPhoneString(item?.phone)) || `n/a`}</div>
+                                <div className={`text-[12px] md:text-[13px] font-bold min-w-[100px] text-right`}>{formatInternationalPhone(splitPhoneString(item?.phone)) || `n/a`}</div>
                             </div>
                         </div>
 
@@ -130,14 +130,19 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                             </div>
 
                             <div className={`w-[30%]  h-full flex flex-col place-items-end`}>
-                                <p>
+                                <p className={`font-light`}>
                                     Starting
                                 </p>
-                                <p className={`font-bold text-[19px]`}>
-                                    {item.currency} {formatNumber(Number(item.minimum_amount) || 0)}
+                                <p className={`font-bold text-[19px] flex gap-[1px]`}>
+                                    <span>
+                                        {item.currency}
+                                    </span>
+                                    <span className={`tracking-tight`}>
+                                        {formatNumber(Number(item.minimum_amount) || 0)}
+                                    </span>
                                 </p>
 
-                                <div className={`hover:underline`}>
+                                <div className={`hover:underline text-orange-500`}>
                                     Website
                                 </div>
                             </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BusinessReviewType, ListingType, ProfileImageType, RatingsDataType } from '~/lib/types'
 
 import Reviews from './Reviews'
-import { ReviewType } from '~/context/WriteReviewAltContext'
+import { ReviewType, WriteReviewAltProvider } from '~/context/WriteReviewAltContext'
 import { BusinessRatingSummary } from '~/routes/api/rating/rate_business'
 import RatingBoxInfoCard from '~/components/content/RatingBoxInfoCard'
 import { ShareContextType, ShareDialogProvider } from '~/context/ShareDialogContext'
@@ -40,9 +40,11 @@ const RatingSummary = ({ ratings, listing, reviewContext, businessRating, shareC
                 <div className={`text-lg flex flex-col  place-items-center place-content-center`}>
                     <div className={`mx-[50%] text-center leading-[1.2em] text-[14px] md:text-[15px] font-semibold`}>
                         <div className={`md:hidden`}>
-                            <Reviews listing={listing}
-                                reviewContext={reviewContext}
-                            />
+                            <WriteReviewAltProvider>
+                                <Reviews listing={listing} reviewContext={reviewContext} />
+                            </WriteReviewAltProvider>
+
+
                         </div>
                         <span className={`md:block hidden`}>User Reviews</span>
                     </div>

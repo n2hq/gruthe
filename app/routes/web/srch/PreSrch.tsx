@@ -84,7 +84,7 @@ const PreSrch = ({ items }: PreSrchProps) => {
                 <div className={`flex place-content-between place-items-end  mb-3 `}>
                     <div className={`flex flex-col place-content-center  w-[70%] h-full place-items-start`}>
                         <div className={`text-[17px] font-sans font-bold`}>
-                            Latest Businesses
+                            Featured Businesses
                         </div>
 
                         <div className={`text-[12px] font-sans`}>

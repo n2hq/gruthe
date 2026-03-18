@@ -10,6 +10,7 @@ export default function ChangeEmailFailAlt() {
         // Trigger animation after component mounts
         setIsVisible(true);
     }, []);
+    console.log(config.SITENAME)
 
     return (
         <div className="min-h-screen w-screen min-w-screen bg-black/50  flex items-center justify-center p-4">
@@ -19,6 +20,7 @@ export default function ChangeEmailFailAlt() {
                     <div className="flex justify-center mb-6 mt-0 py-5 bg-gray-50 border-b">
                         <div className={`text-2xl font-[600] tracking-tighter font-poppins text-gray-700`}>
                             {config.SITENAME}
+
                         </div>
                     </div>
 

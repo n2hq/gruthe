@@ -14,6 +14,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     const countResult: any = await query(`
       SELECT COUNT(*) AS total
       FROM tbl_dir d
+      WHERE d.active_status = true
     `, []);
 
     const totalItems = countResult[0]?.total || 0;
@@ -37,6 +38,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         ON d.gid = bg.business_guid
       LEFT JOIN tbl_business_profile_image bpi
         ON d.gid = bpi.business_guid
+      WHERE d.active_status = true
       ORDER BY d.date_created DESC
       LIMIT ? OFFSET ?
     `, [ITEMS_PER_PAGE, offset]);

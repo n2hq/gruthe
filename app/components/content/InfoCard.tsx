@@ -75,10 +75,15 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
                     <div className={`flex flex-col flex-grow pl-3 relative`}>
                         <div className={`flex justify-between relative`}>
-                            <p className={`text-base leading-[1.2em] capitalize`}>{convertDashToSpace(item.category)}</p>
+                            <p className={`text-[11px] leading-[1.2em] capitalize line-clamp-1 hover:underline`}>
+                                <Link to={`/web/category/${item.category}`}>
+                                    {convertDashToSpace(item.category)}
+                                </Link>
+
+                            </p>
                             <div>
                                 {/* <BsHeart className={`text-2xl cursor-pointer`} /> */}
-                                <div className={`text-[12px] md:text-[13px] font-bold min-w-[100px] text-right`}>{formatInternationalPhone(splitPhoneString(item?.phone)) || `n/a`}</div>
+                                <div className={`text-[11px] md:text-[13px] font-bold min-w-[100px] text-right`}>{formatInternationalPhone(splitPhoneString(item?.phone)) || `n/a`}</div>
                             </div>
                         </div>
 

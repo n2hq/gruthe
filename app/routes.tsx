@@ -175,6 +175,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/city_sitexml", "routes/api/listing/city_sitexml.tsx")
 
         route("/api/listing/top_latest_businesses", "routes/api/listing/top_latest_businesses.tsx")
+        route("/api/listing/top_latest_featured_businesses", "routes/api/listing/top_latest_featured_businesses.tsx")
 
         route("/api/listing/latest_businesses", "routes/api/listing/latest_businesses.tsx")
 

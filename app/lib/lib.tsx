@@ -280,6 +280,31 @@ export const getTopLatestBusinesses = async () => {
     }
 }
 
+
+export const getTopLatestFeaturedBusinesses = async () => {
+
+    const endpoint = `/api/listing/top_latest_featured_businesses`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
 export const getLatestBusinesses2 = async (page: string) => {
 
     let endpoint = `/api/listing/latest_businesses`

@@ -3,7 +3,7 @@ import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { config, convertDashToSpace, generateRandom10DigitNumber, getCountries, getLatestBusinesses, getMeta, getSearch, getTopLatestBusinesses, logError } from '~/lib/lib'
+import { config, convertDashToSpace, generateRandom10DigitNumber, getCountries, getLatestBusinesses, getMeta, getSearch, getTopLatestBusinesses, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { Link, useLoaderData, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -40,7 +40,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     try {
         page = parseInt(url?.searchParams.get("page") || "1")
         data = await getSearch(query, city, state, country, category, page)
-        latest = await getTopLatestBusinesses()
+        latest = await getTopLatestFeaturedBusinesses()
         countries = await getCountries()
         randomNumber = generateRandom10DigitNumber()
     } catch (error: any) {

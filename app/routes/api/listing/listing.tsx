@@ -116,6 +116,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             let minimum_amount = body.minimum_amount as string === undefined ? listing.minimum_amount : body.minimum_amount
 
 
+            const currencyRes = await query(`SELECT * FROM tbl_country c
+                WHERE
+                c.id = ?`, [body.minimum_amount_currency_code])
+
+            const currencySymbol = currencyRes[0].currency_symbol
 
 
             if (minimum_amount !== null && minimum_amount !== undefined) {
@@ -248,7 +253,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                     website,
                     minimum_amount_currency_code,
                     minimum_amount,
-                    currency,
+                    currencySymbol,
                     starting_note,
                     guid
                 ])

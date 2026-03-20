@@ -66,6 +66,7 @@ const BusinessProfileForm = ({ data }: any) => {
 
     const handleUpdateBusiness: SubmitHandler<any> = async (datar: any) => {
         setWorking(true)
+        console.log(datar)
         //notification.notify('Updating business profile...')
         showOperation('processing', 'Updating business profile')
         await new Promise((resolve) => setTimeout(resolve, 1000));

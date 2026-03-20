@@ -122,6 +122,13 @@ export async function action({ request, params }: ActionFunctionArgs) {
             const minimumAmt = removeCommas(body?.minimum_amount)
             //console.log(body)
 
+            const currencyRes = await query(`SELECT * FROM tbl_country c
+                WHERE
+                c.id = ?`, [body.minimum_amount_currency_code])
+
+            const currencySymbol = currencyRes[0].currency_symbol
+
+
             const result = await query(`INSERT INTO tbl_dir SET 
                 title = ?, 
                 pagetype = ?,
@@ -143,7 +150,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 established = ?,
                 listing_hash = ?,
                 minimum_amount = ?,
-                minimum_amount_currency_code = ?`,
+                minimum_amount_currency_code = ?,
+                currency = ?`,
                 [
                     body.title || null,
                     body.pagetype,
@@ -165,7 +173,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
                     body.established || null,
                     listingHash || null,
                     minimumAmt || null,
-                    body.minimum_amount_currency_code || null
+                    body.minimum_amount_currency_code || null,
+                    currencySymbol || "$"
                 ])
 
             const rating = 3

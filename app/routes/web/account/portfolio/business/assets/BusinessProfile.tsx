@@ -21,7 +21,7 @@ import InputNumberOnly from '~/components/content/input/InputNumberOnly'
 import SelectCurrency from '~/components/content/select/SelectCurrency'
 
 const BusinessProfile = ({ data }: any) => {
-    //console.log(data.businessProfile)
+    console.log(data.businessProfile)
     const [businessProfile, setBusinessProfile] = useState<any | null>(data.businessProfile)
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)

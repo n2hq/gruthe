@@ -109,7 +109,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                                         {
                                             item?.address_two &&
                                             <span>
-                                                {item.address_two}
+                                                {`${item.address_two}, `}
                                             </span>
                                         }
 

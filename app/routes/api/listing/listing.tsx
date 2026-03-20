@@ -82,7 +82,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             let short_description = body.short_description as string === undefined ? listing.short_description : body.short_description
             let long_description = body.long_description as string === undefined ? listing.long_description : body.long_description
 
-            let phone = body.phone as string === undefined ? listing.phone : body.phone
+            //let phone = body.phone as string === undefined ? listing.phone : body.phone
+            let phone = body.phone as string === undefined ? "" : body.phone
             let address_one = body.address_one as string === undefined ? listing.address_one : body.address_one
             let address_two = body.address_two as string === undefined ? listing.address_two : body.address_two
             let img = body.img as string === undefined ? listing.img : body.img

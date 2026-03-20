@@ -82,8 +82,8 @@ const BusinessProfile = ({ data }: any) => {
 
     const handleUpdateBusiness: SubmitHandler<any> = async (datar: any) => {
         setWorking(true)
-        alert(JSON.stringify(datar))
-        console.log(datar)
+        //alert(JSON.stringify(datar))
+        //console.log(datar)
         //return false
         //notification.notify('Updating business profile...')
         showOperation('processing', 'Updating page profile')

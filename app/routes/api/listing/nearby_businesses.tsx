@@ -26,6 +26,8 @@ export const loader: LoaderFunction = async ({ params }) => {
             LEFT JOIN tbl_business_profile_image bpi
             	ON d.gid = bpi.business_guid
             WHERE d.city_id RLIKE ?
+            AND
+            d.active_status = true
             ORDER BY d.title
             LIMIT ?;
     `, [cityId, limit]);

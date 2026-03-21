@@ -47,17 +47,29 @@ function getEncodedShareLinks(listing: ListingType, location: any) {
     const url = config.BASE_URL + location.pathname
 
     const baseUrl = `${url}?v=${Date.now()}`
-    const shareText = listing?.title + " - " + removeAllParagraphs(truncateText(listing?.short_description, 150)) + ` via @bycetinc`
+    const shareText = listing?.title + " - " + removeAllParagraphs(truncateText(listing?.short_description, 150)) + ` via @gruthe`
+
+    const twitterShareText = listing?.title + " - " + removeAllParagraphs(truncateText(listing?.short_description, 150)) + ` via @gruthe_`
+
+
+    const whatsappShareText = listing?.title + " - " + removeAllParagraphs(truncateText(listing?.short_description, 150)) + ` via @gruthe`
+
+
+    const facebookShareText = listing?.title + " - " + removeAllParagraphs(truncateText(listing?.short_description, 150)) + ` via @gruthe`
 
     const encodedBaseUrl = encodeURIComponent(baseUrl);
     const encodedShareText = encodeURIComponent(shareText);
 
-    const twitterShare = `https://twitter.com/intent/tweet?url=${encodedBaseUrl}&text=${encodedShareText}`;
+    const encodedTwitterShareText = encodeURIComponent(twitterShareText);
+    const encodedWhatsappShareText = encodeURIComponent(whatsappShareText);
+    const encodedFacebookShareText = encodeURIComponent(facebookShareText);
 
-    const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${encodedBaseUrl}&quote=${encodedShareText}`;
+    const twitterShare = `https://twitter.com/intent/tweet?url=${encodedBaseUrl}&text=${encodedTwitterShareText}`;
+
+    const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${encodedBaseUrl}&quote=${encodedFacebookShareText}`;
 
 
-    const whatsappShare = `https://wa.me/?text=${encodedShareText} ${encodedBaseUrl}`
+    const whatsappShare = `https://wa.me/?text=${encodedWhatsappShareText} ${encodedBaseUrl}`
 
 
     const mailtoSubject = `Check out ${listing?.title} on Bycet.com`

@@ -13,6 +13,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/latest", "routes/web/srch/latest.tsx")
         route("/web/cat/:category/city/:city", "routes/web/categorycity/index.tsx");
 
+
         route("/web/category/:category/city/:city", "routes/web/categorycity/catcity/index.tsx");
 
         route("/web/cat/:category", "routes/web/categorycity/category.tsx")
@@ -78,6 +79,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/landing/change_email", "routes/web/landing/change_email/index.tsx")
         route("/web/landing/reset_password/:guid", "routes/web/landing/reset_password/index.tsx")
         route("/web/landing/complete_signup/:guid", "routes/web/landing/complete_signup/index.tsx")
+        route("/web/landing/conversion", "routes/web/landing/conversion/index.tsx")
 
         {/** user */ }
         route("api/user", "routes/api/user/index.tsx");

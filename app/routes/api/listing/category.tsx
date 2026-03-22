@@ -60,6 +60,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 d.website,
                 d.short_description AS short_description,
                 d.category,
+                d.currency,
+                d.minimum_amount,
                 d.country_code,
                 d.state_code,
                 d.city_id,

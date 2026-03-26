@@ -180,7 +180,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
                     body.owner || null,
                     body.established || null,
                     listingHash || null,
-                    minimumAmt || null,
+                    minimumAmt || 0,
                     body.minimum_amount_currency_code || null,
                     currencySymbol || "$",
                     currencyAbbr || 'USD'

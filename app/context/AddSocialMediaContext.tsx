@@ -278,7 +278,7 @@ export const AddSocialMediaProvider = ({ children }: any) => {
 
                                             <Input
                                                 controlTitle={"Social Media Identifier"}
-                                                controlPlaceholder={"Enter a valid url"}
+                                                controlPlaceholder={"Enter a valid handle"}
                                                 controlName={"social_media_identifier"}
                                                 register={register}
                                                 changeHandler={changeHandler}

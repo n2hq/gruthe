@@ -25,9 +25,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
             if (!body.facility_id) {
                 return new Response(JSON.stringify({ message: "Missing Facility ID" }), { status: 400 })
             }
-            if (!body.facility_description) {
+            /* if (!body.facility_description) {
                 return new Response(JSON.stringify({ message: "Missing Facility Description" }), { status: 400 })
-            }
+            } */
 
 
             const facility_guid = crypto.randomUUID()
@@ -46,7 +46,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
                         `,
                 [
                     body.facility_id,
-                    body.facility_description,
+                    body.facility_description || null,
                     facility_guid,
                     body.user_guid,
                     body.business_guid,

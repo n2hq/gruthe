@@ -338,8 +338,9 @@ const urlvalidator = /^(?!https?)(?!www\.?).*\..+$/g
 export const FacilityProfileSchema = z.object({
     facility_id: z.string({ message: "Please enter a service name" })
         .min(1, { message: "Please enter a service name" }),
-    facility_description: z.string({ message: "Please enter a facility description" })
-        .min(1, { message: "Please enter a service description" }),
+    /* facility_description: z.string({ message: "Please enter a facility description" })
+        .min(1, { message: "Please enter a facility description" }), */
+    facility_description: z.any(),
 
 
 })

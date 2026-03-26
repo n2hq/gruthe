@@ -154,6 +154,7 @@ export type ListingType = {
     avg_rating: any
     count_of_rating: any
     currency: any
+    currency_abbr: any
     profile_image_url_ext: any
     bg_image_url_ext: any
     starting: any

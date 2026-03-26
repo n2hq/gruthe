@@ -165,9 +165,13 @@ const PreSrch = ({ items }: PreSrchProps) => {
                                                     </div>
 
                                                     <div className={`text-sm text-gray-500 flex place-items-center gap-2`}>
-                                                        <span>
-                                                            Starting {item?.currency}{formatNumber(item?.minimum_amount)}
+                                                        <span className={`flex gap-1`}>
+                                                            <span>Starting:</span>
+                                                            <span className={`uppercase`}>
+                                                                {item?.currency}{formatNumber(item?.minimum_amount)}
+                                                            </span>
                                                         </span>
+
                                                         {
                                                             item?.avg_rating &&
                                                             <span className={`flex place-items-center`}>

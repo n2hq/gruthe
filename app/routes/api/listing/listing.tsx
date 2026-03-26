@@ -122,9 +122,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 c.id = ?`, [body.minimum_amount_currency_code])
 
             let currencySymbol = ''
+            let currencyAbbr = ''
 
             if ((currencyRes as any[]).length > 0) {
                 currencySymbol = currencyRes[0]?.currency_symbol
+                currencyAbbr = currencyRes[0]?.currency
             }
 
 
@@ -227,6 +229,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 minimum_amount_currency_code = ?,
                 minimum_amount = ?,
                 currency = ?,
+                currency_abbr = ?,
                 starting_note = ?  
                 WHERE
                 gid = ?`,
@@ -260,6 +263,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                     minimum_amount_currency_code,
                     minimum_amount,
                     currencySymbol,
+                    currencyAbbr,
                     starting_note,
                     guid
                 ])

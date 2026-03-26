@@ -126,7 +126,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 WHERE
                 c.id = ?`, [body.minimum_amount_currency_code])
 
-            const currencySymbol = currencyRes[0].currency_symbol
+            let currencySymbol = ''
+            let currencyAbbr = ''
+
+
+            if ((currencyRes as any[]).length > 0) {
+                currencySymbol = currencyRes[0]?.currency_symbol
+                currencyAbbr = currencyRes[0]?.currency
+            }
 
 
             const result = await query(`INSERT INTO tbl_dir SET 
@@ -151,7 +158,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 listing_hash = ?,
                 minimum_amount = ?,
                 minimum_amount_currency_code = ?,
-                currency = ?`,
+                currency = ?,
+                currency_abbr = ?`,
                 [
                     body.title || null,
                     body.pagetype,
@@ -174,7 +182,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
                     listingHash || null,
                     minimumAmt || null,
                     body.minimum_amount_currency_code || null,
-                    currencySymbol || "$"
+                    currencySymbol || "$",
+                    currencyAbbr || 'USD'
                 ])
 
             const rating = 3

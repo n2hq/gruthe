@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let randomNumber = generateRandom10DigitNumber()
 
 
-    let fullUrl = config.BASE_URL + url.pathname
+    let fullUrl = config.BASE_URL + url.pathname + `?v=${randomNumber}`
     console.log(fullUrl)
 
     try {
@@ -71,7 +71,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let category = capitalizePhrase(data?.category)
     let title = `Explore verified ${category} in ${city}. View contact info, working hours, and reviews.`
 
-    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+    const fullUrl: string = data.fullUrl;
     console.log(data.fullUrl)
 
     const description = `Discover and connect with verified ${category} in ${city}. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`

@@ -120,7 +120,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     const description = `Find the best businesses in ${capitalizePhrase(data?.city)}. Browse verified businesses, contact details, reviews, working hours and ratings on Gruthe.`
 
-    let img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+    let img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
 
     const metaImage = img

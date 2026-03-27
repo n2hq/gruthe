@@ -79,7 +79,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 
     if (profileImage === '' || profileImage === undefined || profileImage === null) {
-        img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+        img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
     } else {
         img = config.IMG_BASE_URL + profileImage

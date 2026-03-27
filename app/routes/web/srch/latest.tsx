@@ -65,7 +65,7 @@ const Latest = ({ items }: LatestProps) => {
             <div className={`w-full px-[15px]`}>
                 <div className={`flex place-items-center place-content-between max-w-[1300px] mx-auto w-full mb-6 px-2`}>
                     <div className={`text-2xl font-bold`}>
-                        Latest Businesses
+                        Global Business Explorer
                     </div>
                     <Link to={`/web/latest`}>
                         <div className={`flex place-items-center gap-2`}>

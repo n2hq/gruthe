@@ -88,7 +88,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         img = config.IMG_BASE_URL + profileImage
     }
 
-    const surl = fullUrl + `?v=${randomNumber}`
+    const surl = fullUrl
 
     const metaImage = img
 

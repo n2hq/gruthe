@@ -55,7 +55,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const category = capitalizePhrase(data?.category)
 
     let randomNumber = data?.randomNumber
-    let title = `Explore verified ${category}. View contact info, working hours, and reviews.`
+    let title = `Explore verified ${category}. View contact info, work hours, reviews.`
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
 

@@ -3,7 +3,7 @@ import { query } from "../DB";
 import { DoResponse } from "~/lib/lib";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const ITEMS_PER_PAGE = 48;
+  const ITEMS_PER_PAGE = 36;
 
   try {
     const url = new URL(request.url);

@@ -29,11 +29,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let randomNumber = generateRandom10DigitNumber()
 
 
-
-    const ogUrl = `${request.url}`;
-
-    let fullUrl = ogUrl
-
+    let fullUrl = config.BASE_URL + url.pathname
+    console.log(fullUrl)
 
     try {
         // Call your paginated backend function
@@ -75,7 +72,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let title = `Explore verified ${category} in ${city}. View contact info, working hours, and reviews.`
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
-    console.log(fullUrl)
+    console.log(data.fullUrl)
 
     const description = `Discover and connect with verified ${category} in ${city}. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 

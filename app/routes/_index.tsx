@@ -122,14 +122,14 @@ const _index = () => {
         <BusinessCategories
           items={abujaBusinesses}
           title='Businesses in Abuja'
-          subtitle={`Whatever your business, we've got you.`}
+          subtitle={`Hotels, Restaurants, Corporates and more...`}
         />
 
 
         <BusinessCategories
           items={dubaiBusinesses}
           title='Businesses in Dubai'
-          subtitle={`Whatever your business, we've got you.`}
+          subtitle={`Hotels, Restaurants, Investments...`}
         />
 
         {/** top categories */}

@@ -19,6 +19,8 @@ import { BiChevronLeft, BiChevronRight, BiSolidStar } from 'react-icons/bi'
 import { CgChevronRight } from 'react-icons/cg'
 import { PreSearch } from './PreSearch'
 import PreSrch from './PreSrch'
+import BusinessLinks from '../categorycity/city/assets/BusinessLinks'
+import Categories from '../categorycity/city/assets/Categories'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -304,6 +306,8 @@ const index = () => {
                             <div className={`hidden lg:block col-span-4`}>
                                 <div className={`sticky top-[80px] w-full`}>
                                     <Featured />
+                                    <BusinessLinks />
+
                                 </div>
                             </div>
                         </div>

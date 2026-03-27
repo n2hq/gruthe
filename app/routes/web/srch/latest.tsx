@@ -1,4 +1,4 @@
-import { LoaderFunction } from '@remix-run/node'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
 import { Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import React from 'react'
 import { BiChevronRight, BiSolidStar } from 'react-icons/bi'
@@ -7,7 +7,7 @@ import { TopAd } from '~/components/content/ads/TopAd'
 import AlternateImage from '~/components/content/AlternateImage'
 import Pagination from '~/components/content/Pagination'
 import MainNav from '~/components/header/v1/MainNav'
-import { config, convertDashToSpace, formatNumber, getLatestBusinesses2, getTopLatestBusinesses, logError } from '~/lib/lib'
+import { config, convertDashToSpace, formatNumber, getLatestBusinesses2, getMeta, getTopLatestBusinesses, logError } from '~/lib/lib'
 import { ListingType } from '~/lib/types'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -17,6 +17,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let data: any = ""
     let countries = null
     let latest: ListingType[] = []
+    let fullUrl = config.BASE_URL + url.pathname
 
     try {
         page = parseInt(url?.searchParams.get("page") || "1")
@@ -31,7 +32,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     let res = {
         data: data,
-        latest: latest
+        latest: latest,
+        fullUrl: fullUrl
     }
     return res;
 }
@@ -39,6 +41,24 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 export interface LatestProps {
     items: ListingType[]
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+    const res: any = useLoaderData()
+    const fullUrl: string = data.fullUrl;
+    let randomNumber = data?.randomNumber
+    const title = `${config.SITENAME} - Global Business Explorer`
+    const description = `Discover and connect with businesses worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
+
+    const metaImage = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
+
+
+    try {
+        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+    } catch (e: any) {
+        logError(e)
+    }
+    return []
+};
 
 
 const Latest = ({ items }: LatestProps) => {

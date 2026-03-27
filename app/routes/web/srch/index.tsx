@@ -30,7 +30,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const category = url?.searchParams.get("category") || "";
 
 
-    const fullUrl = url.href;
+    const fullUrl = config.BASE_URL + url.pathname;
 
     let page: number = 1
     let data: any = ""
@@ -72,9 +72,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const fullUrl: string = data.fullUrl;
     let randomNumber = data?.randomNumber
     const title = `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
-    const description = `Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
+    const description = `Discover and connect with businesses worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 
-    const metaImage = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+    const metaImage = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
 
     try {

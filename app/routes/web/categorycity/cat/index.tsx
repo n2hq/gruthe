@@ -3,7 +3,7 @@ import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
+import { capitalizePhrase, config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -52,7 +52,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const res: any = useLoaderData()
-    const category = data?.category
+    const category = capitalizePhrase(data?.category)
 
     let randomNumber = data?.randomNumber
     let title = `Explore verified ${category}. View contact info, working hours, and reviews.`

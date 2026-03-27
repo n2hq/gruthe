@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { config, generateRandom10DigitNumber, getBusinessByCategory, getBusinessByCategoryAndCity, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
+import { capitalizePhrase, config, generateRandom10DigitNumber, getBusinessByCategory, getBusinessByCategoryAndCity, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -65,8 +65,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     let randomNumber = data?.randomNumber
     let profileImageData = data.profileImageData
-    let city = data?.city
-    let category = data?.category
+    let city = capitalizePhrase(data?.city)
+    let category = capitalizePhrase(data?.category)
     let title = `Explore verified ${category} in ${city}. View contact info, working hours, and reviews.`
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;

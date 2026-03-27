@@ -1,6 +1,7 @@
 import { Link } from '@remix-run/react'
 import React from 'react'
 import Address from './Address'
+import { formatInternationalPhone, splitPhoneString } from '~/lib/lib'
 
 const Feature = ({ feature }: any) => {
 
@@ -14,7 +15,8 @@ const Feature = ({ feature }: any) => {
             </Link>
             <div className={`text-md font-semibold 
                 tracking-tight mt-[2px]`}>
-                {feature.phone}
+                {formatInternationalPhone(splitPhoneString(feature?.phone)) || `n/a`}
+
             </div>
             <div className={`font-normal  
                 tracking-normal mt-[2px] leading-[1.3em]

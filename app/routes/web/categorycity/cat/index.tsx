@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     let businesses: any = null;
     let randomNumber: number = 0
-    let fullUrl = url.href
+    let fullUrl = config.BASE_URL + url.pathname
 
     let latest: ListingType[] = []
 

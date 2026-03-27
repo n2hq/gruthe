@@ -36,7 +36,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         businesses = await getBusinessByCity(city!, page);
         randomNumber = generateRandom10DigitNumber()
         latest = await getTopLatestFeaturedBusinesses()
-        fullUrl = url.href
+        fullUrl = config.BASE_URL + url.pathname
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }

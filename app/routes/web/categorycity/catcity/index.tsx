@@ -28,8 +28,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let latest: ListingType[] = []
     let randomNumber = generateRandom10DigitNumber()
 
-    let fullUrl = url.href
-    console.log(fullUrl)
+
+
+    const ogUrl = `${request.url}`;
+
+    let fullUrl = ogUrl
+
 
     try {
         // Call your paginated backend function

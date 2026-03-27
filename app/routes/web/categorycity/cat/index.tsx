@@ -57,7 +57,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let randomNumber = data?.randomNumber
     let title = `Explore verified ${category}. View contact info, work hours, reviews.`
 
-    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+    const fullUrl: string = data.fullUrl
 
     const description = `Discover ${data.category} worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 

@@ -69,7 +69,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let profileImageData = data.profileImageData
     let city = capitalizePhrase(data?.city)
     let category = capitalizePhrase(data?.category)
-    let title = `Explore verified ${category} in ${city}. View contact info, working hours, and reviews.`
+    let title = `Explore verified ${category} in ${city}. View contact info, work hours, reviews.`
 
     const fullUrl: string = data.fullUrl;
 

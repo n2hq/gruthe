@@ -116,7 +116,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     let title = `Explore best businesses in ${capitalizePhrase(data?.city)} | Gruthe Business Directory`
 
-    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+    const fullUrl: string = data.fullUrl
 
     const description = `Find the best businesses in ${capitalizePhrase(data?.city)}. Browse verified businesses, contact details, reviews, working hours and ratings on Gruthe.`
 

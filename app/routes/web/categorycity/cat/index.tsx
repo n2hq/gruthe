@@ -52,9 +52,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const res: any = useLoaderData()
+    const category = data?.category
 
     let randomNumber = data?.randomNumber
-    let title = `${data.category} - ${config.SITENAME}` || `Category - ${config.SITENAME} Business Directory, Explore ${data.category} around the world`
+    let title = `Explore verified ${category}. View contact info, working hours, and reviews.`
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
 

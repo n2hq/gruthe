@@ -29,12 +29,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let businesses: any = null;
     let randomNumber
     let latest: ListingType[] = []
+    let fullUrl = ''
 
     try {
         // Call your paginated backend function
         businesses = await getBusinessByCity(city!, page);
         randomNumber = generateRandom10DigitNumber()
         latest = await getTopLatestFeaturedBusinesses()
+        fullUrl = url.href
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }
@@ -44,7 +46,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         businesses: businesses || { data: [], pagination: null },
         currentPage: page,
         randomNumber: randomNumber,
-        latest: latest
+        latest: latest,
+        fullUrl: fullUrl
     };
 }
 
@@ -111,11 +114,11 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     let randomNumber = data?.randomNumber
 
-    let title = `Best Businesses in ${capitalizePhrase(data?.city)} | Gruthe Business Directory`
+    let title = `Explore best businesses in ${capitalizePhrase(data?.city)} | Gruthe Business Directory`
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
 
-    const description = `Find the best businesses in ${data?.city}. Browse verified businesses, contact details, reviews, working hours and ratings on Gruthe.`
+    const description = `Find the best businesses in ${capitalizePhrase(data?.city)}. Browse verified businesses, contact details, reviews, working hours and ratings on Gruthe.`
 
     let img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
 

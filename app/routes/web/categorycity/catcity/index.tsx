@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 import FooterAlt from '~/components/footer/FooterAlt'
-import { LoaderFunction } from '@remix-run/node'
-import { config, getBusinessByCategory, getBusinessByCategoryAndCity, getCountries, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { config, generateRandom10DigitNumber, getBusinessByCategory, getBusinessByCategoryAndCity, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -26,7 +26,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     let businesses: any = null;
     let latest: ListingType[] = []
+    let randomNumber = generateRandom10DigitNumber()
 
+    let fullUrl = url.href
 
     try {
         // Call your paginated backend function
@@ -41,7 +43,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         city: city,
         businesses: businesses || { items: [], pagination: null },
         currentPage: page,
-        latest: latest
+        latest: latest,
+        randomNumber: randomNumber,
+        fullUrl: fullUrl
     };
 }
 
@@ -54,6 +58,45 @@ export type CardType = {
     price: string
     total: string
 }
+
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+    const res: any = useLoaderData()
+
+    let randomNumber = data?.randomNumber
+    let profileImageData = data.profileImageData
+    let city = data?.city
+    let category = data?.category
+    let title = `Explore verified ${category} in ${city}. View contact info, working hours, and reviews.`
+
+    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+
+    const description = `Discover and connect with verified ${category} in ${city}. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
+
+    let img
+    let profileImage = profileImageData?.image_url
+
+
+
+    if (profileImage === '' || profileImage === undefined || profileImage === null) {
+        img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+
+    } else {
+        img = config.IMG_BASE_URL + profileImage
+    }
+
+
+    const metaImage = img
+
+
+    try {
+        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+    } catch (e: any) {
+        logError(e)
+    }
+    return []
+};
+
 
 const dat = [
     {
@@ -154,7 +197,7 @@ const index = () => {
                         </div>
                         <div className={`flex gap-2 mt-2 flex-wrap`}>
                             <p className="mt-2 text-gray-600 font-normal text-lg">
-                                Explore verified <b className={`font-bold`}>{category}</b> services. View contact info, working hours, and reviews.
+                                Explore verified <b className={`font-bold capitalize`}>{category}</b> services in <span className=' capitalize'>{city}</span>. View contact info, working hours, and reviews.
                             </p>
 
 

@@ -120,7 +120,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
 
-    const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries.`
+    const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 
     let img
     let profileImage = profileImageData?.image_url

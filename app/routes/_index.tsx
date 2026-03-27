@@ -34,6 +34,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let randomNumber
     let latest
     let abujaBusinesses
+    let dubaiBusinesses
 
     try {
       hotels = await getHomeListingByCategory('hotel', 6)
@@ -41,6 +42,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       latest = await getTopLatestFeaturedBusinesses()
       randomNumber = generateRandom10DigitNumber()
       abujaBusinesses = await getBusinessesByCityId('76749')
+      dubaiBusinesses = await getBusinessesByCityId('32')
+
       console.log(abujaBusinesses)
       console.log('here')
     } catch (error: any) {
@@ -54,7 +57,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       latestBusinesses: latestBusinesses,
       randomNumber: randomNumber,
       latest: latest,
-      abujaBusinesses: abujaBusinesses
+      abujaBusinesses: abujaBusinesses,
+      dubaiBusinesses: dubaiBusinesses
     }
   } catch (err: any) {
     logError(err)
@@ -98,6 +102,7 @@ const _index = () => {
   const latestBusinesses = loader.latestBusinesses
   const latest = loader.latest
   const abujaBusinesses = loader.abujaBusinesses
+  const dubaiBusinesses = loader.dubaiBusinesses
 
   return (
     <OperationProvider defaultDuration={4000}>
@@ -117,6 +122,13 @@ const _index = () => {
         <BusinessCategories
           items={abujaBusinesses}
           title='Businesses in Abuja'
+          subtitle={`Whatever your business, we've got you.`}
+        />
+
+
+        <BusinessCategories
+          items={dubaiBusinesses}
+          title='Businesses in Dubai'
           subtitle={`Whatever your business, we've got you.`}
         />
 

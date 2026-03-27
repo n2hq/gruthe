@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let randomNumber = generateRandom10DigitNumber()
 
 
-    let fullUrl = config.BASE_URL + url.pathname + `?v=${randomNumber}`
+    let fullUrl = config.BASE_URL + url.pathname
     console.log(fullUrl)
 
     try {
@@ -72,7 +72,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let title = `Explore verified ${category} in ${city}. View contact info, working hours, and reviews.`
 
     const fullUrl: string = data.fullUrl;
-    console.log(data.fullUrl)
+
 
     const description = `Discover and connect with verified ${category} in ${city}. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 
@@ -88,12 +88,13 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         img = config.IMG_BASE_URL + profileImage
     }
 
+    const surl = fullUrl + `?v=${randomNumber}`
 
     const metaImage = img
 
 
     try {
-        return getMeta(randomNumber, fullUrl, title, description, metaImage)
+        return getMeta(randomNumber, surl, title, description, metaImage)
     } catch (e: any) {
         logError(e)
     }

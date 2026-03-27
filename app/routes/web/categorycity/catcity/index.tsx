@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MainNav from '~/components/header/v1/MainNav'
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction } from '@remix-run/node'
-import { config, getBusinessByCategory, getBusinessByCategoryAndCity, getCountries, getSearch, logError } from '~/lib/lib'
+import { config, getBusinessByCategory, getBusinessByCategoryAndCity, getCountries, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -13,6 +13,7 @@ import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
 import BusinessLinks from '../city/assets/BusinessLinks'
 import Categories from '../city/assets/Categories'
+import PreSrch from '../../srch/PreSrch'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -24,11 +25,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const page = Math.max(1, parseInt(url?.searchParams.get("page") || "1"));
 
     let businesses: any = null;
+    let latest: ListingType[] = []
 
 
     try {
         // Call your paginated backend function
         businesses = await getBusinessByCategoryAndCity(category!, city!, page);
+        latest = await getTopLatestFeaturedBusinesses()
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }
@@ -37,7 +40,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         category: category,
         city: city,
         businesses: businesses || { items: [], pagination: null },
-        currentPage: page
+        currentPage: page,
+        latest: latest
     };
 }
 
@@ -101,7 +105,7 @@ const dat = [
 
 const index = () => {
     const baseUrl = config.BASE_URL
-    const { category, businesses, city } = useLoaderData<typeof loader>();
+    const { category, businesses, city, latest } = useLoaderData<typeof loader>();
     const fallbackImg = `/images/fallbackBusinessImg.png`
 
     const location = useLocation();
@@ -110,7 +114,7 @@ const index = () => {
 
     const data = businesses?.data || []
     const pagination = businesses?.pagination || null
-
+    const latestBusinesses = latest
 
 
     // Extract initial filters from URL
@@ -129,6 +133,11 @@ const index = () => {
                     </div> :
                     <div className={`h-[40px]`}></div>
             }
+
+            <div className={`mb-12`}>
+                <PreSrch items={latestBusinesses} />
+
+            </div>
             <div className={`px-[15px]`}>
                 <div className={`max-w-[1200px] mx-auto w-full`}>
 

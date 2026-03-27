@@ -3,7 +3,7 @@ import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getCountries, getMeta, getSearch, logError } from '~/lib/lib'
+import { config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -14,6 +14,7 @@ import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
 import BusinessLinks from '../city/assets/BusinessLinks'
 import Categories from '../city/assets/Categories'
+import PreSrch from '../../srch/PreSrch'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -27,11 +28,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let randomNumber: number = 0
     let fullUrl = url.href
 
+    let latest: ListingType[] = []
+
+
     try {
         // Call your paginated backend function
         businesses = await getBusinessByCategory(category!, page);
         randomNumber = generateRandom10DigitNumber()
-
+        latest = await getTopLatestFeaturedBusinesses()
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }
@@ -41,7 +45,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         businesses: businesses || { data: [], pagination: null },
         currentPage: page,
         randomNumber: randomNumber,
-        fullUrl: fullUrl
+        fullUrl: fullUrl,
+        latest: latest
     };
 }
 
@@ -130,11 +135,13 @@ const dat = [
 
 const index = () => {
     const baseUrl = config.BASE_URL
-    const { category, businesses } = useLoaderData<typeof loader>();
+    const { category, businesses, latest } = useLoaderData<typeof loader>();
     const fallbackImg = `/images/fallbackBusinessImg.png`
 
     const location = useLocation();
     const navigate = useNavigate();
+
+    const latestBusinesses = latest
 
 
     const data: ListingType[] = businesses?.data || []
@@ -159,6 +166,10 @@ const index = () => {
                     </div> :
                     <div className={`h-[40px]`}></div>
             }
+            <div className={`mb-12`}>
+                <PreSrch items={latestBusinesses} />
+
+            </div>
             <div className={`px-[15px]`}>
                 <div className={`max-w-[1200px] mx-auto w-full`}>
 

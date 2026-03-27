@@ -3,7 +3,7 @@ import MainNav from '~/components/header/v1/MainNav'
 
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { capitalizePhrase, config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getBusinessByCity, getCountries, getMeta, getSearch, logError } from '~/lib/lib'
+import { capitalizePhrase, config, convertDashToSpace, generateRandom10DigitNumber, getBusinessByCategory, getBusinessByCity, getCountries, getMeta, getSearch, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData, useLocation, useNavigate, useNavigation, useSearchParams } from '@remix-run/react'
 
 import { ListingType } from '~/lib/types'
@@ -14,6 +14,7 @@ import { TopAd } from '~/components/content/ads/TopAd'
 import InfoCard from '~/components/content/InfoCard'
 import BusinessLinks from './assets/BusinessLinks'
 import Categories from './assets/Categories'
+import PreSrch from '../../srch/PreSrch'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -27,12 +28,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     let businesses: any = null;
     let randomNumber
+    let latest: ListingType[] = []
 
     try {
         // Call your paginated backend function
         businesses = await getBusinessByCity(city!, page);
         randomNumber = generateRandom10DigitNumber()
-
+        latest = await getTopLatestFeaturedBusinesses()
     } catch (error: any) {
         console.error("Error loading businesses:", error);
     }
@@ -41,7 +43,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         city: city,
         businesses: businesses || { data: [], pagination: null },
         currentPage: page,
-        randomNumber: randomNumber
+        randomNumber: randomNumber,
+        latest: latest
     };
 }
 
@@ -120,6 +123,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const metaImage = img
 
 
+
     try {
         return getMeta(randomNumber, fullUrl, title, description, metaImage)
     } catch (e: any) {
@@ -130,7 +134,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 const index = () => {
     const baseUrl = config.BASE_URL
-    const { city, businesses } = useLoaderData<typeof loader>();
+    const { city, businesses, latest } = useLoaderData<typeof loader>();
     const fallbackImg = `/images/fallbackBusinessImg.png`
 
     const location = useLocation();
@@ -139,7 +143,7 @@ const index = () => {
 
     const data: ListingType[] = businesses?.data || []
     const pagination = businesses?.pagination || null
-
+    const latestBusinesses = latest
 
 
 
@@ -159,6 +163,12 @@ const index = () => {
                     </div> :
                     <div className={`h-[40px]`}></div>
             }
+
+            <div className={`mb-12`}>
+                <PreSrch items={latestBusinesses} />
+
+            </div>
+
             <div className={`px-[15px]`}>
                 <div className={`max-w-[1200px] mx-auto w-full`}>
 

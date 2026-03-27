@@ -58,7 +58,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
     }, [data])
     return (
         <div>
-            <a href={`${(item?.username !== null && item?.username !== '' && item?.username !== undefined) ? `/${item?.username}` : `/${item?.gid}`}`}>
+            <Link to={`${(item?.username !== null && item?.username !== '' && item?.username !== undefined) ? `/${item?.username}` : `/${item?.gid}`}`}>
                 <div className={`flex py-4 border-b border-gray-200/80 cursor-pointer hover:opacity-80 transition duration-200 ease-out group ${isFirst ? 'border-t' : ''} group`}>
                     <div className={`relative h-48 min-w-40 w-40 md:h-52 md:w-52 md:min-w-52 flex-shrink-0 rounded-3xl overflow-hidden shadow-md group-hover:shadow-lg group-hover:shadow-gray-300 border group-hover:border-none`}>
 
@@ -75,10 +75,12 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
                     <div className={`flex flex-col flex-grow pl-3 relative`}>
                         <div className={`flex justify-between relative`}>
-                            <p className={`text-[11px] leading-[1.2em] capitalize line-clamp-1 hover:underline`}>
-                                <Link to={`/web/category/${item.category}`}>
+                            <p className={`text-[11px] leading-[1.2em] capitalize line-clamp-1 hover:underline mb-2`}>
+                                <button
+                                    className={`capitalize hover:underline`}
+                                    onClick={() => location.href = `/web/category/${item.category}`}>
                                     {convertDashToSpace(item.category)}
-                                </Link>
+                                </button>
 
                             </p>
                             <div>
@@ -155,7 +157,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         </div>
     )
 }

@@ -47,7 +47,7 @@ const Categories = () => {
                 {
                     lnk?.map((link: LinkType, index: number) => {
                         return (
-                            <div className={`group`}>
+                            <div key={index} className={`group`}>
                                 <a href={link.link} className={`group-hover:underline`}>
                                     <div>
                                         {link.title}

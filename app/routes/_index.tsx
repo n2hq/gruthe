@@ -11,13 +11,14 @@ import Hotels from './homepage/assets/hotels/Hotels'
 import YourGuide from './homepage/assets/yourguide/YourGuide'
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { config, generateRandom10DigitNumber, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, getMeta, logError } from '~/lib/lib'
+import { config, generateRandom10DigitNumber, getBusinessesByCityId, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, getMeta, getTopLatestFeaturedBusinesses, logError } from '~/lib/lib'
 import { useLoaderData } from '@remix-run/react'
 import { ListingType } from '~/lib/types'
 import { late } from 'zod'
 import TopDestinations from './homepage/assets/topdestinations/TopDestinations'
 import NotificationDemo, { OperationNotification } from '~/components/content/OperationNotification'
 import OperationDemo, { OperationProvider } from '~/context/OperationContext'
+import BusinessCategories from './homepage/BusinessCategories'
 
 
 
@@ -31,14 +32,17 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let gallery
     let ratingData
     let randomNumber
-
+    let latest
+    let abujaBusinesses
 
     try {
       hotels = await getHomeListingByCategory('hotel', 6)
       latestBusinesses = await getLatestBusinesses(10)
+      latest = await getTopLatestFeaturedBusinesses()
       randomNumber = generateRandom10DigitNumber()
-      //console.log(latestBusinesses)
-
+      abujaBusinesses = await getBusinessesByCityId('76749')
+      console.log(abujaBusinesses)
+      console.log('here')
     } catch (error: any) {
       console.log(error.message)
     }
@@ -48,7 +52,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return {
       hotels: hotels,
       latestBusinesses: latestBusinesses,
-      randomNumber: randomNumber
+      randomNumber: randomNumber,
+      latest: latest,
+      abujaBusinesses: abujaBusinesses
     }
   } catch (err: any) {
     logError(err)
@@ -90,7 +96,8 @@ const _index = () => {
   const loader: any = useLoaderData()
   const hotels = loader.hotels
   const latestBusinesses = loader.latestBusinesses
-
+  const latest = loader.latest
+  const abujaBusinesses = loader.abujaBusinesses
 
   return (
     <OperationProvider defaultDuration={4000}>
@@ -100,6 +107,18 @@ const _index = () => {
         {/** background with search */}
         <SearchBusiness />
 
+        <BusinessCategories
+          items={latest}
+          title='Featured Listings'
+          subtitle={`Whatever your business, we've got you.`}
+        />
+
+
+        <BusinessCategories
+          items={abujaBusinesses}
+          title='Businesses in Abuja'
+          subtitle={`Whatever your business, we've got you.`}
+        />
 
         {/** top categories */}
         {/* <TopCategories /> */}
@@ -123,7 +142,7 @@ const _index = () => {
 
 
         {/** shopping */}
-        <Shopping />
+        {/* <Shopping /> */}
 
         <div className={`h-[100px]`}>
 

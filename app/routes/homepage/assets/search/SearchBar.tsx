@@ -19,7 +19,7 @@ export const SearchBar = () => {
                 </div>
                 <div>
                     <button
-                        className={`bg-purple-600 py-3 rounded-full px-6 border-[1px] border-black text-[15px] font-poppins text-white font-[500]`}
+                        className={`bg-gray-900 py-3 rounded-full px-6 border-[1px] border-black text-[15px] font-poppins text-white font-[500]`}
                     >
                         Search
                     </button>

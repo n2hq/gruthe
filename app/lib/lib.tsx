@@ -305,6 +305,31 @@ export const getTopLatestFeaturedBusinesses = async () => {
     }
 }
 
+
+export const getBusinessesByCityId = async (cityId: string) => {
+
+    const endpoint = `/api/listing/businesses_by_city_id/${cityId}`
+    const url = config.BASE_URL + endpoint
+
+    console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
 export const getLatestBusinesses2 = async (page: string) => {
 
     let endpoint = `/api/listing/latest_businesses`

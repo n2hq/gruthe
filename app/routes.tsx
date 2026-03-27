@@ -180,6 +180,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/api/listing/top_latest_featured_businesses", "routes/api/listing/top_latest_featured_businesses.tsx")
 
         route("/api/listing/latest_businesses", "routes/api/listing/latest_businesses.tsx")
+        route("/api/listing/businesses_by_city_id/:city_id", "routes/api/listing/businesses_by_city_id.tsx")
 
         route("api/rating", "routes/api/rating/index.tsx");
         route("api/rating/:user_guid/:business_guid", "routes/api/rating/rating.tsx");

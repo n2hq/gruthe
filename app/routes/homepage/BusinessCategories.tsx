@@ -105,7 +105,7 @@ const BusinessCategories = ({ items, title, subtitle }: BusinessCategoriesProps)
                             </div>
 
                             <div className={`text-[12px] font-sans`}>
-                                Whatever your business, we've got you.
+                                {subtitle}
                             </div>
                         </div>
                         <div>

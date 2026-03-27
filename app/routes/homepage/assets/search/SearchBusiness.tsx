@@ -12,9 +12,9 @@ const SearchBusiness = () => {
 
                 <div className={` mt-12 md:mt-24 `}>
                     <div className={`text-lg text-center z-0`}>
-                        Business Directory<i>!</i>
+                        Gruthe Business Directory!
                     </div>
-                    <div className={`font-poppins text-4xl text-center font-black md:text-5xl tracking-tighter`}>
+                    <div className={`font-sans text-4xl text-center font-black md:text-5xl tracking-tight`}>
                         Search Businesses?
                     </div>
                 </div>

@@ -5,7 +5,7 @@ export const SearchBar = () => {
     return (
 
         <form action={appConfig.searchBaseUrl} className={` w-full`}>
-            <div className={`border-2 border-black rounded-full flex place-items-center place-content-between gap-3 pl-[15px] pr-[4px] py-1 bg-gray-100 shadow-md shadow-gray-300 font-poppins font-light`}>
+            <div className={`border-2 border-black rounded-full flex place-items-center place-content-between gap-3 pl-[15px] pr-[4px] py-1 bg-gray-100 shadow-md shadow-gray-300 font-sans font-light`}>
                 <div>
                     <BiSearch size={25} />
                 </div>
@@ -14,7 +14,7 @@ export const SearchBar = () => {
                         name="q"
                         placeholder={`Search businesses, hotels, entertainment`}
                         type="text"
-                        className={`w-full py-3 outline-none text-[17px] h-full bg-transparent`}
+                        className={`w-full py-3 outline-none text-[15px] font-sans h-full bg-transparent`}
                     />
                 </div>
                 <div>

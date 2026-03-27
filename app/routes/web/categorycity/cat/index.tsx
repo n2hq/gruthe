@@ -63,7 +63,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     let img
 
-    img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+    img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
     const metaImage = img
 

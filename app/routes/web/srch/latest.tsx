@@ -84,7 +84,7 @@ const Latest = ({ items }: LatestProps) => {
             }
 
             <div className={`w-full px-[15px]`}>
-                <div className={`flex place-items-center place-content-between max-w-[1300px] mx-auto w-full mb-6 px-2`}>
+                <div className={`flex place-items-center place-content-between max-w-[1300px] mx-auto w-full mb-3 px-0`}>
                     <div className={`text-2xl font-bold`}>
                         Global Business Explorer
                     </div>
@@ -97,9 +97,15 @@ const Latest = ({ items }: LatestProps) => {
                         </div>
                     </Link>
                 </div>
+
+
                 <div className={` mb-12 relative max-w-[1300px] mx-auto w-full`}>
 
-
+                    <div className={`mt-2 mb-2`}>
+                        <Pagination
+                            pagination={pagination}
+                        />
+                    </div>
                     <div className={`grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 max-w-[1300px] mx-auto w-full gap-4 rounded-3xl`}
 
                     >

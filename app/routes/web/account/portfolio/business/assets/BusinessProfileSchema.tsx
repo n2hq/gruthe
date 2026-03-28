@@ -75,10 +75,10 @@ const BusinessProfileSchema = z.object({
         .optional()
         .nullable()
         .transform((val) => val ?? "") // turn null into ""
-        .refine(
+        /* .refine(
             (val) => val === "" || /^[0-9]+$/.test(val),
             { message: "Zipcode must contain only numbers" }
-        )
+        ) */
         .refine(
             (val) => val === "" || val.length <= 7,
             { message: "Zipcode must not be more than 7 digits" }

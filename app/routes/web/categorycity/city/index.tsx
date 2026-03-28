@@ -177,7 +177,7 @@ const index = () => {
 
                     <div className={`mb-6 text-xl font-light`}>
                         <div>
-                            <b className={`text-2xl`}>Best Businesses in </b> <span className={`text-2xl font-semibold underline capitalize`}>{convertDashToSpace(city)}</span>
+                            <b className={`text-2xl font-black`}>Explore Best Businesses in </b> <span className={`text-2xl font-semibold underline capitalize`}>{convertDashToSpace(city)}</span>
                         </div>
                         <div className={`flex gap-2 mt-2 flex-wrap`}>
                             <p className="mt-2 text-gray-600 font-normal text-lg">

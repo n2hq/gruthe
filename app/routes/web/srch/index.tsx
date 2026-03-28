@@ -192,7 +192,7 @@ const index = () => {
                     </div> :
                     <div className={`h-[40px]`}></div>
             }
-            <div className={``}>
+            <div className={`mb-12`}>
                 <PreSrch items={latestBusinesses} />
 
             </div>
@@ -200,11 +200,11 @@ const index = () => {
                 <div className={`max-w-[1200px] mx-auto w-full`}>
 
                     <div className={`mb-6 font-light text-2xl`}>
-                        <div className={`flex gap-2`}>
+                        <div className={`flex gap-2 font-black font-sans`}>
                             {
                                 (query || category || country || state || city) &&
                                 <span>
-                                    Searching
+                                    Top Results
                                 </span>
                             }
                             {
@@ -215,7 +215,7 @@ const index = () => {
                             }
                             {
                                 query &&
-                                <span>
+                                <span className=' capitalize'>
                                     '{
                                         query
                                     }'

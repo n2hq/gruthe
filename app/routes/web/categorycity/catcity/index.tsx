@@ -190,12 +190,12 @@ const index = () => {
 
                     <div className={`mb-6 text-xl font-light`}>
                         <div className={`flex flex-row gap-1.5 place-items-center text-2xl`}>
-                            <b className={`text-2xl`}>Searching for</b>
+                            <b className={`text-2xl font-black`}>Explore the Best</b>
                             <span className={`text-2xl font-semibold capitalize underline`}>
                                 {category}
                             </span>
-                            <span>in</span>
-                            <span className={`capitalize underline`}>
+                            <span className=' font-black'>in</span>
+                            <span className={`capitalize underline font-semibold`}>
                                 {city}
                             </span>
                         </div>

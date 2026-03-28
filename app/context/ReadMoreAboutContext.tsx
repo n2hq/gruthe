@@ -48,7 +48,7 @@ export const ReadMoreAboutProvider = ({ children }: any) => {
                                 {title}
                             </div>
 
-                            <div className={` whitespace-pre-wrap mt-6 max-h-[300px] overflow-y-auto`}>
+                            <div className={` whitespace-pre-wrap mt-6 max-h-[400px] overflow-y-auto`}>
                                 {description}
 
                             </div>

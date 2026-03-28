@@ -6,6 +6,7 @@ import { BsChevronDoubleRight } from 'react-icons/bs'
 import { TopAd } from '~/components/content/ads/TopAd'
 import AlternateImage from '~/components/content/AlternateImage'
 import Pagination from '~/components/content/Pagination'
+import FooterAlt from '~/components/footer/FooterAlt'
 import MainNav from '~/components/header/v1/MainNav'
 import { config, convertDashToSpace, formatNumber, getLatestBusinesses2, getMeta, getTopLatestBusinesses, logError } from '~/lib/lib'
 import { ListingType } from '~/lib/types'
@@ -172,6 +173,9 @@ const Latest = ({ items }: LatestProps) => {
 
                 </div>
             </div>
+
+            <div className={`h-[60px]`}></div>
+            <FooterAlt />
         </div>
     )
 }

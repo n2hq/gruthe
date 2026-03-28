@@ -31,7 +31,7 @@ export function AddProductDialogProvider({ children }: any) {
     const [productLink, setProductLink] = useState<any>(null)
     const [productDescription, setProductDescription] = useState<any>(null)
     const [fullView, setFullView] = useState(true)
-    const [productAmount, setProductAmount] = useState<any>(null)
+    const [productAmount, setProductAmount] = useState<any>(0.0)
     const [countryCurrency, setCountryCurrency] = useState<any>(null)
     const [selectedCountry, setSelectedCountry] = useState<CountryType | undefined>(undefined)
     const [productCurrencyId, setProductCurrencyId] = useState('')

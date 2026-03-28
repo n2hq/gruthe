@@ -50,7 +50,7 @@ export const ReadMoreAboutProvider = ({ children }: any) => {
 
                             <div className={` whitespace-pre-wrap mt-6 max-h-[300px] overflow-y-auto`}>
                                 {description}
-                                <div className={`h-[60px]`} />
+
                             </div>
 
 

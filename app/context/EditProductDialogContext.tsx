@@ -34,7 +34,7 @@ export function EditProductDialogProvider({ children }: any) {
     const [productTitle, setProductTitle] = useState<any>(null)
     const [productDescription, setProductDescription] = useState<any>(null)
     const [productLink, setProductLink] = useState<any>(null)
-    const [productAmount, setProductAmount] = useState<any>(null)
+    const [productAmount, setProductAmount] = useState<any>(0.0)
     const [countryCurrency, setCountryCurrency] = useState<any>(null)
     const [selectedCountry, setSelectedCountry] = useState<CountryType | undefined>(undefined)
     const [imageGuid, setImageGuid] = useState<any>(null)

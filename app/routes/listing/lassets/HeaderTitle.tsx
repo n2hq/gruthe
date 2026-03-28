@@ -30,7 +30,7 @@ const HeaderTitle = ({ listing, ratingsData, reviewContext, showShare, shareCont
         <div className={`flex place-content-between place-items-center relative`}>
 
 
-            <div className={`text-[24px] font-semibold text-center leading-[1.3em]  text-gray-700 line-clamp-1 w-auto tracking-tight`}>
+            <div className={`text-[24px] font-extrabold text-center leading-[1.3em]  text-black line-clamp-1 w-auto tracking-tight`}>
                 {listing.title}
             </div>
 

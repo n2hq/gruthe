@@ -61,9 +61,9 @@ const WorkingHours = ({ listing, operatingHoursStatus, workTimeStatusObject }: W
 
             const startNumber = parseInt(start)
             const endNumber = parseInt(end)
-            const startAMPM = (startNumber < 12) ? 'AM' : 'PM'
-            const endAMPM = (endNumber < 12) ? 'AM' : 'PM'
-            return `${start} ${startAMPM} - ${end} ${endAMPM}`
+            const startAMPM = (startNumber < 12) ? 'am' : 'pm'
+            const endAMPM = (endNumber < 12) ? 'am' : 'pm'
+            return `${start}${startAMPM} - ${end}${endAMPM}`
         }
     }
 

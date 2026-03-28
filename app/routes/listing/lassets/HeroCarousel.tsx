@@ -149,7 +149,7 @@ const HeroCarousel = ({ images, listing }: HeroCarouselProps) => {
 
                                     alt=""
 
-                                    className={`object-cover w-full h-full `}
+                                    className={`object-scale-down w-full h-full `}
                                 />
                             </div>
                         )

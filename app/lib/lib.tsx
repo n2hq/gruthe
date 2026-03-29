@@ -2460,6 +2460,7 @@ export const getMeta = (randomNumber: string, fullUrl: string, title: string, de
             { name: "twitter:creator", content: "@Gruthe_" },
             { name: "twitter:card", content: "summary_large_image" },
             { name: "twitter:title", content: `${title}` },
+            { name: "twitter:url", content: `${fullUrl}` },
             { name: "twitter:description", content: `${description}` },
             { name: "twitter:image", content: `${metaImage}` },
             { name: "twitter:image:alt", content: `${config.SITENAME} Business Directory Logo` }

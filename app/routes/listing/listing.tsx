@@ -61,7 +61,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     const url = new URL(request.url);
     const pathname = url.pathname;
-    let fullUrl = url.href
+    let fullUrl = config.BASE_URL + url.pathname
 
     try {
 
@@ -118,7 +118,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let profileImageData = data.profileImageData
     let title = `${data.listing.title} - ${config.SITENAME}` || `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
 
-    const fullUrl: string = data.fullUrl + `?v=${randomNumber}`;
+    const fullUrl: string = data.fullUrl
 
     const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 
@@ -128,7 +128,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     console.log(profileImage)
 
     if (profileImage === '' || profileImage === undefined || profileImage === null) {
-        img = `https://gruthe.com/images/gruthe5.png?v=${randomNumber}`
+        img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
     } else {
         img = config.IMG_BASE_URL + profileImage

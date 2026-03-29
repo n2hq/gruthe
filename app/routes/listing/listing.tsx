@@ -123,7 +123,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 
     let img
-    let profileImage = profileImageData?.image_url
+    let profileImage = profileImageData?.image_url + `?v=${randomNumber}`
 
     console.log(profileImage)
 

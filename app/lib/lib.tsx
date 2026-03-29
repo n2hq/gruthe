@@ -2441,6 +2441,8 @@ export function formatInternationalPhone(phone: string): string {
 
 export const getMeta = (randomNumber: string, fullUrl: string, title: string, description: string, metaImage: string) => {
 
+    const mimetype = getImageMimeType(metaImage)
+
     try {
         return [
             { title: `${title}` },
@@ -2452,7 +2454,7 @@ export const getMeta = (randomNumber: string, fullUrl: string, title: string, de
             { property: "og:description", content: `${description}` },
             { property: "og:image", content: `${metaImage}` },
             { property: "og:image:secure_url", content: `${metaImage}` },
-            { property: "og:image:type", content: "image/png" },
+            { property: "og:image:type", content: `${mimetype}` },
             { property: "og:image:width", content: "1200" },
             { property: "og:image:height", content: "630" },
             { property: "og:image:alt", content: "Gruthe" },
@@ -2470,4 +2472,31 @@ export const getMeta = (randomNumber: string, fullUrl: string, title: string, de
     }
 
     return []
+};
+
+
+export const getImageExtension = (filename: string): string | null => {
+    if (!filename) return null;
+
+    const ext = filename.split(".").pop()?.toLowerCase();
+
+    if (!ext || filename.indexOf(".") === -1) return null;
+
+    return ext;
+}
+
+export const getImageMimeType = (filename: string): string => {
+    const ext = getImageExtension(filename);
+
+    const map: Record<string, string> = {
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+        png: "image/png",
+        webp: "image/webp",
+        avif: "image/avif",
+        gif: "image/gif",
+        svg: "image/svg+xml"
+    };
+
+    return ext && map[ext] ? map[ext] : "image/jpeg"; // safe fallback
 };

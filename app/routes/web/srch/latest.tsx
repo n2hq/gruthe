@@ -111,8 +111,8 @@ const Latest = ({ items }: LatestProps) => {
                     >
                         {
                             latestBusinesses?.map((item: ListingType, index: number) => {
-                                const IMG_BASE_URL = config.IMG_BASE_URL
-                                const imgEndPoint = (item?.profile_image_url_ext) ? (IMG_BASE_URL + item.profile_image_url_ext) : ''
+                                const IMG_BASE_STORAGE = config.IMG_BASE_STORAGE
+                                const imgEndPoint = (item?.profile_image_url_ext) ? (IMG_BASE_STORAGE + item.profile_image_url_ext) : ''
 
                                 let ITEM_URL = '/'
                                 ITEM_URL += (item?.username) ? item?.username : item?.gid

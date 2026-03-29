@@ -42,7 +42,7 @@ const AccountUser = () => {
                             <img
                                 className={`object-cover w-full h-full`}
                                 src={
-                                    config.IMG_BASE_URL + userProfileImgData?.image_url
+                                    config.IMG_BASE_STORAGE + userProfileImgData?.image_url
                                 }
                                 alt=""
                             /> :

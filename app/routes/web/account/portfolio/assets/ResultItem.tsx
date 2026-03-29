@@ -18,7 +18,7 @@ const ResultItem = ({ listing, index }: any) => {
 
     useEffect(() => {
         if (listing && listing?.image_url !== null) {
-            let imgsrc = config.IMG_BASE_URL + listing?.image_url
+            let imgsrc = config.IMG_BASE_STORAGE + listing?.image_url
             setImgsrc(imgsrc)
         } else {
             setImgsrc(placeholder)

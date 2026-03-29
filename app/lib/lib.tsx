@@ -16,7 +16,8 @@ export const config = {
     FORMATTED_SITENAME: import.meta.env.VITE_SITENAME,
     SESSION_SECRET: import.meta.env.VITE_SESSION_SECRET,
     ENV: import.meta.env.VITE_ENV,
-    SITEMAIL: import.meta.env.VITE_SITEMAIL
+    SITEMAIL: import.meta.env.VITE_SITEMAIL,
+    IMG_BASE_STORAGE: import.meta.env.VITE_IMG_BASE_STORAGE
 }
 
 

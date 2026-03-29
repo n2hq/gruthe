@@ -17,7 +17,7 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
 
     useEffect(() => {
         if (userProfileBgData?.image_url) {
-            setImgconst(config.IMG_BASE_URL + userProfileBgData?.image_url)
+            setImgconst(config.IMG_BASE_STORAGE + userProfileBgData?.image_url)
         }
     }, [])
 

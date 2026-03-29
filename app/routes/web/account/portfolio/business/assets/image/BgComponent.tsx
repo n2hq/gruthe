@@ -11,7 +11,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
     let imgconst = ""
 
     if (businessProfileBgData?.image_url) {
-        imgconst = config.IMG_BASE_URL + businessProfileBgData.image_url
+        imgconst = config.IMG_BASE_STORAGE + businessProfileBgData.image_url
 
     }
 

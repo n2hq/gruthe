@@ -32,7 +32,7 @@ export const GalleryProvider = ({ children }: any) => {
     const [gallery, setGallery] = useState<any>(null)
     const slider = useSliderContext()
     const [listing, setListing] = useState<any>(null)
-    const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+    const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
 
     const handleClose = () => setShow(false)
     let vals = {
@@ -106,7 +106,7 @@ export const GalleryProvider = ({ children }: any) => {
                                                  overflow-hidden`}>
                                                         <img
                                                             className={`object-cover w-full h-full`}
-                                                            src={IMG_BASE_URL + image.image_url} alt="" />
+                                                            src={IMG_BASE_STORAGE + image.image_url} alt="" />
                                                     </div>
                                                     <div className={`line-clamp-2 leading-[1.2em] text-sm mt-2`}>
                                                         {image?.image_title}

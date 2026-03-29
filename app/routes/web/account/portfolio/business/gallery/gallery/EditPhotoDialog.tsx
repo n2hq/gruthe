@@ -36,7 +36,7 @@ const EditPhotoDialog = ({
 
             //alert(JSON.stringify(formData))
             //return false
-
+            //alert('here')
             const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
             const endpoint = "/business_gallery_pic_upload"
             const url = IMG_BASE_URL + endpoint

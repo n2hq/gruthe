@@ -13,7 +13,7 @@ export function useSliderContext() {
     return context
 }
 
-const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
 
 export const SliderProvider = ({ children }: any) => {
     const [dialog, setDialog] = useState<any>(false)
@@ -116,7 +116,7 @@ export const SliderProvider = ({ children }: any) => {
                                                         onTouchStart={handleTouchStart}
                                                         onTouchEnd={handleTouchEnd}
                                                         key={index}
-                                                        src={IMG_BASE_URL + slide.image_url}
+                                                        src={IMG_BASE_STORAGE + slide.image_url}
                                                         alt=""
 
                                                         className={`object-scale-down w-full h-full`}

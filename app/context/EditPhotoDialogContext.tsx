@@ -76,7 +76,7 @@ export function EditPhotoDialogProvider({ children }: any) {
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
         const endpoint = "/business_gallery_pic_update"
         const url = IMG_BASE_URL + endpoint
-
+        //alert(url)
         try {
             const response = await fetch(url, {
                 method: "POST",

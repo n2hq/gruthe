@@ -27,7 +27,7 @@ const AccountUserImage = ({ userProfileImgData }: any) => {
                     <img
                         className={`object-cover w-full h-full z-0`}
                         src={
-                            config.IMG_BASE_URL + userProfileImgData?.image_url
+                            config.IMG_BASE_STORAGE + userProfileImgData?.image_url
                         }
                         alt=""
                     /> :

@@ -131,7 +131,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`
 
     } else {
-        img = config.IMG_BASE_URL + profileImage
+        img = config.IMG_BASE_STORAGE + profileImage
     }
 
 

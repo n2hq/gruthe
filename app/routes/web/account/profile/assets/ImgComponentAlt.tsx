@@ -12,7 +12,7 @@ const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
     let imgconst = ""
 
     if (userProfileImageData?.image_url) {
-        imgconst = config.IMG_BASE_URL + userProfileImageData.image_url
+        imgconst = config.IMG_BASE_STORAGE + userProfileImageData.image_url
     }
 
 

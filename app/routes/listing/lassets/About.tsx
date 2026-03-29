@@ -21,7 +21,7 @@ const About = ({ listing }: AboutProps) => {
                     setImg(placeholder)
                     setIsImgNull(true)
                 } else {
-                    setImg(config.IMG_BASE_URL + data.image_url)
+                    setImg(config.IMG_BASE_STORAGE + data.image_url)
                 }
 
             })

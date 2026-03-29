@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const countResult: any = await query(`
             SELECT COUNT(DISTINCT d.id) as total_count
             FROM tbl_dir d
-            WHERE d.category = ?
+            WHERE d.category RLIKE ?
             ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ''}
         `, [
             category,
@@ -105,7 +105,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             LEFT JOIN tbl_country c ON d.country_code = c.iso2
             LEFT JOIN tbl_state s ON d.state_code = s.iso2 AND d.country_code = s.country_code
             LEFT JOIN tbl_city ci ON d.city_id = ci.id
-            WHERE d.category = ?
+            WHERE d.category RLIKE ?
             ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ''}
             AND d.active_status = true
             ORDER BY ${sortColumn} ${sortOrder}

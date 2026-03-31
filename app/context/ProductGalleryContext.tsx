@@ -79,7 +79,7 @@ export const ProductGalleryProvider = ({ children }: any) => {
                                                     >
                                                         <div className={` w-full h-[150px] relative `}>
                                                             <img
-                                                                src={config.IMG_BASE_URL + product.product_image_url}
+                                                                src={config.IMG_BASE_STORAGE + product.product_image_url}
                                                                 alt=""
                                                                 className={` object-cover w-full h-full`}
                                                             />

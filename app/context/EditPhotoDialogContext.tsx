@@ -56,6 +56,7 @@ export function EditPhotoDialogProvider({ children }: any) {
     }
 
     const handleUpdate = async () => {
+        //alert('hello')
         //notification.notify()
         showOperation('processing')
         setWorking(true)
@@ -76,6 +77,7 @@ export function EditPhotoDialogProvider({ children }: any) {
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
         const endpoint = "/business_gallery_pic_update"
         const url = IMG_BASE_URL + endpoint
+        //const url = 'http://localhost:8882' + endpoint
         //alert(url)
         try {
             const response = await fetch(url, {

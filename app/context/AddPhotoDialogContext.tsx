@@ -50,6 +50,7 @@ export function AddPhotoDialogProvider({ children }: any) {
             const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
             const endpoint = "/business_gallery_pic_upload"
             const url = IMG_BASE_URL + endpoint
+            //const url = 'http://localhost:8882' + endpoint
 
 
             try {

@@ -120,7 +120,7 @@ const Products = ({ listing, products }: ProductsProps) => {
                                     >
                                         <div className={`relative w-full h-[180px] rounded-xl overflow-hidden border`}>
                                             <img
-                                                src={config.IMG_BASE_URL + item.product_image_url}
+                                                src={config.IMG_BASE_STORAGE + item.product_image_url}
                                                 alt=""
                                                 className={`object-cover h-full w-full`}
                                             />

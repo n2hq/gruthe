@@ -329,7 +329,7 @@ export const SearchResult = ({ results }: SearchResultProps) => {
         <div>
             {
                 results?.map((item: ListingType, index: number) => {
-
+                    console.log(item)
                     const showAd = (index % 4) === 3;
 
 

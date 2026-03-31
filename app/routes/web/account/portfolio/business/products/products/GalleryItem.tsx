@@ -70,7 +70,7 @@ const GalleryItem = ({
                          rounded-md overflow-hidden -z-10
                     `}>
                     <img
-                        src={config.IMG_BASE_URL + product?.product_image_url}
+                        src={config.IMG_BASE_STORAGE + product?.product_image_url}
                         alt=""
                         className={`object-cover w-full h-full -z-40
                         `}

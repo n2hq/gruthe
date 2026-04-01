@@ -18,11 +18,11 @@ const GalleryItemMenu = ({
     const [videoSrc, setVideoSrc] = useState<any>(null)
     const editProduct = useEditProductDialogContext()
     const notification = useNotification()
-    const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+    const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
 
     const handleOpenDialog = async () => {
         editProduct.setDialog(true)
-        editProduct.setImgSrc(config.IMG_BASE_URL + product.product_image_url)
+        editProduct.setImgSrc(config.IMG_BASE_STORAGE + product.product_image_url)
         editProduct.setProductTitle(product.product_title)
         editProduct.setProductDescription(product.product_description)
         editProduct.setProductLink(product.product_link)

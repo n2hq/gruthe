@@ -34,7 +34,7 @@ const ProductGallery = ({ productGallery, userGuid, businessGuid, listing }: Pro
         <div className={``}>
             <div className={` border-[1px] p-3 rounded-[5px] 
                 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4
-                lg:grid-cols-4 xl:grid-cols-5 gap-2 z-0`}>
+                lg:grid-cols-5 xl:grid-cols-6 gap-2 z-0`}>
                 {
                     productGallery?.map((product: ProductType, index: number) => {
                         return (

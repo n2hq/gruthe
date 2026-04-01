@@ -48,8 +48,7 @@ const GalleryItem = ({
     return (
         <div className='z-0'>
             <div
-                className={`border-[1px] h-fit p-1 rounded-md shadow-md
-                    hover:cursor-pointer relative z-0`}
+                className={`border-[1px] h-[215px] p-1 rounded-md shadow-md hover:cursor-pointer relative z-0`}
             >
 
                 {/** edit button */}

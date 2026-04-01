@@ -303,7 +303,7 @@ export const ShareDialogProvider = ({ children }: any) => {
                                         {
                                             profileImageData !== null ?
                                                 <img
-                                                    src={config?.IMG_BASE_URL + profileImageData?.image_url || `/images/pcho.png`}
+                                                    src={config?.IMG_BASE_STORAGE + profileImageData?.image_url || `/images/pcho.png`}
                                                     alt=""
                                                     className={`object-cover w-full h-full`}
                                                 /> :

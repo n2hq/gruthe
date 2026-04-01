@@ -98,7 +98,7 @@ const Related = ({ related }: RelatedProps) => {
                                         img = item?.profile_image_url_ext
                                     } else { }
 
-                                    imgPath = config.IMG_BASE_URL + img
+                                    imgPath = config.IMG_BASE_STORAGE + img
                                     console.log(imgPath)
 
                                     return (

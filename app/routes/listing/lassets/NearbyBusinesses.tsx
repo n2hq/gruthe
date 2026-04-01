@@ -113,7 +113,7 @@ const BestNearbyList = ({ nearby }: NearbyProps) => {
                             } else {
                                 img = ''
                             }
-                            let imgPath = config?.IMG_BASE_URL + img
+                            let imgPath = config?.IMG_BASE_STORAGE + img
 
                             return (
                                 <div key={i}>

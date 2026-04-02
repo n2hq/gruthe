@@ -228,7 +228,7 @@ const SinglePhoto = ({ index, imgs, showCarousel }: SinglePhotoProp) => {
     }, [])
 
     return (
-        <div className={` overflow-hidden  
+        <div className={` overflow-hidden  bg-gray-600
                     relative cursor-pointer w-full h-full`}
             onMouseDown={(e) => {
 
@@ -238,10 +238,10 @@ const SinglePhoto = ({ index, imgs, showCarousel }: SinglePhotoProp) => {
             }}
         >
 
-            <div className={`w-full h-[30%] absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-black/70 z-[2] rounded-xl`} />
+            <div className={`w-full h-[30%] absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-black/70 z-[2]`} />
 
 
-            <div className={`relative w-full h-full rounded-xl`}>
+            <div className={`relative w-full h-full`}>
                 <img
                     src={
                         imgs[index].default ? (imgs[index].image_url) :

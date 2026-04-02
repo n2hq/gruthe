@@ -248,9 +248,7 @@ const SinglePhoto = ({ index, imgs, showCarousel }: SinglePhotoProp) => {
                         imgs[index].default ? (imgs[index].image_url) :
                             (config.IMG_BASE_STORAGE + imgs[index].image_url)}
                     alt=""
-                    className={`${index === 0 ?
-                        'object-cover object-top' :
-                        'object-cover'} w-full h-full`}
+                    className={`object-cover w-full h-full`}
                 />
             </div>
         </div>

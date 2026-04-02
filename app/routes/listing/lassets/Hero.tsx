@@ -98,7 +98,7 @@ const Hero = ({ images, listing }: HeroProp) => {
 
                     {
                         (loaded && heroImages?.length === 2) &&
-                        <div className={`grid grid-cols-12 gap-2 h-full`}>
+                        <div className={`grid grid-cols-12 gap-1.5 h-full`}>
 
                             <div className={`col-span-7
                     row-span-2 overflow-hidden
@@ -116,7 +116,7 @@ const Hero = ({ images, listing }: HeroProp) => {
 
                     {
                         (loaded && heroImages?.length === 3) &&
-                        <div className={`grid grid-cols-12 gap-2 h-full`}>
+                        <div className={`grid grid-cols-12 gap-1.5 h-full`}>
 
                             <div className={`col-span-7
                     row-span-2 overflow-hidden

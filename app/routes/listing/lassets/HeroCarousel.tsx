@@ -145,7 +145,7 @@ const HeroCarousel = ({ images, listing }: HeroCarouselProps) => {
                                         handleShowSlides(images, index)
                                     }}
                                     key={index}
-                                    src={slide?.default ? (slide?.image_url) : (config.IMG_BASE_URL + slide?.image_url)}
+                                    src={slide?.default ? (slide?.image_url) : (config.IMG_BASE_STORAGE + slide?.image_url)}
 
                                     alt=""
 

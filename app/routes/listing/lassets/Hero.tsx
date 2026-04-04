@@ -169,7 +169,7 @@ const Hero = ({ images, listing }: HeroProp) => {
 
 
                     {
-                        (loaded && heroImages !== null && heroImages.length === 4) &&
+                        (loaded && heroImages !== null && heroImages.length === 5) &&
                         <div className="grid h-full grid-cols-4 grid-rows-2 gap-1.5">
 
                             {/* BIG IMAGE */}
@@ -202,7 +202,7 @@ const Hero = ({ images, listing }: HeroProp) => {
 
 
                     {
-                        (loaded && heroImages !== null && heroImages.length >= 5) &&
+                        (loaded && heroImages !== null && heroImages.length >= 6) &&
                         <div className="grid h-full grid-cols-12 grid-rows-2 gap-1.5">
 
                             {/* BIG IMAGE */}
@@ -237,6 +237,9 @@ const Hero = ({ images, listing }: HeroProp) => {
                             </div>
                         </div>
                     }
+
+
+
                 </div>
             }
         </div>

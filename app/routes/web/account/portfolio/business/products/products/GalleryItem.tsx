@@ -15,19 +15,28 @@ const GalleryItem = ({
 }: ProductItemProps) => {
     const [menu, setMenu] = useState<boolean>(false)
     const [videoId, setVideoId] = useState<string | null>(null)
+    const [openImg, setOpenImg] = useState<any | null>()
 
-    const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+
+
+    const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
 
     let imgconst = ""
 
     if (product.product_image_url) {
-        imgconst = IMG_BASE_URL + product.product_image_url
+        imgconst = IMG_BASE_STORAGE + product.product_image_url
         //alert(imgconst)
     } else {
         imgconst = 'https://trendyblinds.ca/wp-content/uploads/2023/09/3.-3D-WALLPAPER-SKU0015.jpg'
     }
 
     const [imgSrc, setImgSrc] = useState<any>(imgconst)
+
+    const handleImageUpdate = (newImageUrl: string, index: number) => {
+        if (index === itemIndex) {
+            setImgSrc(newImageUrl)
+        }
+    }
 
     const showMenu = () => {
         setMenu(true)
@@ -69,7 +78,7 @@ const GalleryItem = ({
                          rounded-md overflow-hidden -z-10
                     `}>
                     <img
-                        src={config.IMG_BASE_STORAGE + product?.product_image_url}
+                        src={imgSrc}
                         alt=""
                         className={`object-cover w-full h-full -z-40
                         `}
@@ -87,6 +96,10 @@ const GalleryItem = ({
                     menu={menu}
                     userGuid={userGuid}
                     businessGuid={businessGuid}
+                    openImg={openImg}
+                    setOpenImg={setOpenImg}
+                    itemIndex={itemIndex}
+                    onImageUpdate={handleImageUpdate}
                 />
 
 

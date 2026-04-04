@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useContext, useRef, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
-import { headers } from "~/lib/lib";
+import { getBusinessGalleryImage, headers } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
 import { useOperation } from "./OperationContext";
 import { CgClose } from "react-icons/cg";
@@ -28,11 +28,28 @@ export function EditPhotoDialogProvider({ children }: any) {
     const [imageTitle, setImageTitle] = useState<any>(null)
     const [imageGuid, setImageGuid] = useState<any>(null)
     const [formData, setFormdata] = useState<any | null>(null)
+    const [openImg, setOpenImg] = useState<any | null>(null)
+    const [, setSetOpenImg] = useState<any | null>(null)
 
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const notification = useNotification()
 
     const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
+    const [onImageUpdate, setOnImageUpdate] = useState<((newSrc: string, index: number) => void) | null>(null)
+    const [itemIndex, setItemIndex] = useState<any | 0>(0)
+
+    useEffect(() => {
+        if (imageGuid) {
+            console.log(imageGuid)
+        }
+    }, [imageGuid])
+
+    useEffect(() => {
+        if (openImg) {
+            console.log(openImg)
+        }
+    }, [openImg])
 
     const handleCloseDialog = () => {
         setDialog(false)
@@ -75,10 +92,15 @@ export function EditPhotoDialogProvider({ children }: any) {
         formData.append('image_guid', imageGuid)
 
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+        const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
         const endpoint = "/business_gallery_pic_update"
         const url = IMG_BASE_URL + endpoint
         //const url = 'http://localhost:8882' + endpoint
+
         //alert(url)
+
+
+
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -113,7 +135,22 @@ export function EditPhotoDialogProvider({ children }: any) {
 
         }
 
+
+        const imageRecord = await getBusinessGalleryImage(imageGuid)
+        console.log(imageRecord[0])
+
+
+
+        const newImageUrl = IMG_BASE_STORAGE + imageRecord[0]?.image_url
+        if (onImageUpdate) {
+            onImageUpdate(newImageUrl, itemIndex) // You need to pass the item index
+        }
+
+        setOpenImg(openImg)
+
     }
+
+
 
     const deletePhoto = async (userGuid: string, businessGuid: string, imageGuid: string) => {
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
@@ -174,7 +211,9 @@ export function EditPhotoDialogProvider({ children }: any) {
         selectedFile, setSelectedFile,
         imageTitle, setImageTitle,
         imageGuid, setImageGuid,
-        deletePhoto
+        deletePhoto, setOpenImg, openImg, setSetOpenImg,
+        onImageUpdate, setOnImageUpdate,
+        itemIndex, setItemIndex
     }
 
     return (

@@ -111,6 +111,9 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/home_listing_by_category/:category/:limit", "routes/api/listing/home_listing_by_category.tsx")
         route("api/listing/home_latest_businesses/:limit", "routes/api/listing/home_latest_businesses.tsx")
         route("api/listing/business_gallery/:business_guid", "routes/api/listing/business_gallery.tsx");
+
+        route("api/listing/business_gallery_image/:image_guid", "routes/api/listing/business_gallery_image.tsx");
+
         route("api/listing/business_profile_image/:guid", "routes/api/listing/business_profile_image.tsx");
         route("api/listing/business_profile_bg/:guid", "routes/api/listing/business_profile_bg.tsx");
         route("api/listing/owner", "routes/api/listing/owner/index.tsx");
@@ -157,6 +160,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/video_links/:business_guid", "routes/api/listing/video_links_listing.tsx")
 
         route("api/listing/products/:business_guid/:user_guid", "routes/api/listing/products/index.tsx")
+
+        route("api/listing/business_products_image/:product_guid", "routes/api/listing/products/business_product_image.tsx")
 
         route("api/listing/services/:business_guid/:user_guid", "routes/api/listing/services/services.tsx")
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiEdit, BiEditAlt } from 'react-icons/bi'
 import { IoClose } from 'react-icons/io5'
 import Carousel from './carousel/Carousel'
@@ -15,6 +15,28 @@ const GalleryItem = ({
 
     const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
     const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
+    const [openImg, setOpenImg] = useState<any | null>()
+
+    const handleImageUpdate = (newImageUrl: string, index: number) => {
+        if (index === itemIndex) {
+            setImgSrc(newImageUrl)
+        }
+    }
+
+    useEffect(() => {
+        const opImg = document.getElementById('openImg')
+        setOpenImg(opImg)
+        console.log(opImg)
+
+    }, [])
+
+    useEffect(() => {
+        if (openImg) {
+
+            console.log(openImg)
+        }
+
+    }, [openImg])
 
     let imgconst = ""
 
@@ -63,6 +85,7 @@ const GalleryItem = ({
                     <img
                         src={imgSrc}
                         alt=""
+                        id='openImg'
                         className={`object-cover w-full h-full -z-40
                         `}
                     />
@@ -74,12 +97,19 @@ const GalleryItem = ({
                     </div>
                 }
 
-                <GalleryItemMenu
-                    item={item}
-                    menu={menu}
-                    userGuid={userGuid}
-                    businessGuid={businessGuid}
-                />
+                {
+                    openImg &&
+                    <GalleryItemMenu
+                        item={item}
+                        menu={menu}
+                        userGuid={userGuid}
+                        businessGuid={businessGuid}
+                        openImg={openImg}
+                        setOpenImg={setOpenImg}
+                        itemIndex={itemIndex}
+                        onImageUpdate={handleImageUpdate}
+                    />
+                }
 
 
             </div>

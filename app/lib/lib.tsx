@@ -2501,3 +2501,54 @@ export const getImageMimeType = (filename: string): string => {
 
     return ext && map[ext] ? map[ext] : "image/jpeg"; // safe fallback
 };
+
+
+
+export const getBusinessGalleryImage = async (imageGuid: string) => {
+
+    const endpoint = `/api/listing/business_gallery_image/${imageGuid}`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+
+export const getProductGalleryImage = async (productGuid: string) => {
+
+    const endpoint = `/api/listing/business_products_image/${productGuid}`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}

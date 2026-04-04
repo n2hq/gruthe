@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
-import { filterCountry, getCountriesCurrencies, headers } from "~/lib/lib";
+import { filterCountry, getCountriesCurrencies, getProductGalleryImage, headers } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
 import { useOperation } from "./OperationContext";
 import { BiChevronLeft } from "react-icons/bi";
@@ -46,6 +46,13 @@ export function EditProductDialogProvider({ children }: any) {
     const notification = useNotification()
 
     const [productCurrencyId, setProductCurrencyId] = useState('')
+
+    const [onImageUpdate, setOnImageUpdate] = useState<((newSrc: string, index: number) => void) | null>(null)
+
+    const [itemIndex, setItemIndex] = useState<any | 0>(0)
+    const [openImg, setOpenImg] = useState<any | null>(null)
+    const [, setSetOpenImg] = useState<any | null>(null)
+
 
 
 
@@ -155,6 +162,7 @@ export function EditProductDialogProvider({ children }: any) {
         formData.append('product_currency_country_id', countryId)
 
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+        const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
         const endpoint = "/business_gallery_product_update"
         const url = IMG_BASE_URL + endpoint
 
@@ -192,6 +200,14 @@ export function EditProductDialogProvider({ children }: any) {
 
         }
 
+        const imageRecord = await getProductGalleryImage(productGuid)
+        console.log(imageRecord)
+        const newImageUrl = IMG_BASE_STORAGE + imageRecord[0]?.product_image_url
+
+        if (onImageUpdate) {
+            onImageUpdate(newImageUrl, itemIndex) // You need to pass the item index
+        }
+        setOpenImg(openImg)
     }
 
     const deleteProduct = async (userGuid: string, businessGuid: string, productGuid: string) => {
@@ -260,7 +276,10 @@ export function EditProductDialogProvider({ children }: any) {
         productLink, setProductLink,
         productGuid, setProductGuid,
         deleteProduct, setSelectedCountry,
-        setProductCurrencyId, setProductAmount
+        setProductCurrencyId, setProductAmount,
+        onImageUpdate, setOnImageUpdate,
+        itemIndex, setItemIndex,
+        setOpenImg
     }
 
     return (

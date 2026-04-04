@@ -410,7 +410,11 @@ export interface ProductItemMenuProps {
     product: ProductType
     menu: boolean
     userGuid?: string
-    businessGuid?: string
+    businessGuid?: string,
+    onImageUpdate: any,
+    itemIndex: number,
+    openImg: any
+    setOpenImg: any
 }
 
 export interface ProductDisplayProps {

@@ -11,7 +11,11 @@ const GalleryItemMenu = ({
     product,
     menu,
     userGuid,
-    businessGuid
+    businessGuid,
+    itemIndex,
+    onImageUpdate,
+    openImg,
+    setOpenImg,
 }: ProductItemMenuProps) => {
 
     const [dialog, setDialog] = useState<any>(false)
@@ -20,7 +24,9 @@ const GalleryItemMenu = ({
     const notification = useNotification()
     const IMG_BASE_STORAGE = import.meta.env.VITE_IMG_BASE_STORAGE
 
-    const handleOpenDialog = async () => {
+    const handleOpenDialog = async (openImg: any, setOpenImg: any) => {
+        editProduct.setOnImageUpdate(() => onImageUpdate)
+        editProduct.setItemIndex(itemIndex)
         editProduct.setDialog(true)
         editProduct.setImgSrc(config.IMG_BASE_STORAGE + product.product_image_url)
         editProduct.setProductTitle(product.product_title)
@@ -68,7 +74,7 @@ const GalleryItemMenu = ({
                     <div className={`mt-3`}>
                         <div className={` divide-y-[1px]`}>
                             <div
-                                onMouseDown={handleOpenDialog}
+                                onMouseDown={() => handleOpenDialog(openImg, setOpenImg)}
                                 className={`py-1 hover:bg-gray-300 w-full
                                 flex flex-col
                                 px-2 transition duration-1000 ease-in-out`}>

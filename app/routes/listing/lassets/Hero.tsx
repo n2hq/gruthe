@@ -169,7 +169,7 @@ const Hero = ({ images, listing }: HeroProp) => {
 
 
                     {
-                        (loaded && heroImages !== null && heroImages.length > 4) &&
+                        (loaded && heroImages !== null && heroImages.length === 4) &&
                         <div className="grid h-full grid-cols-4 grid-rows-2 gap-1.5">
 
                             {/* BIG IMAGE */}
@@ -197,6 +197,44 @@ const Hero = ({ images, listing }: HeroProp) => {
                                 <SinglePhoto imgs={heroImages} index={4} showCarousel={showCarousel} />
                             </div>
 
+                        </div>
+                    }
+
+
+                    {
+                        (loaded && heroImages !== null && heroImages.length >= 5) &&
+                        <div className="grid h-full grid-cols-12 grid-rows-2 gap-1.5">
+
+                            {/* BIG IMAGE */}
+                            <div className="row-span-2 col-span-4 relative">
+                                <SinglePhoto imgs={heroImages} index={0} showCarousel={showCarousel} />
+                            </div>
+
+                            {/* SMALL IMAGE 1 */}
+                            <div className="relative row-span-2 col-span-3">
+                                <SinglePhoto imgs={heroImages} index={1} showCarousel={showCarousel} />
+                            </div>
+
+                            {/* SMALL IMAGE 2 */}
+                            <div className="relative row-span-1 col-span-3">
+                                <SinglePhoto imgs={heroImages} index={2} showCarousel={showCarousel} />
+                            </div>
+
+                            {/* SMALL IMAGE 3 */}
+                            <div className="relative row-span-1 col-span-2">
+                                <SinglePhoto imgs={heroImages} index={3} showCarousel={showCarousel} />
+                            </div>
+
+                            {/* SMALL IMAGE 4 */}
+                            <div className="relative row-span-1 col-span-3">
+                                <SinglePhoto imgs={heroImages} index={4} showCarousel={showCarousel} />
+                            </div>
+
+
+                            {/* SMALL IMAGE 5 */}
+                            <div className="relative row-span-1 col-span-2">
+                                <SinglePhoto imgs={heroImages} index={5} showCarousel={showCarousel} />
+                            </div>
                         </div>
                     }
                 </div>

@@ -271,7 +271,7 @@ const SinglePhoto = ({ index, imgs, showCarousel }: SinglePhotoProp) => {
                     relative cursor-pointer w-full h-full`}
             onMouseDown={(e) => {
 
-                if (showCarousel && !imgs[0].default) {
+                if (showCarousel && !imgs[0]?.default) {
                     showCarousel(index, imgs)
                 }
             }}
@@ -283,8 +283,8 @@ const SinglePhoto = ({ index, imgs, showCarousel }: SinglePhotoProp) => {
             <div className={`relative w-full h-full`}>
                 <img
                     src={
-                        imgs[index].default ? (imgs[index].image_url) :
-                            (config.IMG_BASE_STORAGE + imgs[index].image_url)}
+                        imgs[index]?.default ? (imgs[index]?.image_url) :
+                            (config.IMG_BASE_STORAGE + imgs[index]?.image_url)}
                     alt=""
                     className={`object-cover w-full h-full`}
                 />

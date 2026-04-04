@@ -32,9 +32,9 @@ const CardHeaderWithSearch = ({ baseUrl, noOfPages, query }: any) => {
                 <div className={`h-full min-w-[100px] max-w-[300px]`}>
 
                     <div className="flex items-center   ">
-                        <GrLaunch className="mr-1 flex-shrink-0" size={20} />
+
                         <span className="line-clamp-1 overflow-hidden text-blue-800 text-[16px] font-sans tracking-tight font-bold ">
-                            {pages} Pages
+                            Businesses: ({pages})
                         </span>
                     </div>
                 </div>

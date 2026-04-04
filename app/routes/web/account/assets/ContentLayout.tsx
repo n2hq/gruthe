@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react'
 import BusinessHeader from '../portfolio/business/assets/BusinessHeader'
 import BusinessMenu from '../portfolio/business/assets/BusinessMenu'
 import BusinessDrawer from './BusinessDrawer'
+import { PortfolioSearchBox } from '../portfolio/business/assets/PortfolioSearchBox'
+import { useLocation } from '@remix-run/react'
 
 
 const ContentLayout = ({ children, businessGuid, data, businessProfile, title }: any) => {
     const [isOpen, setIsOpen] = useState(false)
+
+    const location = useLocation()
+    const params = new URLSearchParams(location.search)
+    const q = params?.get("q") || ""
 
     return (
         <div>
@@ -15,10 +21,13 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
             <div className={`mt-4 bg-white 
                 rounded-lg shadow-md pb-8 `}>
                 <div className={`font-semibold text-[17px] border-b-[1px] p-3 flex place-content-between place-items-center`}>
-                    <div>
+                    <div className={`w-[250px]`}>
                         {title}
                     </div>
-                    <div className={`text-[13px] flex place-items-center gap-2`}>
+                    <div className=' w-full'>
+                        <PortfolioSearchBox query={q} />
+                    </div>
+                    <div className={`text-[13px] flex place-items-center gap-2 bg-blue-50`}>
                         {
                             businessProfile?.gid !== undefined && businessProfile?.gid !== "" && businessProfile?.gid !== "" &&
                             <a href={`/web/account/portfolio/${businessGuid}`}
@@ -45,6 +54,7 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
                         <div className={`text-lg font-[600] leading-[1.4em]`}>
                             {businessProfile && businessProfile.title}
                         </div>
+
                         <div>
                             {
                                 businessGuid && data?.userGuid &&

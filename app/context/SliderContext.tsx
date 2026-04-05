@@ -107,11 +107,11 @@ export const SliderProvider = ({ children }: any) => {
                                                 /* style={{ transform: `translateX(-${currentSlide * 100}%)` }} */
                                                 style={{ display: index === currentSlide ? 'block' : 'none' }}
                                             >
-                                                <div className={`absolute top-10`}>
+                                                <div className={`absolute top-10 w-full`}>
                                                     <div className='text-white text-center '>{currentSlide + 1} / {slides.length}</div>
                                                 </div>
 
-                                                <div className={`max-w-[100%] md:max-w-[70%] h-[70%] relative `}>
+                                                <div className={`max-w-[100%] md:max-w-[70%] h-[70%] relative mx-auto`}>
                                                     <img
                                                         onTouchStart={handleTouchStart}
                                                         onTouchEnd={handleTouchEnd}

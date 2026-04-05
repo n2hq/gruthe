@@ -41,6 +41,7 @@ import { useShareDialogContext } from '~/context/ShareDialogContext'
 import { ReadMoreAboutProvider } from '~/context/ReadMoreAboutContext'
 import { ReadMoreWithUrlProvider } from '~/context/ReadMoreWithUrlContext'
 import StartingAmount from './lassets/StartingAmount'
+import { TopAd } from '~/components/content/ads/TopAd'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -213,6 +214,7 @@ const listing = () => {
         <RatingProvider>
             <GalleryProvider>
                 <SearchLayout>
+                    <TopAd />
                     <MobileHeroWithTitle
                         title={listing?.title}
                         images={gallery}

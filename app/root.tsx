@@ -116,9 +116,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
           import.meta.env.VITE_ENV === "prod" && (
             <script
               async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973"
               crossOrigin="anonymous"
             ></script>
+
           )}
         <Meta />
         <Links />

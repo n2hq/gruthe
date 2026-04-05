@@ -85,8 +85,8 @@ export const adInfo = {
 }
 
 export const testAdInfo = {
-    clientId: "ca-pub-xxxxxxxxxxxxxxxx",
-    adslot: "1234567890",
+    clientId: "ca-pub-xxxxxxxxxxxxxxx",
+    adslot: "1234567891",
     format: "auto",
     responsive: "true"
 }

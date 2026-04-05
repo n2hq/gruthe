@@ -30,7 +30,7 @@ export function TopAd() {
     return (
         <div
             className={`max-w-[1000px] min-h-[90px] bg-blue-50
-                mx-auto w-full mt-4 flex place-items-center 
+                mx-auto w-full mt-8 flex place-items-center 
                 place-content-center font-light text-[14px]
                 `}
         >Ads by google

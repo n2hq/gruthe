@@ -112,15 +112,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/gruthe5.png?v=3" type="image/png" />
+
+
         {
           import.meta.env.VITE_ENV === "prod" && (
             <script
               async
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973"
               crossOrigin="anonymous"
-            ></script>
-
-          )}
+              onError={(e) => {
+                // Silent fail - just log to console in development
+                if (process.env.NODE_ENV === 'development') {
+                  console.warn('AdSense script failed to load');
+                }
+                // You can also remove the failed script element
+                (e.target as HTMLScriptElement)?.remove();
+              }}
+            />
+          )
+        }
         <Meta />
         <Links />
       </head>

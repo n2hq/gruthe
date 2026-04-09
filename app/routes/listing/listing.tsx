@@ -215,25 +215,31 @@ const listing = () => {
             <GalleryProvider>
                 <SearchLayout>
                     <TopAd />
-                    <MobileHeroWithTitle
-                        title={listing?.title}
-                        images={gallery}
-                        listing={listing}
-                    />
+                    {
+                        listing?.title && gallery && listing &&
+                        <MobileHeroWithTitle
+                            title={listing?.title}
+                            images={gallery}
+                            listing={listing}
+                        />
+                    }
                     <div className={`px-[20px] bg-gray-50/20`}>
                         <div className={`max-w-[1100px] mx-auto w-full mt-0 md:mt-12`}>
 
                             <div className={`hidden md:block`}>
                                 {/** main header title */}
-                                <HeaderTitle
-                                    listing={listing}
-                                    ratingsData={ratingsData}
-                                    reviewContext={reviewContext}
-                                    showShare={showShare}
-                                    shareContext={shareContext}
-                                    profileImg={profileImg}
-                                    profileImageData={profileImageData}
-                                />
+                                {
+                                    listing && ratingsData && reviewContext && showShare && shareContext && profileImg && profileImageData &&
+                                    <HeaderTitle
+                                        listing={listing}
+                                        ratingsData={ratingsData}
+                                        reviewContext={reviewContext}
+                                        showShare={showShare}
+                                        shareContext={shareContext}
+                                        profileImg={profileImg}
+                                        profileImageData={profileImageData}
+                                    />
+                                }
 
                                 {/** hero */}
                                 {
@@ -250,99 +256,150 @@ const listing = () => {
 
 
                                     <WriteReviewAltProvider>
-                                        <RatingSummary
-                                            listing={listing}
-                                            ratings={ratingsData}
-                                            reviewContext={reviewContext}
-                                            businessRating={businessRating}
-                                            shareContext={shareContext}
-                                            profileImg={profileImg}
-                                            profileImageData={profileImageData}
-                                        />
+                                        {
+                                            listing && ratingsData && reviewContext && businessRating && shareContext && profileImg && profileImageData &&
+                                            <RatingSummary
+                                                listing={listing}
+                                                ratings={ratingsData}
+                                                reviewContext={reviewContext}
+                                                businessRating={businessRating}
+                                                shareContext={shareContext}
+                                                profileImg={profileImg}
+                                                profileImageData={profileImageData}
+                                            />
+                                        }
 
                                     </WriteReviewAltProvider>
 
-                                    <DropBy
-                                        listing={listing}
-                                        reportTime={reportTime}
-                                        operatingHoursStatus={operatingHoursStatus}
-                                        reviewContext={reviewContext}
-                                    />
+                                    {
+                                        listing && reportTime && operatingHoursStatus && reviewContext &&
+                                        <DropBy
+                                            listing={listing}
+                                            reportTime={reportTime}
+                                            operatingHoursStatus={operatingHoursStatus}
+                                            reviewContext={reviewContext}
+                                        />
+                                    }
 
                                     <ReadMoreAboutProvider>
-                                        <About listing={listing} />
+                                        {
+                                            listing &&
+                                            <About listing={listing} />
+                                        }
                                     </ReadMoreAboutProvider>
 
                                     <ReadMoreAboutProvider>
-                                        <StartingAmount listing={listing} />
+                                        {
+                                            listing &&
+                                            <StartingAmount listing={listing} />
+                                        }
                                     </ReadMoreAboutProvider>
 
 
                                     <div className={`block lg:hidden mb-12`}>
-                                        <WorkingHours listing={listing}
-                                            operatingHoursStatus={operatingHoursStatus}
-                                            workTimeStatusObject={reportTime.todayHoursOpenStatus}
-                                        />
+                                        {
+                                            listing && operatingHoursStatus && reportTime?.todayHoursOpenStatus &&
+                                            < WorkingHours listing={listing}
+                                                operatingHoursStatus={operatingHoursStatus}
+                                                workTimeStatusObject={reportTime?.todayHoursOpenStatus}
+                                            />
+                                        }
 
                                         <ClaimBusiness />
                                     </div>
 
                                     <VideoGalleryProvider>
-                                        <Videos
-                                            listing={listing}
-                                            videoGallery={videoGallery}
-                                        />
+                                        {
+
+                                            listing && videoGallery &&
+                                            <Videos
+                                                listing={listing}
+                                                videoGallery={videoGallery}
+                                            />
+                                        }
                                     </VideoGalleryProvider>
 
-                                    <SocialMedia listing={listing} />
+                                    {
+                                        listing &&
+                                        <SocialMedia listing={listing} />
+                                    }
 
                                     <ReadMoreWithUrlProvider>
-                                        <Services services={services} />
+                                        {
+                                            services &&
+                                            <Services services={services} />
+                                        }
                                     </ReadMoreWithUrlProvider>
 
 
                                     <ProductSliderProvider>
                                         <ProductGalleryProvider>
-                                            <Products
-                                                listing={listing}
-                                                products={products}
-                                            />
+                                            {
+                                                listing && products &&
+                                                <Products
+                                                    listing={listing}
+                                                    products={products}
+                                                />
+                                            }
                                         </ProductGalleryProvider>
                                     </ProductSliderProvider>
 
                                     <ReadMoreAboutProvider>
-                                        <Features listing={listing} />
+                                        {
+                                            listing &&
+                                            <Features listing={listing} />
+                                        }
                                     </ReadMoreAboutProvider>
 
-                                    <Location listing={listing} />
+                                    {
+                                        listing &&
+                                        <Location listing={listing} />
+                                    }
                                 </div>
                                 <div className={`hidden lg:block lg:col-span-5 relative w-full`}>
                                     <div className={`sticky top-[100px] w-full`}>
-                                        <WorkingHours listing={listing}
-                                            operatingHoursStatus={operatingHoursStatus}
-                                            workTimeStatusObject={reportTime.todayHoursOpenStatus}
-                                        />
+                                        {
+                                            listing && operatingHoursStatus && reportTime?.todayHoursOpenStatus &&
+                                            <WorkingHours listing={listing}
+                                                operatingHoursStatus={operatingHoursStatus}
+                                                workTimeStatusObject={reportTime?.todayHoursOpenStatus}
+                                            />
+                                        }
                                         <ClaimBusiness />
                                     </div>
                                 </div>
                             </div>
 
                             {/** review report */}
-                            <ReviewReport businessRating={businessRating}
-                                listing={listing} />
+                            {
+                                businessRating && listing &&
+                                <ReviewReport
+                                    businessRating={businessRating}
+                                    listing={listing}
+                                />
+                            }
 
                             {/** reviews from people */}
-                            <UserReviews businessReviews={businessReviews} />
+                            {
+                                businessReviews &&
+                                <UserReviews businessReviews={businessReviews} />
+                            }
 
 
                             {/** Related */}
-                            <Related related={related} />
+                            {
+                                related &&
+                                <Related related={related} />
+                            }
 
 
                         </div>
 
                         <div className={`max-w-[1100px] mx-auto w-full mt-12`}>
-                            <NearbyBusinesses nearby={nearby} />
+                            {
+                                nearby &&
+                                <NearbyBusinesses nearby={nearby} />
+                            }
                         </div>
                     </div>
                 </SearchLayout>

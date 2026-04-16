@@ -33,7 +33,7 @@ const AccountUser = () => {
     return (
         <Link to={`/web/account/profile`}>
             <div className={`flex hover:bg-gray-100 px-[10px] py-[5px] 
-        hover:cursor-pointer gap-2 place-items-center`}>
+        hover:cursor-pointer gap-2 place-items-center relative z-[200000]`}>
                 <div className={` relative h-[30px] w-[30px] rounded-full
                     overflow-hidden flex place-content-center place-items-center
                     bg-white`}>

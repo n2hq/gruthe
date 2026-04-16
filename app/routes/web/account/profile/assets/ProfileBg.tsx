@@ -123,7 +123,7 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
 
 
             <div className={` flex place-items-center gap-1.5
-                place-content-center top-[5px] right-[5px] w-fit z-[120] absolute`}>
+                place-content-center top-[5px] right-[5px] w-fit z-[0] absolute`}>
 
                 <button
                     className={`bg-white  w-full py-[4px] rounded-[8px] border-[1px] border-gray-200

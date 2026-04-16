@@ -21,7 +21,7 @@ const AccountUserImage = ({ userProfileImgData }: any) => {
     return (
         <div className={` relative h-full w-full rounded-full
                     overflow-hidden flex place-content-center place-items-center
-                    bg-white z-0 border-[1px] border-gray-500`}>
+                 z-0 border-[1px] border-gray-400`}>
             {
                 userProfileImgData?.image_url ?
                     <img

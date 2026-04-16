@@ -38,7 +38,7 @@ const AccountUser = () => {
                     overflow-hidden flex place-content-center place-items-center
                     bg-white`}>
                     {
-                        userProfileImgData?.image_url ?
+                        (userProfileImgData?.image_url !== "" && userProfileImgData?.image_url !== null && userProfileImgData?.image_url && undefined) ?
                             <img
                                 className={`object-cover w-full h-full`}
                                 src={

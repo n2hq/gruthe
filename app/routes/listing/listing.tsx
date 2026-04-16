@@ -116,8 +116,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const res: any = useLoaderData()
 
     let randomNumber = data?.randomNumber
-    let profileImageData = data.profileImageData
-    let title = `${data.listing.title} - ${config.SITENAME}` || `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
+    let profileImageData = data?.profileImageData
+    let title = `${data?.listing.title} - ${config.SITENAME}` || `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
 
     const fullUrl: string = data.fullUrl
 
@@ -244,7 +244,11 @@ const listing = () => {
                                 {/** hero */}
                                 {
                                     gallery && listing &&
-                                    <Hero images={gallery} listing={listing} />
+                                    <Hero
+                                        images={gallery}
+                                        listing={listing}
+                                        profileImageData={profileImageData}
+                                    />
                                 }
                             </div>
 

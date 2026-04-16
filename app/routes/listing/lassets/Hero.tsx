@@ -4,7 +4,7 @@ import { MdOutlineImage } from 'react-icons/md'
 import { useGallery } from '~/context/GalleryContext'
 import { useSliderContext } from '~/context/SliderContext'
 import { config, spinUpPlaceholder } from '~/lib/lib'
-import { ListingType } from '~/lib/types'
+import { ListingType, ProfileImageType } from '~/lib/types'
 import { CgMenuGridR } from "react-icons/cg";
 
 const imgs = [
@@ -35,7 +35,8 @@ export type ImageType = {
 
 export interface HeroProp {
     images: ImageType[],
-    listing: ListingType
+    listing: ListingType,
+    profileImageData: ProfileImageType | null
 }
 
 ///images/abstract_placeholder.jpg
@@ -44,11 +45,27 @@ const defaultImg = [{
     default: true
 }]
 
-const Hero = ({ images, listing }: HeroProp) => {
+const Hero = ({ images, listing, profileImageData }: HeroProp) => {
     const [loaded, setLoaded] = useState(false)
     const slider = useSliderContext()
     const gallery = useGallery()
     const [heroImages, setHeroImages] = useState<ImageType[] | []>([])
+    const [profileImg, setProfileImg] = useState<ImageType[] | []>([])
+    useEffect(() => {
+        if (profileImageData) {
+            let profileData: ImageType[] = []
+
+            profileData[0] = {
+                id: 0,
+                image_url: profileImageData.image_url,
+                alt: profileImageData.image_filename,
+                default: true
+            }
+
+            setProfileImg(profileData)
+
+        }
+    }, [profileImageData])
 
     useEffect(() => {
         setLoaded(true)
@@ -90,6 +107,13 @@ const Hero = ({ images, listing }: HeroProp) => {
             {
                 heroImages?.length > 0 &&
                 <div className={`relative  h-full bg-white`}>
+                    {
+                        (loaded && profileImg && heroImages?.length === 0) &&
+                        <div>
+                            <a href="">a</a>
+                            <SinglePhoto imgs={profileImg} index={0} showCarousel={showCarousel} />
+                        </div>
+                    }
                     {
                         (loaded && heroImages?.length === 1) &&
                         <SinglePhoto imgs={heroImages} index={0} showCarousel={showCarousel} />

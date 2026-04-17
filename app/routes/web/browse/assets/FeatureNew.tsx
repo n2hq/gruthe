@@ -6,8 +6,8 @@ import { config, formatInternationalPhone, splitPhoneString } from '~/lib/lib'
 const FeatureNew = ({ feature }: any) => {
 
     return (
-        <div className={`flex place-content-between h-auto gap-x-2 py-8`}>
-            <div className={` h-auto group hover:cursor-pointer`}>
+        <div className={`flex place-content-between h-auto gap-x-2 py-8 group hover:cursor-pointer`}>
+            <div className={` h-auto `}>
                 <div className={`relative line-clamp-2 group-hover:underline font-semibold text-[14px] text-blue-900`}>
                     {feature?.title}
                 </div>

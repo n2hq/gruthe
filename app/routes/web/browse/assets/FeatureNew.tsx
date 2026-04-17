@@ -8,7 +8,7 @@ const FeatureNew = ({ feature }: any) => {
     return (
         <div className={`flex place-content-between h-auto gap-x-2 py-8`}>
             <div className={` h-auto group hover:cursor-pointer`}>
-                <div className={`relative line-clamp-2 group-hover:underline font-semibold text-[14px] text-blue-600`}>
+                <div className={`relative line-clamp-2 group-hover:underline font-semibold text-[14px] text-blue-900`}>
                     {feature?.title}
                 </div>
                 <div className={`text-gray-600 relative line-clamp-2 leading-5 mt-2 text-[12px]`}>

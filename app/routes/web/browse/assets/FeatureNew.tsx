@@ -34,7 +34,7 @@ const FeatureNew = ({ feature }: any) => {
                 <img
                     src={`${config.IMG_BASE_STORAGE}${feature?.image_url}`}
                     alt=""
-                    className={`w-full rounded-md h-[60px]`}
+                    className={`w-full rounded-md h-[60px] object-cover`}
                 />
             </div>
         </div>

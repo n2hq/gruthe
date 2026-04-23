@@ -3,13 +3,23 @@ import React from 'react'
 import Address from './Address'
 import { config, formatInternationalPhone, splitPhoneString } from '~/lib/lib'
 
-const FeatureNew = ({ feature }: any) => {
+export interface FeatureNewProps {
+    feature: any
+    keyIndex: number
+}
+const FeatureNew = ({ feature, keyIndex }: FeatureNewProps) => {
 
     return (
         <div className={`flex place-content-between h-auto gap-x-2 py-8 group hover:cursor-pointer`}>
             <div className={` h-auto `}>
-                <div className={`relative line-clamp-2 group-hover:underline font-semibold text-[14px] text-blue-900`}>
-                    {feature?.title}
+                <div className={`flex place-items-center gap-2`}>
+                    <div className={`text-4xl font-black  w-[40px] h-[40px]  border bg-purple-200 rounded-lg flex place-items-center place-content-center text-gray-700`}>
+                        {Number(keyIndex) + 1}
+                    </div>
+
+                    <div className={`relative line-clamp-2 group-hover:underline font-semibold text-[14px] text-blue-900`}>
+                        {feature?.title}
+                    </div>
                 </div>
                 <div className={`text-gray-600 relative line-clamp-2 leading-5 mt-2 text-[12px]`}>
                     {feature?.short_description}

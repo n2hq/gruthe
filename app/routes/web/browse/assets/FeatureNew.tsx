@@ -13,7 +13,7 @@ const FeatureNew = ({ feature, keyIndex }: FeatureNewProps) => {
         <div className={`flex place-content-between h-auto gap-x-2 py-8 group hover:cursor-pointer`}>
             <div className={` h-auto `}>
                 <div className={`flex place-items-center gap-2`}>
-                    <div className={`text-4xl font-black  w-[40px] h-[40px]  border bg-purple-200 rounded-lg flex place-items-center place-content-center text-gray-700`}>
+                    <div className={`text-4xl font-black  w-[40px] h-[40px]  border bg-gray-700 rounded-full flex place-items-center place-content-center text-gray-50`}>
                         {Number(keyIndex) + 1}
                     </div>
 

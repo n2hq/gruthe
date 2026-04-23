@@ -71,7 +71,7 @@ const Featured = () => {
                 {
                     featured?.length > 0 ?
                         featured?.map((feature: any, index: number) => {
-                            if (index > 2) {
+                            if (index > 12) {
                                 return null
                             }
                             return (

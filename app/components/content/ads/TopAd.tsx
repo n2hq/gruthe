@@ -5,9 +5,7 @@ import { config } from "~/lib/lib";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
-    const [envi, setEnvi] = useState(() => {
-        return config.ENV
-    })
+    const envi = import.meta.env.VITE_ENV
 
     useEffect(() => {
         if (envi === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {

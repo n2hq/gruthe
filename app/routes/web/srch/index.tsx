@@ -19,6 +19,7 @@ import { BiChevronLeft, BiChevronRight, BiSolidStar } from 'react-icons/bi'
 import { CgChevronRight } from 'react-icons/cg'
 import { PreSearch } from './PreSearch'
 import PreSrch from './PreSrch'
+import { ClientOnly } from '~/components/content/ads/ClientOnly'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -187,7 +188,9 @@ const index = () => {
                 import.meta.env.VITE_ENV === "prod" ?
                     <div>
                         <div className={`h-[10px]`}></div>
-                        <TopAd />
+                        <ClientOnly>
+                            <TopAd />
+                        </ClientOnly>
                         <div className={`h-[20px]`}></div>
                     </div> :
                     <div className={`h-[40px]`}></div>
@@ -342,7 +345,9 @@ export const SearchResult = ({ results }: SearchResultProps) => {
                                         <InfoCard key={index} item={item}
                                             isFirst={index === 0}
                                         />
-                                        <SearchAd />
+                                        <ClientOnly>
+                                            <SearchAd />
+                                        </ClientOnly>
                                     </> :
 
                                     <>

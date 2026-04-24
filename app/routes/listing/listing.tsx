@@ -214,7 +214,7 @@ const listing = () => {
         <RatingProvider>
             <GalleryProvider>
                 <SearchLayout>
-                    {/* <TopAd /> */}
+                    <TopAd />
                     {
                         listing?.title && gallery && listing &&
                         <MobileHeroWithTitle

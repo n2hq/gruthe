@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { adInfo, testAdInfo } from "~/lib/json";
 import { config } from "~/lib/lib";
+import { ClientOnly } from "./ClientOnly";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
@@ -48,22 +49,25 @@ export function TopAd() {
     }
 
     return (
-        <div
-            className={`max-w-[1000px] min-h-[90px] bg-blue-50
+        <ClientOnly>
+            <div
+                className={`max-w-[1000px] min-h-[90px] bg-blue-50
                 mx-auto w-full mt-8 flex place-items-center 
                 place-content-center font-light text-[14px]
                 `}
-        >Ads by google
-            {
-                adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
-                <ins
-                    className="adsbygoogle"
-                    style={{ display: "block" }}
-                    data-ad-client={adInfo.clientId}
-                    data-ad-slot={adInfo.adslot}
-                    data-ad-format={adInfo.format}
-                    data-full-width-responsive={adInfo.responsive}
-                ></ins>}
-        </div>
+            >Ads by google
+                {
+                    adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block" }}
+                        data-ad-client={adInfo.clientId}
+                        data-ad-slot={adInfo.adslot}
+                        data-ad-format={adInfo.format}
+                        data-full-width-responsive={adInfo.responsive}
+                    ></ins>}
+            </div>
+
+        </ClientOnly>
     );
 }

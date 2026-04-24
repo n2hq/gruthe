@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { adInfo, testAdInfo } from '~/lib/json';
+import { ClientOnly } from './ClientOnly';
 
 const SearchAd = () => {
     const [adsLoaded, setAdsLoaded] = useState(false);
@@ -37,23 +38,26 @@ const SearchAd = () => {
     }
 
     return (
-        <div
-            className={`max-w-full overflow-hidden min-h-[90px] bg-blue-50
+        <ClientOnly>
+
+            <div
+                className={`max-w-full overflow-hidden min-h-[90px] bg-blue-50
                     mx-auto w-full mt-4 mb-4 flex place-items-center 
                     place-content-center font-light text-[14px]
                     `}
-        >Ads by google
-            {
-                adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
-                <ins
-                    className="adsbygoogle"
-                    style={{ display: "block" }}
-                    data-ad-client={adInfo.clientId}
-                    data-ad-slot={adInfo.adslot}
-                    data-ad-format={adInfo.format}
-                    data-full-width-responsive={adInfo.responsive}
-                ></ins>}
-        </div>
+            >Ads by google
+                {
+                    adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block" }}
+                        data-ad-client={adInfo.clientId}
+                        data-ad-slot={adInfo.adslot}
+                        data-ad-format={adInfo.format}
+                        data-full-width-responsive={adInfo.responsive}
+                    ></ins>}
+            </div>
+        </ClientOnly>
     );
 }
 

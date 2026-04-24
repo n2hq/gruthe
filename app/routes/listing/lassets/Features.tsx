@@ -86,7 +86,7 @@ const Features = ({ listing }: FeaturesProps) => {
 
         const fetchFacilities = async (business_guid: string) => {
             const facilities = await getBusinessFeatures(listing?.gid)
-            console.log(facilities)
+            //console.log(facilities)
             setFeatures(facilities)
         }
 

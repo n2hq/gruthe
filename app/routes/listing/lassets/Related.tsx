@@ -99,7 +99,7 @@ const Related = ({ related }: RelatedProps) => {
                                     } else { }
 
                                     imgPath = config.IMG_BASE_STORAGE + img
-                                    console.log(imgPath)
+                                    //console.log(imgPath)
 
                                     return (
                                         <div key={i} className={`w-[200px] group`}>

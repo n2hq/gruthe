@@ -60,7 +60,7 @@ const SocialMedia = ({ listing }: SocialMediaProps) => {
 
     useEffect(() => {
         if (social !== null) {
-            console.log(social)
+            //console.log(social)
         }
     }, [social])
 

@@ -67,7 +67,7 @@ const Featured = () => {
         <div className={`border-[1px] px-4 pt-4 pb-4
         rounded-xl border-gray-200 bg-blue-50 mb-6`}>
             <div className={`font-bold text-lg`}>Featured</div>
-            <div className={`divide-y divide-gray-200`}>
+            <div className={`divide-y-[1px] divide-gray-500/60`}>
                 {
                     featured?.length > 0 ?
                         featured?.map((feature: any, index: number) => {

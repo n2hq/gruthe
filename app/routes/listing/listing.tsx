@@ -84,8 +84,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         nearby = await getNearbyBusinesses(listing?.city_id || '32', 10) //use dubai = 32
 
         services = await getServicesByBusinessGuid(listing?.gid)
-        console.log(services)
-        console.log('hal')
+        //console.log(services)
+        //console.log('hal')
 
         return {
             listing: listing,
@@ -126,7 +126,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let img
     let profileImage = profileImageData?.image_url + `?v=${randomNumber}`
 
-    console.log(profileImage)
+    //console.log(profileImage)
 
     if (profileImage === '' || profileImage === undefined || profileImage === null) {
         img = `https://gruthe.com/gruthe5.png?v=${randomNumber}`

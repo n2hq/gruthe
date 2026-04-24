@@ -31,7 +31,7 @@ const Location = ({ listing }: LocationProps) => {
             let cty: string = ''
             let ctr = listing?.country_name
 
-            console.log(listing?.city_name)
+            //console.log(listing?.city_name)
             if (listing?.city_name !== null) {
                 cty = listing?.city_name + ', '
             }

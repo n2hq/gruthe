@@ -186,11 +186,11 @@ const index = () => {
             {
                 import.meta.env.VITE_ENV === "prod" ?
                     <div>
-                        <div className={`h-[10px]`}></div>
+                        <div className={`h-[10px]`}>a</div>
                         <TopAd />
                         <div className={`h-[20px]`}></div>
                     </div> :
-                    <div className={`h-[40px]`}></div>
+                    <div className={`h-[40px]`}>b</div>
             }
             <div className={`mb-12`}>
                 <PreSrch items={latestBusinesses} />

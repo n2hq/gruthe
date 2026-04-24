@@ -34,7 +34,7 @@ export function TopAd() {
 
                 }
             } catch (e) {
-                console.error("AdSense error:", e);
+                //console.error("AdSense error:", e);
 
             }
 

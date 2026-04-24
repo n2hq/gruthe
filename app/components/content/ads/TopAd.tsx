@@ -6,47 +6,17 @@ import { ClientOnly } from "./ClientOnly";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
-
-    const loaded = {
-
-    }
-
-
+    const [isClient, setIsClient] = useState(false);
 
 
     useEffect(() => {
-        const adsbygoogle = (window as any).adsbygoogle;
-
-        if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
-            try {
-                // Ensure AdSense script is loaded
-                if (typeof window !== "undefined") {
-
-                    requestAnimationFrame(() => {
-                        if (adsbygoogle && !adsbygoogle.loaded) {
-                            (adsbygoogle as any[]).push({});
-                            setAdsLoaded(true);
-                        }
-
-
-                        if (adsbygoogle && adsbygoogle.loaded) {
-                            setAdsLoaded(true)
-                        }
-                    })
-
-
-                }
-            } catch (e) {
-                //console.error("AdSense error:", e);
-
-            }
-
-        }
+        setIsClient(true);
     }, []);
 
 
 
-    if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
+
+    if (import.meta.env.VITE_ENV !== "prod" || !isClient) {
         return null; // Don't render ads in development
     }
 

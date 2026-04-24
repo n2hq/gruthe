@@ -6,18 +6,36 @@ import { config } from "~/lib/lib";
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
 
+    const loaded = {
+
+    }
+
+
+
 
     useEffect(() => {
+        const adsbygoogle = (window as any).adsbygoogle;
+
         if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
             try {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
-                    // @ts-ignore
-                    (window.adsbygoogle = window.adsbygoogle || []).push({});
-                    setAdsLoaded(true);
+
+
+                    if (adsbygoogle && !adsbygoogle.loaded) {
+                        (adsbygoogle as any[]).push({});
+                        setAdsLoaded(true);
+                    }
+
+
+                    if (adsbygoogle && adsbygoogle.loaded) {
+                        setAdsLoaded(true)
+                    }
+
                 }
             } catch (e) {
                 console.error("AdSense error:", e);
+
             }
 
         }

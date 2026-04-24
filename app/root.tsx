@@ -104,11 +104,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }
 
   const [adsScriptLoaded, setAdsScriptLoaded] = useState(false);
-
+  const adsbygoogle = (window as any).adsbygoogle;
 
   return (
     <html lang="en">
-      <head>
+      <head suppressHydrationWarning>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/gruthe5.png?v=3" type="image/png" />
@@ -121,12 +121,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
               suppressHydrationWarning
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973"
               crossOrigin="anonymous"
-              onError={(e) => {
-                // Silent fail - just log to console in development
-                if (process.env.NODE_ENV === 'development') {
-                  console.warn('AdSense script failed to load');
+              onLoad={() => {
+                console.log("AdSense loaded");
+                // Trigger ads
+                if (adsbygoogle && !adsbygoogle.loaded) {
+                  (adsbygoogle as any[]).push({});
                 }
-                // You can also remove the failed script element
+              }}
+              onError={(e) => {
+                console.warn("AdSense failed");
                 (e.target as HTMLScriptElement)?.remove();
               }}
             />

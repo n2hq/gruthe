@@ -6,15 +6,9 @@ import { ClientOnly } from "./ClientOnly";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
-    const [isClient, setIsClient] = useState(false);
 
+    const loaded = {
 
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    if (!isClient) {
-        return null; // or return <div className="ad-placeholder" />
     }
 
 
@@ -52,7 +46,7 @@ export function TopAd() {
 
 
 
-    if (import.meta.env.VITE_ENV !== "prod" || !isClient) {
+    if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
         return null; // Don't render ads in development
     }
 

@@ -345,9 +345,7 @@ export const SearchResult = ({ results }: SearchResultProps) => {
                                         <InfoCard key={index} item={item}
                                             isFirst={index === 0}
                                         />
-                                        <ClientOnly>
-                                            <SearchAd />
-                                        </ClientOnly>
+                                        <SearchAd />
                                     </> :
 
                                     <>

@@ -201,32 +201,36 @@ const index = () => {
                                         No results found.
                                     </div>
                                 }
-                                {
-                                    data?.map((item: ListingType, index: number) => {
-                                        const showAd = (index % 4) === 3;
-                                        return (
-                                            <div key={index}>
-                                                {
-                                                    (showAd) ?
-                                                        <>
-                                                            <InfoCard key={index} item={item}
-                                                                isFirst={index === 0}
-                                                            />
-                                                            <SearchAd />
 
-                                                        </> :
+                                <div className={`flex flex-col gap-y-4`}>
+                                    {
+                                        data?.map((item: ListingType, index: number) => {
+                                            const showAd = (index % 4) === 3;
+                                            return (
+                                                <div key={index}>
+                                                    {
+                                                        (showAd) ?
+                                                            <>
+                                                                <InfoCard key={index} item={item}
+                                                                    isFirst={index === 0}
+                                                                />
+                                                                <SearchAd />
 
-                                                        <>
-                                                            <InfoCard key={index} item={item}
-                                                                isFirst={index === 0}
-                                                            />
+                                                            </> :
 
-                                                        </>
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
+                                                            <>
+                                                                <InfoCard key={index} item={item}
+                                                                    isFirst={index === 0}
+                                                                />
+
+                                                            </>
+                                                    }
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+
 
                                 {
                                     data?.length > 0 &&

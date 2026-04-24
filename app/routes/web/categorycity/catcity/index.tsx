@@ -220,29 +220,32 @@ const index = () => {
                                         No results found.
                                     </div>
                                 }
-                                {
-                                    data?.map((item: ListingType, index: number) => {
-                                        const showAd = (index % 4) === 3;
-                                        return (
-                                            <div key={index}>
-                                                {
-                                                    (showAd) ?
-                                                        <>
-                                                            <SearchAd />
+                                <div className={`flex flex-col gap-y-4`}>
+                                    {
+                                        data?.map((item: ListingType, index: number) => {
+                                            const showAd = (index % 4) === 3;
+                                            return (
+                                                <div key={index}>
+                                                    {
+                                                        (showAd) ?
+                                                            <>
+                                                                <SearchAd />
 
-                                                        </> :
+                                                            </> :
 
-                                                        <>
-                                                            <InfoCard key={index} item={item}
-                                                                isFirst={index === 0}
-                                                            />
+                                                            <>
+                                                                <InfoCard key={index} item={item}
+                                                                    isFirst={index === 0}
+                                                                />
 
-                                                        </>
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
+                                                            </>
+                                                    }
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+
 
                                 {
                                     data?.length > 0 &&

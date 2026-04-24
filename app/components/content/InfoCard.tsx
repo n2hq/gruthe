@@ -53,7 +53,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
             setImg(img)
             let imgPath: string = config?.IMG_BASE_STORAGE + img
-            console.log(imgPath)
+            //console.log(imgPath)
             setImgPath(imgPath)
         }
     }, [data])

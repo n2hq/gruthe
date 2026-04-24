@@ -29,7 +29,6 @@ import { CustomNetworkError, isNetworkError, NetworkErrorBoundary } from "./comp
 import LoadingMessage from "./components/content/LoadingMessage";
 import { WriteReviewAltProvider } from "./context/WriteReviewAltContext";
 import { ShareDialogProvider } from "./context/ShareDialogContext";
-import { config } from "./lib/lib";
 
 
 export const links: LinksFunction = () => [
@@ -64,25 +63,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const progressStarted = useRef(false);
 
 
-  const loading = navigation.state !== "idle" || hydrated;
+  const loading = navigation.state !== "idle" || !hydrated;
 
 
   useEffect(() => {
     if (loading) {
-      try {
-        setHydrated(true);
-      } catch (e) {
-
-      }
+      setHydrated(true);
     }
   }, [loading]);
 
-  try {
-    if (isNetworkError(error) || error instanceof CustomNetworkError) {
-      return <NetworkErrorBoundary />;
-    }
-  } catch (e) {
-    console.log('Error occured')
+  if (isNetworkError(error) || error instanceof CustomNetworkError) {
+    return <NetworkErrorBoundary />;
   }
 
   if (isRouteErrorResponse(error)) {
@@ -106,19 +97,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
       NProgress.done()
       progressStarted.current = false
     }
-
-
   }, [navigation])
 
   const adsLoaded = useRef(false);
 
   useEffect(() => {
-    const adsbygoogle = (window as any).adsbygoogle;
+    let adsbygoogle = (window as any).adsbygoogle;
 
-    if (typeof window === 'undefined') { return; }
+    // Only run in production on the client side
+    if (typeof window === "undefined") return;
     if (import.meta.env.VITE_ENV !== "prod") return;
-    if (adsLoaded.current) return;
+    if (adsLoaded.current) return
 
+    // Check if script already exists
     if (document.getElementById("adsbygoogle-script")) {
       adsLoaded.current = true;
       return;
@@ -130,14 +121,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
     script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973";
     script.crossOrigin = "anonymous";
 
+
     script.onload = () => {
       console.log("[AdSense] Loaded successfully");
       adsLoaded.current = true;
 
       // Initialize any queued ad requests
       try {
-        if (adsbygoogle && !adsbygoogle.loaded) {
-          (adsbygoogle as any[]).push({});
+        if (adsbygoogle) {
+          (adsbygoogle = adsbygoogle || []).push({});
         }
       } catch (error) {
         console.warn("[AdSense] Initialization error:", error);
@@ -164,8 +156,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
       }, 10000);
     };
 
+
     document.head.appendChild(script);
+
+    return () => {
+      // Don't remove the script on unmount
+      // The script stays in the DOM
+    };
+
+
   }, [])
+
 
   return (
     <html lang="en">

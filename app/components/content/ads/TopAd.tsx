@@ -1,12 +1,16 @@
 // app/components/AdComponent.tsx
 import { useEffect, useState } from "react";
 import { adInfo, testAdInfo } from "~/lib/json";
+import { config } from "~/lib/lib";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
+    const [envi, setEnvi] = useState(() => {
+        return config.ENV
+    })
 
     useEffect(() => {
-        if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
+        if (envi === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
             try {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
@@ -23,7 +27,7 @@ export function TopAd() {
 
 
 
-    if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
+    if (envi !== "prod" || !adsLoaded) {
         return null; // Don't render ads in development
     }
 

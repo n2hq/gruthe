@@ -119,7 +119,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     let profileImageData = data?.profileImageData
     let title = `${data?.listing.title} - ${config.SITENAME}` || `Search - ${config.SITENAME} Business Directory, Explore Listings Around The World`
 
-    const fullUrl: string = data.fullUrl
+    const fullUrl: string = data?.fullUrl
 
     const description = `${data.listing.short_description}` || `Discover and connect with businesses worldwide. Gruthe helps you explore listings, find services, and grow your network across industries and countries.`
 

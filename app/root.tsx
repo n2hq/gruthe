@@ -29,6 +29,7 @@ import { CustomNetworkError, isNetworkError, NetworkErrorBoundary } from "./comp
 import LoadingMessage from "./components/content/LoadingMessage";
 import { WriteReviewAltProvider } from "./context/WriteReviewAltContext";
 import { ShareDialogProvider } from "./context/ShareDialogContext";
+import { config } from "./lib/lib";
 
 
 export const links: LinksFunction = () => [
@@ -63,7 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const progressStarted = useRef(false);
 
 
-  const loading = navigation.state !== "idle" && hydrated;
+  const loading = navigation.state !== "idle" || hydrated;
 
 
   useEffect(() => {
@@ -98,61 +99,83 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    try {
-      if (navigation.state === 'loading' && !progressStarted.current) {
-        NProgress.start()
-        progressStarted.current = true
-      } else if (navigation.state === 'idle' && progressStarted.current) {
-        NProgress.done()
-        progressStarted.current = false
-      }
-    } catch (e) {
-      console.log('error info')
+    if (navigation.state === 'loading' && !progressStarted.current) {
+      NProgress.start()
+      progressStarted.current = true
+    } else if (navigation.state === 'idle' && progressStarted.current) {
+      NProgress.done()
+      progressStarted.current = false
     }
 
 
   }, [navigation])
-  const [adsbygoogle, setAdsbygoogle] = useState<Window | null>(null)
+
+  const adsLoaded = useRef(false);
 
   useEffect(() => {
     const adsbygoogle = (window as any).adsbygoogle;
-    setAdsbygoogle(adsbygoogle)
+
+    if (typeof window === 'undefined') { return; }
+    if (import.meta.env.VITE_ENV !== "prod") return;
+    if (adsLoaded.current) return;
+
+    if (document.getElementById("adsbygoogle-script")) {
+      adsLoaded.current = true;
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = "adsbygoogle-script";
+    script.async = true;
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973";
+    script.crossOrigin = "anonymous";
+
+    script.onload = () => {
+      console.log("[AdSense] Loaded successfully");
+      adsLoaded.current = true;
+
+      // Initialize any queued ad requests
+      try {
+        if (adsbygoogle && !adsbygoogle.loaded) {
+          (adsbygoogle as any[]).push({});
+        }
+      } catch (error) {
+        console.warn("[AdSense] Initialization error:", error);
+      }
+    };
+
+    script.onerror = (event) => {
+      console.error("[AdSense] Failed to load:", event);
+      // Remove failed script element
+      const failedScript = document.getElementById("adsbygoogle-script");
+      if (failedScript) {
+        failedScript.remove();
+      }
+
+      // Optional: Retry after 10 seconds
+      setTimeout(() => {
+        console.log("[AdSense] Retrying...");
+        const retryScript = document.createElement("script");
+        retryScript.id = "adsbygoogle-script";
+        retryScript.async = true;
+        retryScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973";
+        retryScript.crossOrigin = "anonymous";
+        document.head.appendChild(retryScript);
+      }, 10000);
+    };
+
+    document.head.appendChild(script);
   }, [])
 
   return (
     <html lang="en">
-      <head suppressHydrationWarning>
+      <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/gruthe5.png?v=3" type="image/png" />
 
 
-        {
-          import.meta.env.VITE_ENV === "prod" && (
-            <script
-              key={'adsbygoogle'}
-              async
-              suppressHydrationWarning
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973"
-              crossOrigin="anonymous"
-              onLoad={() => {
-                const adsbygoogle = (window as any).adsbygoogle;
-                // Success handler
-                if (typeof window !== "undefined") {
-                  console.log("AdSense loaded successfully");
-                  // Initialize any queued ad requests
-                  try {
-                    if (adsbygoogle && !adsbygoogle.loaded) {
-                      (adsbygoogle as any[]).push({});
-                    }
-                  } catch (error) {
-                    console.warn("AdSense initialization error:", error);
-                  }
-                }
-              }}
-            />
-          )
-        }
+
         <Meta />
         <Links />
       </head>

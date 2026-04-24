@@ -329,7 +329,7 @@ export interface SearchResultProps {
 
 export const SearchResult = ({ results }: SearchResultProps) => {
     return (
-        <div>
+        <div className={`flex flex-col gap-y-4`}>
             {
                 results?.map((item: ListingType, index: number) => {
                     //console.log(item)

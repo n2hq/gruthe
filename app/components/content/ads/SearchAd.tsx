@@ -9,7 +9,7 @@ const SearchAd = () => {
     useEffect(() => {
         const adsbygoogle = (window as any).adsbygoogle;
 
-        if (import.meta.env.VITE_ENV === env && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
+        if (import.meta.env.VITE_ENV === 'prod' && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
             try {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {

@@ -68,13 +68,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (loading) {
-      setHydrated(true);
+      try {
+        setHydrated(true);
+      } catch (e) {
+
+      }
     }
   }, [loading]);
 
-  /* if (isNetworkError(error) || error instanceof CustomNetworkError) {
-    return <NetworkErrorBoundary />;
-  } */
+  try {
+    if (isNetworkError(error) || error instanceof CustomNetworkError) {
+      return <NetworkErrorBoundary />;
+    }
+  } catch (e) {
+    console.log('Error occured')
+  }
 
   if (isRouteErrorResponse(error)) {
     return (
@@ -90,12 +98,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    if (navigation.state === 'loading' && !progressStarted.current) {
-      NProgress.start()
-      progressStarted.current = true
-    } else if (navigation.state === 'idle' && progressStarted.current) {
-      NProgress.done()
-      progressStarted.current = false
+    try {
+      if (navigation.state === 'loading' && !progressStarted.current) {
+        NProgress.start()
+        progressStarted.current = true
+      } else if (navigation.state === 'idle' && progressStarted.current) {
+        NProgress.done()
+        progressStarted.current = false
+      }
+    } catch (e) {
+      console.log('error info')
     }
 
 

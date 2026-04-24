@@ -14,15 +14,17 @@ const SearchAd = () => {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
 
-                    if (adsbygoogle && !adsbygoogle.loaded) {
-                        (adsbygoogle as any[]).push({});
-                        setAdsLoaded(true);
-                    }
+                    requestAnimationFrame(() => {
+                        if (adsbygoogle && !adsbygoogle.loaded) {
+                            (adsbygoogle as any[]).push({});
+                            setAdsLoaded(true);
+                        }
 
 
-                    if (adsbygoogle && adsbygoogle.loaded) {
-                        setAdsLoaded(true)
-                    }
+                        if (adsbygoogle && adsbygoogle.loaded) {
+                            setAdsLoaded(true)
+                        }
+                    })
                 }
             } catch (e) {
                 //console.error("AdSense error:", e);
@@ -48,14 +50,17 @@ const SearchAd = () => {
             >Ads by google
                 {
                     adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
-                    <ins
-                        className="adsbygoogle"
-                        style={{ display: "block" }}
-                        data-ad-client={adInfo.clientId}
-                        data-ad-slot={adInfo.adslot}
-                        data-ad-format={adInfo.format}
-                        data-full-width-responsive={adInfo.responsive}
-                    ></ins>}
+                    <div suppressHydrationWarning>
+                        <ins
+                            className="adsbygoogle"
+                            style={{ display: "block" }}
+                            data-ad-client={adInfo.clientId}
+                            data-ad-slot={adInfo.adslot}
+                            data-ad-format={adInfo.format}
+                            data-full-width-responsive={adInfo.responsive}
+                        ></ins>
+                    </div>
+                }
             </div>
         </ClientOnly>
     );

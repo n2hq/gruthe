@@ -22,16 +22,18 @@ export function TopAd() {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
 
+                    requestAnimationFrame(() => {
+                        if (adsbygoogle && !adsbygoogle.loaded) {
+                            (adsbygoogle as any[]).push({});
+                            setAdsLoaded(true);
+                        }
 
-                    if (adsbygoogle && !adsbygoogle.loaded) {
-                        (adsbygoogle as any[]).push({});
-                        setAdsLoaded(true);
-                    }
 
+                        if (adsbygoogle && adsbygoogle.loaded) {
+                            setAdsLoaded(true)
+                        }
+                    })
 
-                    if (adsbygoogle && adsbygoogle.loaded) {
-                        setAdsLoaded(true)
-                    }
 
                 }
             } catch (e) {
@@ -58,14 +60,17 @@ export function TopAd() {
             >Ads by google
                 {
                     adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
-                    <ins
-                        className="adsbygoogle"
-                        style={{ display: "block" }}
-                        data-ad-client={adInfo.clientId}
-                        data-ad-slot={adInfo.adslot}
-                        data-ad-format={adInfo.format}
-                        data-full-width-responsive={adInfo.responsive}
-                    ></ins>}
+                    <div suppressHydrationWarning>
+                        <ins
+                            className="adsbygoogle"
+                            style={{ display: "block" }}
+                            data-ad-client={adInfo.clientId}
+                            data-ad-slot={adInfo.adslot}
+                            data-ad-format={adInfo.format}
+                            data-full-width-responsive={adInfo.responsive}
+                        ></ins>
+                    </div>
+                }
             </div>
 
         </ClientOnly>

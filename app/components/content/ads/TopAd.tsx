@@ -5,10 +5,10 @@ import { config } from "~/lib/lib";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
-    const envi = import.meta.env.VITE_ENV
+
 
     useEffect(() => {
-        if (envi === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
+        if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
             try {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
@@ -25,7 +25,7 @@ export function TopAd() {
 
 
 
-    if (envi !== "prod" || !adsLoaded) {
+    if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
         return null; // Don't render ads in development
     }
 

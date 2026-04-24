@@ -75,7 +75,7 @@ const Featured = () => {
                                 return null
                             }
                             return (
-                                <FeatureNew keyIndex={index} feature={feature} />
+                                <FeatureNew key={index} keyIndex={index} feature={feature} />
                             )
 
                         }) :

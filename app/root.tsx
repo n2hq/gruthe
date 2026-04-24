@@ -11,7 +11,7 @@ import {
 import type { HeadersFunction, LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import { NotificationProvider } from "./context/NotificationContext";
@@ -59,32 +59,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const navigation = useNavigation()
   const [hydrated, setHydrated] = useState(false);
 
-  // Use a ref to track if we've started NProgress
-  const progressStarted = useRef(false);
-
-  // Handle NProgress based on navigation state
-  useEffect(() => {
-    if (navigation.state === "loading" && !progressStarted.current) {
-      NProgress.start();
-      progressStarted.current = true;
-    } else if (navigation.state === "idle" && progressStarted.current) {
-      NProgress.done();
-      progressStarted.current = false;
-    }
-  }, [navigation.state]);
-
-  // Handle hydration status - separate from navigation
-  useEffect(() => {
-    // Mark as hydrated immediately on client mount
-    setHydrated(true);
-  }, []); // Empty array = runs once after hydration
-
-  // Calculate loading state AFTER hydration is complete
-  // This ensures server and client match (both show false for loading)
-  const loading = hydrated && navigation.state !== "idle";
-
-  // Handle route errors (keep as is)
   const error = useRouteError();
+
+
+
+  const loading = navigation.state !== "idle" || !hydrated;
+
+
+  useEffect(() => {
+    if (loading) {
+      setHydrated(true);
+    }
+  }, [loading]);
 
   if (isNetworkError(error) || error instanceof CustomNetworkError) {
     return <NetworkErrorBoundary />;
@@ -102,6 +88,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </div>
     );
   }
+
+  useEffect(() => {
+
+
+    NProgress.start()
+
+    const holdWait = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 13000));
+    }
+
+    if (navigation) {
+      if (navigation.state !== "loading") {
+        NProgress.done();
+
+      }
+    }
+  }, [navigation])
 
   return (
     <html lang="en">

@@ -104,6 +104,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }
 
   const [adsScriptLoaded, setAdsScriptLoaded] = useState(false);
+  const [adsbygoogle, setAdsbygoogle] = useState(null)
+  useEffect(() => {
+    const adsbygoogle = (window as any).adsbygoogle;
+    setAdsbygoogle(adsbygoogle)
+
+  }, [])
 
 
   return (
@@ -118,15 +124,53 @@ export function Layout({ children }: { children: React.ReactNode }) {
           import.meta.env.VITE_ENV === "prod" && (
             <script
               async
+              suppressHydrationWarning
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973"
               crossOrigin="anonymous"
-              onError={(e) => {
-                // Silent fail - just log to console in development
-                if (process.env.NODE_ENV === 'development') {
-                  console.warn('AdSense script failed to load');
+              onLoad={() => {
+                // Success handler - log and initialize
+                const adsbygoogle = (window as any).adsbygoogle;
+
+                if (typeof window !== "undefined") {
+                  console.log("[AdSense] Script loaded successfully");
+
+                  // Initialize any queued ad requests
+                  try {
+                    if (adsbygoogle && !adsbygoogle.loaded) {
+                      (adsbygoogle as any[]).push({});
+                    }
+                  } catch (error) {
+                    console.warn("[AdSense] Initialization error:", error);
+                  }
                 }
-                // You can also remove the failed script element
-                (e.target as HTMLScriptElement)?.remove();
+              }}
+
+              onError={(event) => {
+                // Error handler with recovery
+                const scriptElement = event.currentTarget as HTMLScriptElement;
+
+                console.error("[AdSense] Failed to load script:", {
+                  src: scriptElement?.src,
+                  clientId: "ca-pub-6158119458012973",
+                  timestamp: new Date().toISOString(),
+                });
+
+                // Remove the failed script element from DOM
+                scriptElement?.remove();
+
+                // Optional: Retry loading after delay
+                setTimeout(() => {
+                  if (typeof document !== "undefined") {
+                    const retryScript = document.createElement("script");
+                    retryScript.async = true;
+                    retryScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973";
+                    retryScript.crossOrigin = "anonymous";
+                    retryScript.onload = () => {
+                      console.log("[AdSense] Retry successful");
+                    };
+                    document.head.appendChild(retryScript);
+                  }
+                }, 10000); // Retry after 10 seconds
               }}
             />
           )

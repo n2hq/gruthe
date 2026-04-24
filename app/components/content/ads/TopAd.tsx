@@ -13,6 +13,42 @@ export function TopAd() {
         setIsClient(true);
     }, []);
 
+    if (!isClient) {
+        return null; // or return <div className="ad-placeholder" />
+    }
+
+
+
+
+    useEffect(() => {
+        const adsbygoogle = (window as any).adsbygoogle;
+
+        if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
+            try {
+                // Ensure AdSense script is loaded
+                if (typeof window !== "undefined") {
+
+                    requestAnimationFrame(() => {
+                        if (adsbygoogle && !adsbygoogle.loaded) {
+                            (adsbygoogle as any[]).push({});
+                            setAdsLoaded(true);
+                        }
+
+
+                        if (adsbygoogle && adsbygoogle.loaded) {
+                            setAdsLoaded(true)
+                        }
+                    })
+
+
+                }
+            } catch (e) {
+                //console.error("AdSense error:", e);
+
+            }
+
+        }
+    }, []);
 
 
 

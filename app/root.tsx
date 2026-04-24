@@ -112,16 +112,47 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 
   }, [navigation])
+  const [adsbygoogle, setAdsbygoogle] = useState<Window | null>(null)
+
+  useEffect(() => {
+    const adsbygoogle = (window as any).adsbygoogle;
+    setAdsbygoogle(adsbygoogle)
+  }, [])
 
   return (
     <html lang="en">
-      <head>
+      <head suppressHydrationWarning>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/gruthe5.png?v=3" type="image/png" />
 
 
-
+        {
+          import.meta.env.VITE_ENV === "prod" && (
+            <script
+              key={'adsbygoogle'}
+              async
+              suppressHydrationWarning
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6158119458012973"
+              crossOrigin="anonymous"
+              onLoad={() => {
+                const adsbygoogle = (window as any).adsbygoogle;
+                // Success handler
+                if (typeof window !== "undefined") {
+                  console.log("AdSense loaded successfully");
+                  // Initialize any queued ad requests
+                  try {
+                    if (adsbygoogle && !adsbygoogle.loaded) {
+                      (adsbygoogle as any[]).push({});
+                    }
+                  } catch (error) {
+                    console.warn("AdSense initialization error:", error);
+                  }
+                }
+              }}
+            />
+          )
+        }
         <Meta />
         <Links />
       </head>

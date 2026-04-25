@@ -52,6 +52,11 @@ const moreTools = [
         icon: <HiMiniBriefcase />,
         link: '/web/account/portfolio'
     },
+    {
+        title: "Create Advert",
+        icon: <HiMiniBriefcase />,
+        link: '/web/account/ads'
+    },
     /* {
         title: "Add Event",
         icon: <HiMiniBriefcase />,

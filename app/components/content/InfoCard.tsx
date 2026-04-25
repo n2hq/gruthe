@@ -41,10 +41,11 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
 
             let img = ''
 
-            if (data?.bg_image_url_ext !== undefined && data?.bg_image_url_ext !== null) {
+            /* if (data?.bg_image_url_ext !== undefined && data?.bg_image_url_ext !== null) {
                 img = data?.bg_image_url_ext
 
-            } else if (data?.profile_image_url_ext !== undefined && data?.profile_image_url_ext !== null) {
+            } else  */
+            if (data?.profile_image_url_ext !== undefined && data?.profile_image_url_ext !== null) {
                 img = data?.profile_image_url_ext
 
             } else {
@@ -60,7 +61,7 @@ const InfoCard = ({ item, isFirst = false }: { item: ListingType, isFirst?: bool
     return (
         <div>
             <Link to={`${(item?.username !== null && item?.username !== '' && item?.username !== undefined) ? `/${item?.username}` : `/${item?.gid}`}`}>
-                <div className={`flex py-4 px-3 border rounded-lg border-gray-200/80 cursor-pointer hover:opacity-80 transition duration-200 ease-out group ${isFirst ? 'border-t' : ''} group bg-blue-50`}>
+                <div className={`flex py-4 px-3 border rounded-lg border-gray-400/50 cursor-pointer hover:opacity-80 transition duration-200 ease-out group ${isFirst ? 'border-t' : ''} group bg-blue-50`}>
                     <div className={`relative h-48 min-w-40 w-40 md:h-52 md:w-52 md:min-w-52 flex-shrink-0 rounded-3xl overflow-hidden shadow-md group-hover:shadow-lg group-hover:shadow-gray-300 border group-hover:border-none`}>
 
                         {

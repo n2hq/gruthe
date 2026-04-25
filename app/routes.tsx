@@ -51,6 +51,10 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/account/portfolio/:business_guid", "routes/web/account/portfolio/business/index.tsx");
         route("/web/account/create_business", "routes/web/account/create_business/index.tsx");
 
+
+        {/** create ad */ }
+        route("/web/account/ads", "routes/web/account/profile/ads/index.tsx");
+
         {/** portfolio business */ }
         route("/web/account/portfolio/:business_guid/:user_guid/settings", "routes/web/account/portfolio/business/settings/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/gallery", "routes/web/account/portfolio/business/gallery/index.tsx");
